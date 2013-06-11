@@ -1,0 +1,98 @@
+02:36:01 GMILSTER> @p4
+02:36:02 GMILSTER> -- Lab 9 | Part 4
+02:36:02 GMILSTER> -- Name: Garrett Milster
+02:36:02 GMILSTER> -- Partner: Ross McKelvie
+02:36:02 GMILSTER> CREATE OR REPLACE TRIGGER partsWatcher
+02:36:02   2  BEFORE INSERT OR UPDATE OR DELETE ON parts
+02:36:02   3  BEGIN
+02:36:02   4  	 dbms_output.put_line('*****' || to_char(sysdate, 'MON-DD-YY, HH:MI:SS') || ' ' || USER || ' changing the parts table.');
+02:36:02   5  END;
+02:36:02   6  /
+
+Trigger created.
+
+02:36:02 GMILSTER> show errors;
+No errors.
+02:36:02 GMILSTER> @p5
+02:36:04 GMILSTER> -- Lab 9 | Part 5
+02:36:04 GMILSTER> -- Name: Garrett Milster
+02:36:04 GMILSTER> -- Partner: Ross McKelvie
+02:36:04 GMILSTER> CREATE OR REPLACE TRIGGER reorderWatcher
+02:36:04   2  BEFORE INSERT OR UPDATE ON parts
+02:36:04   3  FOR EACH ROW
+02:36:04   4  BEGIN
+02:36:04   5  	 IF (:new.qoh <= :new.olevel) THEN
+02:36:04   6  	    dbms_output.put_line('!!!!!' || to_char(sysdate, 'MON-DD-YY, HH:MI:SS') || '-- ALERT: part ' || :new.pno || ' needs to be reordered');
+02:36:04   7  	 END IF;
+02:36:04   8  END;
+02:36:04   9  /
+
+Trigger created.
+
+02:36:04 GMILSTER> show errors;
+No errors.
+02:36:04 GMILSTER> INSERT INTO parts (pno, pname, qoh, price, olevel)
+02:36:18   2      (SELECT pno+1, pname || ' 2', 20, price + 5, 10 FROM par 10800);
+    (SELECT pno+1, pname || ' 2', 20, price + 5, 10 FROM par 10800)
+                                                             *
+ERROR at line 2:
+ORA-00907: missing right parenthesis
+
+
+02:36:41 GMILSTER> insert into parts(pno, pname, qoh, price, olevel) (select pno+1, pname || '2', 20, price +5, 10 FROM parts where pno = 10800);
+*****MAR-04-12, 02:37:42 GMILSTER changing the parts table.
+
+1 row created.
+
+02:37:42 GMILSTER> insert into parts(pno, pname, qoh, price, olevel) (select pno+2, pname || '3', 20, price +5, 20 FROM parts where pno = 10800);
+*****MAR-04-12, 02:39:23 GMILSTER changing the parts table.
+!!!!!MAR-04-12, 02:39:23-- ALERT: part 10802 needs to be reordered
+
+1 row created.
+
+02:39:23 GMILSTER> update parts set qoh = qoh - 5 where pno = 10801;
+*****MAR-04-12, 02:39:50 GMILSTER changing the parts table.
+
+1 row updated.
+
+02:39:50 GMILSTER> update parts set qoh = qoh -6 where pno = 10801;
+*****MAR-04-12, 02:40:14 GMILSTER changing the parts table.
+!!!!!MAR-04-12, 02:40:14-- ALERT: part 10801 needs to be reordered
+
+1 row updated.
+
+02:40:13 GMILSTER> update parts set qoh = olevel;
+*****MAR-04-12, 02:40:29 GMILSTER changing the parts table.
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10802 needs to be reordered
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10506 needs to be reordered
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10507 needs to be reordered
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10508 needs to be reordered
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10509 needs to be reordered
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10601 needs to be reordered
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10701 needs to be reordered
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10800 needs to be reordered
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10900 needs to be reordered
+!!!!!MAR-04-12, 02:40:29-- ALERT: part 10801 needs to be reordered
+
+10 rows updated.
+
+02:40:29 GMILSTER> delete from parts where pno = 10801 or pno = 10802;
+*****MAR-04-12, 02:40:47 GMILSTER changing the parts table.
+
+2 rows deleted.
+
+02:40:47 GMILSTER> select * from parts order by pno;
+       PNO PNAME                                 QOH      PRICE     OLEVEL
+---------- ------------------------------ ---------- ---------- ----------
+     10506 Land Before Time I                     20      19.99         20
+     10507 Land Before Time II                    20      19.99         20
+     10508 Land Before Time III                   20      19.99         20
+     10509 Land Before Time IV                    20      19.99         20
+     10601 Sleeping Beauty                        20      24.99         20
+     10701 When Harry Met Sally                   30      19.99         30
+     10800 Dirty Harry                            30      14.99         30
+     10900 Dr. Zhivago                            30      24.99         30
+
+8 rows selected.
+
+02:40:58 GMILSTER> spool off

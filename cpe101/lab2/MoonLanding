@@ -1,0 +1,20 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main (void) {
+
+float distance;
+float velocity;
+int time;
+
+  printf("Prototype Moon Landing Program\n");
+  printf("Garrett Milster & Clark Duvall\n");
+  printf("Enter distance to the Moon (miles):\n");
+  scanf("%lf", &distance);
+  printf("Enter currect velocity (miles/sec):\n");
+  scanf("%lf", &velocity);
+  printf("Enter the time in flight (mins):\n");
+  scanf("%d", &time);
+
+  exit(0)
+}

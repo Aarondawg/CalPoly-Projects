@@ -1,0 +1,45 @@
+Trying Brute Force... 
+
+Best feasible solution found: total value - 726 total weight - 519
+Item 0.  value: 91 weight: 29
+Item 1.  value: 60 weight: 65
+Item 2.  value: 61 weight: 71
+Item 4.  value: 79 weight: 45
+Item 9.  value: 84 weight: 91
+Item 11.  value: 72 weight: 60
+Item 14.  value: 28 weight: 2
+Item 15.  value: 81 weight: 30
+Item 17.  value: 43 weight: 25
+Item 18.  value: 100 weight: 82
+Item 19.  value: 27 weight: 19
+
+Trying Greedy Approach... 
+
+Greedy solution (not necessarily optimal): total value - 642 total weight - 506
+Item 14.  value: 60 weight: 65
+Item 0.  value: 28 weight: 2
+Item 15.  value: 46 weight: 71
+Item 11.  value: 9 weight: 60
+Item 4.  value: 79 weight: 45
+Item 8.  value: 27 weight: 19
+Item 17.  value: 19 weight: 22
+Item 18.  value: 57 weight: 97
+Item 19.  value: 61 weight: 71
+Item 9.  value: 84 weight: 91
+Item 10.  value: 20 weight: 57
+Item 3.  value: 72 weight: 60
+
+Trying Branch and Bound... 
+
+Best feasible solution found: total value - 726 total weight - 519
+Item 0.  value: 91 weight: 29
+Item 1.  value: 60 weight: 65
+Item 2.  value: 61 weight: 71
+Item 4.  value: 79 weight: 45
+Item 9.  value: 84 weight: 91
+Item 11.  value: 72 weight: 60
+Item 14.  value: 28 weight: 2
+Item 15.  value: 81 weight: 30
+Item 17.  value: 43 weight: 25
+Item 18.  value: 100 weight: 82
+Item 19.  value: 27 weight: 19

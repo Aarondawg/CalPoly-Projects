@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <sys/time.h>
+#include <unistd.h>
+
+void handler(int num);
+int counter;
+
+int main(int argc, char *argv[])
+{
+   struct sigaction sa;
+   double count;
+   struct itimerval tick;
+
+   char *endptr;
+
+   if(argc !=2)
+   {
+      fprintf(stderr,"usage: timeit <seconds>\n");
+      return -1;
+   }
+
+   count = strtod(argv[1], &endptr);
+   if(*endptr != '\0')
+   {
+      fprintf(stderr,"%s: malformed time\n", argv[1]);
+      fprintf(stderr,"usage: timeit <seconds>\n");
+      return -1;
+   }
+   
+   sa.sa_handler = handler;
+   sa.sa_flags = 0;
+   sigaction(SIGALRM, &sa, NULL);
+   
+   tick.it_interval.tv_sec = 0;
+   tick.it_interval.tv_usec = 500000;
+   tick.it_value.tv_sec = 0;
+   tick.it_value.tv_usec = 500000;
+
+   setitimer(ITIMER_REAL, &val, NULL);
+   for(;;)
+      pause();
+}
+
+void handler(int num)
+{
+   static int which = 1;
+   if(which)
+   {
+      printf("Tick...");
+   }
+   else
+   {
+      printf("Tock\n");
+      counter++;
+   }
+}
+

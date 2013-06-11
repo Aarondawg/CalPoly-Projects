@@ -1,0 +1,6 @@
+DJ. Mitchell
+Garrett Milster
+
+our makefile has two options for building, matmult_double and matmult_float. There is also a clean option which removes the object file from the director. To run the program, use ./matmult file1 file2. This will output a file called resultant.txt that has the result of the matrix multiplication. 
+
+

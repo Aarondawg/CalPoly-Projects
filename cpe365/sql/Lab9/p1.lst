@@ -1,0 +1,38 @@
+01:43:07 GMILSTER> @p1
+01:43:09 GMILSTER> -- Lab 9 | Part 1
+01:43:09 GMILSTER> -- Name: Garrett Milster
+01:43:09 GMILSTER> -- Partner: Ross McKelvie
+01:43:09 GMILSTER> CREATE OR REPLACE
+01:43:09   2  PROCEDURE listOnePart(pno_ parts.pno%type) AS
+01:43:09   3  	      -- DELCARE
+01:43:09   4  	      price_ parts.price%TYPE;
+01:43:09   5  	      QOH_ parts.qoh%TYPE;
+01:43:09   6  	      pname_ parts.pname%TYPE;
+01:43:09   7  
+01:43:09   8  BEGIN
+01:43:09   9  	 SELECT p.pname, p.price, p.qoh INTO pname_, price_, qoh_
+01:43:09  10  	 FROM parts p
+01:43:09  11  	 WHERE pno = pno_;
+01:43:09  12  	 dbms_output.put_line(pname_ || ',' || price_ || ',' || qoh_);
+01:43:09  13  EXCEPTION
+01:43:09  14  	 WHEN OTHERS THEN
+01:43:09  15  	  dbms_output.put_line('Error occurred: ' || ':' || SQLERRM);
+01:43:09  16  
+01:43:09  17  END;
+01:43:09  18  /
+
+Procedure created.
+
+01:43:09 GMILSTER> show errors
+No errors.
+01:43:09 GMILSTER> exec listOnePart(10601)
+Sleeping Beauty,24.99,300
+
+PL/SQL procedure successfully completed.
+
+01:43:23 GMILSTER> exec listOnePart(12345)
+Error occurred: :ORA-01403: no data found
+
+PL/SQL procedure successfully completed.
+
+01:43:36 GMILSTER> Spool off

@@ -1,0 +1,12 @@
+function F() {
+}
+F.prototype.sharedForFObjects = 1;
+print (F.prototype.sharedForFObjects)
+function G() {
+}
+G.prototype = new F();
+G.prototype.constructor = G;
+
+var g = new G();
+print (g.sharedForFObjects);
+print ("\n");

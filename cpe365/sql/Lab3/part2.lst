@@ -1,0 +1,558 @@
+10:21:09 GMILSTER> start part2.sql
+10:21:13 GMILSTER> -- Script for lab3, part 2
+10:21:13 GMILSTER> -- Run this to generate part2.lst for your hand-in
+10:21:13 GMILSTER> -- M. Liu, Winter 2012
+10:21:13 GMILSTER> --------------------------------------------
+10:21:13 GMILSTER> SET PAUSE OFF
+10:21:13 GMILSTER> SET AUTOCOMMIT OFF
+10:21:13 GMILSTER> @dropAirline
+10:21:13 GMILSTER> --  This file drops the tables for the
+10:21:13 GMILSTER> --  airline database.
+10:21:13 GMILSTER> --  M. Liu, Fall 2011
+10:21:13 GMILSTER> drop table flight;
+
+Table dropped.
+
+10:21:13 GMILSTER> drop table certified;
+
+Table dropped.
+
+10:21:13 GMILSTER> drop table aircraft cascade constraints;
+
+Table dropped.
+
+10:21:13 GMILSTER> drop table employee cascade constraints;
+
+Table dropped.
+
+10:21:13 GMILSTER> @createAirline
+10:21:13 GMILSTER> ---------------------------------------------------------------
+10:21:13 GMILSTER> -- Recipe Database; Create Airline Tables Script
+10:21:13 GMILSTER> -- Garrett Milster, Winter 2012
+10:21:13 GMILSTER> ---------------------------------------------------------------
+10:21:13 GMILSTER> 
+10:21:13 GMILSTER> drop table flight cascade constraints;
+drop table flight cascade constraints
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+10:21:13 GMILSTER> -- If the table recipe does not already exist, the statement
+10:21:13 GMILSTER> --	above will cause a harmless error message.
+10:21:13 GMILSTER> create table flight (
+10:21:13   2  	fno	     numeric(4) check (fno between 0 AND 9000),
+10:21:13   3  	origin	     char(3) not null,
+10:21:13   4  	destination  char(3) not null,
+10:21:13   5  	distance     numeric(5) check (distance > 0),
+10:21:13   6  	departs      date not null,
+10:21:13   7  	arrives      date not null,
+10:21:13   8  	fare	     numeric(6,2) check (fare > 0),
+10:21:13   9  	primary key (fno)
+10:21:13  10  );
+
+Table created.
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> create table aircraft (
+10:21:14   2  	aid	numeric(3) check (aid between 0 and 100),
+10:21:14   3  	aname	varchar2(30) not null,
+10:21:14   4  	range	numeric(6) check (range > 0),
+10:21:14   5  	primary key(aid)
+10:21:14   6  );
+
+Table created.
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> create table employee (
+10:21:14   2  	eid	 numeric(9) check (eid > 0),
+10:21:14   3  	ename	 varchar2(20) not null,
+10:21:14   4  	salary	 numeric(10,2) check (salary > 0),
+10:21:14   5  	sid	 numeric(9) check (sid > 0),
+10:21:14   6  	foreign key(sid) references employee (eid),
+10:21:14   7  	primary key(eid)
+10:21:14   8  );
+
+Table created.
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> create table certified (
+10:21:14   2  	eid	 numeric(9) check (eid > 0),
+10:21:14   3  	aid	 numeric(3) check (aid between 0 and 100),
+10:21:14   4  	foreign key(eid) references employee (eid),
+10:21:14   5  	foreign key(aid) references aircraft (aid),
+10:21:14   6  	primary key(eid,aid)
+10:21:14   7  );
+
+Table created.
+
+10:21:14 GMILSTER> @showConstraints
+10:21:14 GMILSTER> -- These commands list the constraints created for the Airline database
+10:21:14 GMILSTER> -- M. Liu, Fall 2011
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> select constraint_name, constraint_type, search_condition
+10:21:14   2  from user_constraints
+10:21:14   3  where table_name = 'FLIGHT';
+CONSTRAINT_NAME                C
+------------------------------ -
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+SYS_C00540538                  C
+distance > 0
+
+SYS_C00540539                  C
+fare > 0
+
+SYS_C00540540                  P
+
+
+SYS_C00540533                  C
+"ORIGIN" IS NOT NULL
+
+SYS_C00540534                  C
+"DESTINATION" IS NOT NULL
+
+SYS_C00540535                  C
+"DEPARTS" IS NOT NULL
+
+SYS_C00540536                  C
+"ARRIVES" IS NOT NULL
+
+SYS_C00540537                  C
+fno between 0 AND 9000
+
+
+8 rows selected.
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> select constraint_name, constraint_type, search_condition
+10:21:14   2  from user_constraints
+10:21:14   3  where table_name = 'AIRCRAFT';
+CONSTRAINT_NAME                C
+------------------------------ -
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+SYS_C00540541                  C
+"ANAME" IS NOT NULL
+
+SYS_C00540542                  C
+aid between 0 and 100
+
+SYS_C00540543                  C
+range > 0
+
+SYS_C00540544                  P
+
+
+
+4 rows selected.
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> select constraint_name, constraint_type, search_condition
+10:21:14   2  from user_constraints
+10:21:14   3  where table_name = 'EMPLOYEE';
+CONSTRAINT_NAME                C
+------------------------------ -
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+SYS_C00540545                  C
+"ENAME" IS NOT NULL
+
+SYS_C00540546                  C
+eid > 0
+
+SYS_C00540547                  C
+salary > 0
+
+SYS_C00540548                  C
+sid > 0
+
+SYS_C00540549                  P
+
+
+SYS_C00540550                  R
+
+
+
+6 rows selected.
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> select constraint_name,  constraint_type, search_condition
+10:21:14   2  from user_constraints
+10:21:14   3  where table_name = 'CERTIFIED';
+CONSTRAINT_NAME                C
+------------------------------ -
+SEARCH_CONDITION
+--------------------------------------------------------------------------------
+SYS_C00540551                  C
+eid > 0
+
+SYS_C00540552                  C
+aid between 0 and 100
+
+SYS_C00540553                  P
+
+
+SYS_C00540554                  R
+
+
+SYS_C00540555                  R
+
+
+
+5 rows selected.
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> SET ECHO OFF
+10:21:14 GMILSTER> SET FEEDBACK ON
+10:21:14 GMILSTER> @listTables
+10:21:14 GMILSTER> ---------------------------------------------------------------
+10:21:14 GMILSTER> -- Airline Database: list the tables
+10:21:14 GMILSTER> -- created by M. Liu,  Fall 2011
+10:21:14 GMILSTER> ---------------------------------------------------------------
+10:21:14 GMILSTER> select count(*)  from flight;
+  COUNT(*)
+----------
+        18
+
+1 row selected.
+
+10:21:14 GMILSTER> select count(*) from aircraft;
+  COUNT(*)
+----------
+        16
+
+1 row selected.
+
+10:21:14 GMILSTER> select count(*) from employee;
+  COUNT(*)
+----------
+        31
+
+1 row selected.
+
+10:21:14 GMILSTER> select count(*) from certified;
+  COUNT(*)
+----------
+        69
+
+1 row selected.
+
+10:21:14 GMILSTER> @insertBad
+10:21:14 GMILSTER> ---------------------------------------------------------------
+10:21:14 GMILSTER> -- Airline Database: Insert tuples that will cause integrity
+10:21:14 GMILSTER> -- constraint violations.
+10:21:14 GMILSTER> -- created by M. Liu,  Fall 2011
+10:21:14 GMILSTER> ---------------------------------------------------------------
+10:21:14 GMILSTER> insert into flight values(99,'LAX','DCA',2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),235.98);
+insert into flight values(99,'LAX','DCA',2308,
+*
+ERROR at line 1:
+ORA-00001: unique constraint (GMILSTER.SYS_C00540540) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(-1,'LAX','DCA',2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),235.98);
+insert into flight values(-1,'LAX','DCA',2308,
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540537) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(9001,'LAX','DCA',2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),235.98);
+insert into flight values(9001,'LAX','DCA',2308,
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540537) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(1234,'LAXX','DCA',2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),235.98);
+insert into flight values(1234,'LAXX','DCA',2308,
+                               *
+ERROR at line 1:
+ORA-12899: value too large for column "GMILSTER"."FLIGHT"."ORIGIN" (actual: 4,
+maximum: 3)
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(1234,'LAX','DCAX',2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),235.98);
+insert into flight values(1234,'LAX','DCAX',2308,
+                                     *
+ERROR at line 1:
+ORA-12899: value too large for column "GMILSTER"."FLIGHT"."DESTINATION"
+(actual: 4, maximum: 3)
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(1234, null,'DCA' ,2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),235.98);
+insert into flight values(1234, null,'DCA' ,2308,
+                                *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("GMILSTER"."FLIGHT"."ORIGIN")
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(1234, 'LAX', null ,2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),235.98);
+insert into flight values(1234, 'LAX', null ,2308,
+                                       *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("GMILSTER"."FLIGHT"."DESTINATION")
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(1234,'LAX','DCA',-1000,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),235.98);
+insert into flight values(1234,'LAX','DCA',-1000,
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540538) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(1234,'LAX','DCA',2308,
+10:21:14   2  null,
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),235.98);
+null,
+*
+ERROR at line 2:
+ORA-01400: cannot insert NULL into ("GMILSTER"."FLIGHT"."DEPARTS")
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(1234,'LAX','DCA',2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  null,235.98);
+null,235.98)
+*
+ERROR at line 3:
+ORA-01400: cannot insert NULL into ("GMILSTER"."FLIGHT"."ARRIVES")
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(1234,'LAX','DCA',2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'),-2000);
+insert into flight values(1234,'LAX','DCA',2308,
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540539) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into flight values(1234,'LAX','DCA',2308,
+10:21:14   2  to_date( '2005/04/12 09:30am','YY/MM/DD hh:miam'),
+10:21:14   3  to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'), 12345);
+to_date('2005/04/12 09:40pm','YY/MM/DD hh:miam'), 12345)
+                                                  *
+ERROR at line 3:
+ORA-01438: value larger than specified precision allowed for this column
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into aircraft values(1,'Boeing 747-400',8430);
+insert into aircraft values(1,'Boeing 747-400',8430)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (GMILSTER.SYS_C00540544) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into aircraft values(-1,'Boeing 747-400',8430);
+insert into aircraft values(-1,'Boeing 747-400',8430)
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540542) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into aircraft values(101,'Boeing 747-400',8430);
+insert into aircraft values(101,'Boeing 747-400',8430)
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540542) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into aircraft values(100,'0123456789012345678901234567890',8430);
+insert into aircraft values(100,'0123456789012345678901234567890',8430)
+                                *
+ERROR at line 1:
+ORA-12899: value too large for column "GMILSTER"."AIRCRAFT"."ANAME" (actual:
+31, maximum: 30)
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into aircraft values(100, null,8430);
+insert into aircraft values(100, null,8430)
+                                 *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("GMILSTER"."AIRCRAFT"."ANAME")
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into aircraft values(100,'Boeing 747-400',-1);
+insert into aircraft values(100,'Boeing 747-400',-1)
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540543) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into aircraft values(100,'Boeing 747-400',1234567);
+insert into aircraft values(100,'Boeing 747-400',1234567)
+                                                 *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into employee values(242518965,'James Wong',1204330, null);
+insert into employee values(242518965,'James Wong',1204330, null)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (GMILSTER.SYS_C00540549) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into employee values(-1,'James Wong',1204330, null);
+insert into employee values(-1,'James Wong',1204330, null)
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540546) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into employee values(1234567890,'James Wong',1204330, null);
+insert into employee values(1234567890,'James Wong',1204330, null)
+                            *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into employee values(123456789,'012345678901234567890',1204330, null);
+insert into employee values(123456789,'012345678901234567890',1204330, null)
+                                      *
+ERROR at line 1:
+ORA-12899: value too large for column "GMILSTER"."EMPLOYEE"."ENAME" (actual:
+21, maximum: 20)
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into employee values(123456789,null, 1204330, null);
+insert into employee values(123456789,null, 1204330, null)
+                                      *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("GMILSTER"."EMPLOYEE"."ENAME")
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into employee values(123456789,'James Wong',-1, null);
+insert into employee values(123456789,'James Wong',-1, null)
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540547) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into employee values(123456789,'James Wong',123456789.00, null);
+insert into employee values(123456789,'James Wong',123456789.00, null)
+                                                   *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into employee values(123456789,'James Wong',1204330, 987654321);
+insert into employee values(123456789,'James Wong',1204330, 987654321)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (GMILSTER.SYS_C00540550) violated - parent key
+not found
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into certified values(567354612,1);
+insert into certified values(567354612,1)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (GMILSTER.SYS_C00540553) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into certified values(123456789, 1);
+insert into certified values(123456789, 1)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (GMILSTER.SYS_C00540554) violated - parent key
+not found
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> insert into certified values(567354612,123);
+insert into certified values(567354612,123)
+*
+ERROR at line 1:
+ORA-02290: check constraint (GMILSTER.SYS_C00540552) violated
+
+
+10:21:14 GMILSTER> 
+10:21:14 GMILSTER> @listTables
+10:21:14 GMILSTER> ---------------------------------------------------------------
+10:21:14 GMILSTER> -- Airline Database: list the tables
+10:21:14 GMILSTER> -- created by M. Liu,  Fall 2011
+10:21:14 GMILSTER> ---------------------------------------------------------------
+10:21:14 GMILSTER> select count(*)  from flight;
+  COUNT(*)
+----------
+        18
+
+1 row selected.
+
+10:21:14 GMILSTER> select count(*) from aircraft;
+  COUNT(*)
+----------
+        16
+
+1 row selected.
+
+10:21:14 GMILSTER> select count(*) from employee;
+  COUNT(*)
+----------
+        31
+
+1 row selected.
+
+10:21:14 GMILSTER> select count(*) from certified;
+  COUNT(*)
+----------
+        69
+
+1 row selected.
+
+10:21:14 GMILSTER> SET PAUSE ON
+10:21:14 GMILSTER> -----------------------------------------
+10:21:14 GMILSTER> spool off

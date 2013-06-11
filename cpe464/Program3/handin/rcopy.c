@@ -1,0 +1,317 @@
+/* Garrett Milster 
+ * 
+ * CPE 464 Program 3
+ *  Client side
+ */
+
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/types.h>          
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include <string.h>
+#include <netdb.h>
+#include <string.h>
+#include "cpe464.h"
+#include <fcntl.h>
+#include "util.h"
+#include <sys/stat.h>
+
+ unsigned char* build_filename_packet(int buffer_size, int window_size, char* from_remote_file);
+ void wait_for_ack(char *from_remote_file, int sk, unsigned char *buffer, struct sockaddr_in* remote, socklen_t rlen); 
+ int print_ack(int ACK, char *from_remote_file, int sk, unsigned char *buffer, struct sockaddr_in* remote, int count);
+ int extract_packet_data(int seq, unsigned char* data, int buffer_size,int fd, int high, 
+ int count, struct sockaddr_in* remote,int sk,int *srej, struct window_data *buffer, int *index);
+ void receive_data(int buffer_size, int window_size,int sk, unsigned char *buffer, 
+                   struct sockaddr_in* remote, socklen_t rlen, char* to_local_file);
+ void wait_for_eof(struct sockaddr_in *remote, int sk);
+
+int main ( int argc, char *argv[] )
+{
+   int sk ;        // socket descriptor
+   struct sockaddr_in remote ;    // socket address for remote sid
+   struct hostent *hp ;       // address of remote host
+   //int len; /* len of data actually sent  */
+   socklen_t rlen = sizeof(remote) ; // length of remote address
+   unsigned char* buffer;
+   if(argc != 8)
+   {
+      perror("Usage: rcopy [from-remote-file] [to-local-file] [buffer-size] [error-percent] [window-size] [remote-machine] [remote-port]\n");
+      exit(-1);
+   }
+   char *from_remote_file = argv[1];
+   char *to_local_file = argv[2];
+   int buffer_size = atoi(argv[3]);
+   double error_percent = strtod(argv[4],NULL); 
+   int window_size = atoi(argv[5]);
+   char *remote_machine = argv[6];
+   int remote_port = htons(atoi(argv[7]));  
+   
+	sk = open_socket();
+   remote.sin_family = AF_INET; 
+   sendtoErr_init(error_percent, 1,1,1,1);
+   hp = gethostbyname(remote_machine);
+   memcpy(&remote.sin_addr,hp->h_addr,hp->h_length);
+   remote.sin_port = remote_port;
+   buffer = build_filename_packet(buffer_size, window_size, from_remote_file);
+   sendtoErr(sk,buffer,115,0,(struct sockaddr *)&remote, sizeof(remote));
+   wait_for_ack(from_remote_file, sk, buffer, &remote, rlen);
+   receive_data(buffer_size, window_size, sk, buffer, &remote, rlen, to_local_file);
+   return 0;
+}
+
+unsigned char* build_filename_packet(int buffer_size, int window_size, char* from_remote_file)
+{
+   unsigned short check = 0;
+   int strlength  = strlen(from_remote_file) + 1;
+   if(strlength > 100)
+   {
+      printf("Error: filename too long\n");
+      exit(-1);
+   }
+   unsigned char* buffer = malloc(115);
+   int seq_num = 1;
+   unsigned char flag = 6;
+   
+   memset(buffer, '\0', 115);
+   
+   memcpy(buffer, &seq_num, 4);
+   memcpy(buffer + 6, &flag, 1);
+   printf("BUFF: %d\n", buffer_size);
+   buffer_size = htons(buffer_size);
+   memcpy(buffer+7, &buffer_size,2);
+   
+   strlength = htonl(strlength);   
+   memcpy(buffer+9, &strlength, 4);   
+   strlength = ntohl(strlength);
+   
+   window_size = htons(window_size);
+   memcpy(buffer+13, &window_size, 2);   
+   memcpy(buffer+15, from_remote_file, strlength);  
+   
+   check = in_cksum((u_short*)buffer, 115);
+   memcpy(buffer+4, &check,2);
+   
+   return buffer;
+}
+
+void wait_for_ack(char *from_remote_file, int sk, unsigned char *buffer, struct sockaddr_in* remote, socklen_t rlen)
+{
+   int count = 10;
+   int len;
+   unsigned char ack[7];
+   while(count > 0)
+   {   
+      if(select_call(sk, 1, 0) == 1)
+      {         
+         if ((len = recvfrom(sk,ack,7,0,(struct sockaddr *)remote,&rlen)) < 0)
+   	   {
+   	      perror("recvfrom call");
+   	      exit(-1);
+   	   }
+         len = print_ack((int)ack[6],from_remote_file,sk,buffer,remote,count);
+         if(len == count)
+         {
+            break;
+         }
+	   }
+	   else
+	   {         
+	      count--;
+	      len = sendtoErr(sk,buffer,115,0,(struct sockaddr *)remote, sizeof(*remote));
+	   }
+   }
+   if(count == 0)
+   {
+      printf("Filename ACK not received correctly within 10 tries\n");
+      exit(-1);
+   }
+   if (len < 0) {
+      printf("Warning data not sent!\n");
+      perror("sendtoErr call");
+      exit(-1);
+   }
+}
+
+int print_ack(int ACK, char *from_remote_file, int sk, unsigned char *buffer, struct sockaddr_in* remote, int count)
+{
+   if(ACK == 7)
+   {
+      printf("Filename response received\n");
+   }
+   else if(ACK == 8)
+   {
+      printf("Server could not open file: %s\n", from_remote_file);
+      exit(-1);
+   }
+   else
+   {   	  
+      printf("Invalid ACK received - %d\n",ACK);    
+      sendtoErr(sk,buffer,115,0,(struct sockaddr *)remote, sizeof(*remote));
+      count--;
+   }
+   return count;
+}
+
+void receive_data(int buffer_size, int window_size,int sk, unsigned char *buffer, 
+                  struct sockaddr_in* remote, socklen_t rlen, char* to_local_file)
+{
+   int fd,count,len;
+   unsigned char* data = malloc(buffer_size + 7);
+   int seq = 0;
+   int index = 0;
+   int srej = 0;
+   int high = window_size -1;
+   struct window_data* window_buffer = malloc(sizeof(struct window_data)*window_size);
+   
+   if((fd = open(to_local_file, O_RDWR|O_CREAT|O_TRUNC,S_IRWXU)) < 0)
+   {
+      perror(to_local_file);
+      exit(-1);
+   }
+   
+   while (1)
+   {  
+      if(select_call(sk, 10, 0) == 1)
+      {	    
+         if ((count = recvfrom(sk,data,buffer_size+7,0,(struct sockaddr *)remote,&rlen)) < 0)
+   	   {
+   	      perror("recvfrom call");
+   	      exit(-1);
+   	   }                  
+         len = extract_packet_data(seq,data,buffer_size,fd,high,count,remote,sk,&srej,window_buffer,&index);
+ 
+         seq = len;
+         if(seq == -1)
+         {            
+            wait_for_eof(remote,sk);
+            break;
+         }
+      
+         high = seq + window_size;
+   	}
+   	else
+   	{
+         printf("Timer expired waiting for data\n");
+         exit(-1);
+   	}
+   }
+
+   close(fd);
+}
+
+int extract_packet_data(int seq, unsigned char* data, int buffer_size,int fd, int high, 
+                        int count,struct sockaddr_in* remote, int sk, int *srej, struct window_data *buffer, int *index)
+{
+   int num,len;
+   char flag;
+   memcpy(&num, data, 4); 
+   unsigned char* ack;
+   memcpy(&flag, data+6,1);
+   num = ntohl(num);
+   if(flag == 9)
+   {
+      return -1;
+   }
+   if(num == seq)
+   {      	   
+      num++;
+      //printf("buffersize: %d\n",buffer_size);
+      if(in_cksum((u_short*)data, count) == 0)
+      {
+      
+         if(write(fd, data+7, count -7) == -1) 
+         {
+            perror("Write Error\n");
+            exit(-1);
+         }
+         printf("data packet %d written to file\n",seq);
+         ack = build_ack(3,num);   	   
+         len = sendtoErr(sk,ack,7,0,(struct sockaddr*)remote, sizeof(*remote));         
+         if(len < 0)
+         {
+            printf("send error\n");
+            exit(-1);
+         }
+         if(*srej == 1)
+         {
+            *srej = 0;
+            
+         }
+         return num;
+      }
+      else
+      {  
+         if(*srej == 0)   
+         {
+            printf("SREJ packet %d sent\n",seq);               
+            ack = build_ack(4,seq);
+            len = sendtoErr(sk,ack,7,0,(struct sockaddr*)remote, sizeof(*remote));
+            if(len < 0)
+            {
+               printf("send error\n");
+               exit(-1);
+            }
+            *srej = 1;
+         }
+         return seq;
+      }
+   }
+   else if(num > seq && num <= high)
+   {
+         if(*srej == 0)   
+         {
+            printf("SREJ packet %d sent\n",seq);               
+            ack = build_ack(4,seq);
+            len = sendtoErr(sk,ack,7,0,(struct sockaddr*)remote, sizeof(*remote));
+            if(len < 0)
+            {
+               printf("send error\n");
+               exit(-1);
+            }
+         }      
+         else
+         {
+            buffer[*index].data = malloc(count);
+            buffer[*index].sequence_num = num;
+            *index = *index + 1;
+         }
+         return seq;
+      
+   }
+   else
+   {
+      len = sendtoErr(sk,build_ack(3,num+1),7,0,(struct sockaddr*)remote, sizeof(*remote));
+
+   }
+ 
+   return seq;
+}
+
+void wait_for_eof(struct sockaddr_in *remote, int sk)
+{
+   int len;
+   int count = 0;
+   len = sendtoErr(sk,build_ack(10,0),7,0,(struct sockaddr*)remote, sizeof(*remote));
+   while(count < 10)
+   {
+      if(select_call(sk, 3, 0) == 1)
+      {
+         len = sendtoErr(sk,build_ack(10,0),7,0,(struct sockaddr*)remote, sizeof(*remote));
+         count++;
+      }
+      else
+      {
+         printf("FILE TRANSFER COMPLETED SUCCESSFULLY\n");
+         break;
+      }
+   }
+   if(count == 10)
+   {
+      printf("EOF LOST ACK, FILE COMPLETED BUT DISCONNECTED FROM SERVER\n");
+   }
+
+}

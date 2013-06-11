@@ -1,0 +1,344 @@
+01:23:21 GMILSTER> start part1.sql
+01:23:29 GMILSTER> -- Garrett Milster --
+01:23:29 GMILSTER> -- Partner: Ross McKelvie --
+01:23:29 GMILSTER> -- Lab 5 part 1 AM --
+01:23:29 GMILSTER> 
+01:23:29 GMILSTER> -- 1 How many different ingredients are there in each recipe? List only those that have more than 6 ingredients
+01:23:29 GMILSTER> SELECT rname RNAME, i_count INGREDIENT_COUNT
+01:23:29   2  FROM (
+01:23:29   3  	 SELECT rname rname, count(*) i_count
+01:23:29   4  	 FROM contains
+01:23:29   5  	 GROUP BY rname
+01:23:29   6  )
+01:23:29   7  WHERE i_count > 6
+01:23:29   8  ORDER BY INGREDIENT_COUNT ASC, RNAME ASC;
+RNAME                INGREDIENT_COUNT
+-------------------- ----------------
+Fried Cheese                        7
+Garlic Shrimp                       7
+Hummus                              8
+
+3 rows selected.
+
+01:23:31 GMILSTER> 
+01:23:31 GMILSTER> -- 2 List each recipe with profit-per-serving exceeding $2. Output with column heading RNAME and CALORIE_PER_SERVING in cincreasing order of cps, then rname.
+01:23:31 GMILSTER> -- Do not put the division operator on a line by itself.
+01:23:31 GMILSTER> SELECT rname RNAME,
+01:23:31   2  	 ( SELECT sum(calorie * amount) CALS
+01:23:31   3  	    FROM contains c
+01:23:31   4  	    INNER JOIN ingredient
+01:23:31   5  	    USING (iname)
+01:23:31   6  	    WHERE d.rname = c.rname
+01:23:31   7  	    GROUP BY rname ) /
+01:23:31   8  	 ( SELECT servings
+01:23:31   9  	    FROM recipe
+01:23:31  10  	    WHERE rname = d.rname ) AS CALORIE_PER_SERVING
+01:23:31  11  FROM contains d
+01:23:31  12  GROUP BY rname
+01:23:31  13  ORDER BY CALORIE_PER_SERVING, rname;
+RNAME                CALORIE_PER_SERVING
+-------------------- -------------------
+Hummus                            54.825
+Garlic Shrimp                        142
+Fried Cheese                       220.7
+Meatloaf                             515
+Apple Treat                        632.5
+Butter Cookies                762.916667
+
+6 rows selected.
+
+01:23:33 GMILSTER> 
+01:23:33 GMILSTER> -- 3 How many recipes contain both salt and pepper
+01:23:33 GMILSTER> SELECT count(*) COUNT
+01:23:33   2  FROM
+01:23:33   3  (
+01:23:33   4  	 SELECT c.rname
+01:23:33   5  	 FROM contains c
+01:23:33   6  	 INNER JOIN contains d
+01:23:33   7  	 ON c.rname = d.rname
+01:23:33   8  	 WHERE c.iname = 'salt' AND d.iname = 'pepper'
+01:23:33   9  	 GROUP BY c.rname
+01:23:33  10  );
+     COUNT
+----------
+         3
+
+1 row selected.
+
+01:23:33 GMILSTER> 
+01:23:33 GMILSTER> -- 4 What is the ratio of recipes that contain an ingredient in the 'dairy' foodgroup?
+01:23:33 GMILSTER> -- Use a sub-select for the set of such recipes, count how many, and divide over the count of total recipes.
+01:23:33 GMILSTER> -- Output with a column heading RATIO above a number.
+01:23:33 GMILSTER> SELECT
+01:23:33   2  (
+01:23:33   3  	 SELECT count(*)
+01:23:33   4  	 FROM contains c
+01:23:33   5  	 INNER JOIN ingredient i
+01:23:33   6  	 ON c.iname = i.iname
+01:23:33   7  	 WHERE i.foodGroup = 'dairy'
+01:23:33   8  ) /
+01:23:33   9  (
+01:23:33  10  	 SELECT count(rname)
+01:23:33  11  	 FROM recipe
+01:23:33  12  ) AS RATIO
+01:23:33  13  FROM dual;
+     RATIO
+----------
+         1
+
+1 row selected.
+
+01:23:34 GMILSTER> 
+01:23:34 GMILSTER> 
+01:23:34 GMILSTER> -- 5 How many distinct combinations of appetizer-entree-dessert are there?
+01:23:34 GMILSTER> -- An examble of one such combination is Hummus-Meatloaf-Apple treat.
+01:23:34 GMILSTER> -- Output with the column heading HOW_MANY above a number
+01:23:34 GMILSTER> SELECT count(*) HOW_MANY
+01:23:34   2  FROM recipe r1, recipe r2, recipe r3
+01:23:34   3  WHERE r1.type = 'appetizer' AND r2.type = 'entree' AND r3.type = 'dessert';
+  HOW_MANY
+----------
+         8
+
+1 row selected.
+
+01:23:34 GMILSTER> 
+01:23:34 GMILSTER> -- 6 List the rname, type, and price of each recipe that contains the ingredient "egg"
+01:23:34 GMILSTER> -- output in increasing order of rname
+01:23:34 GMILSTER> 
+01:23:34 GMILSTER> -- 6a
+01:23:34 GMILSTER> SELECT r.rname, r.type, r.price
+01:23:34   2  FROM contains c
+01:23:34   3  INNER JOIN recipe r
+01:23:34   4  ON r.rname = c.rname
+01:23:34   5  WHERE c.iname = 'egg'
+01:23:34   6  ORDER BY r.rname;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Apple Treat          dessert                5.5
+Fried Cheese         appetizer              6.5
+Meatloaf             entree                  12
+
+3 rows selected.
+
+01:23:35 GMILSTER> 
+01:23:35 GMILSTER> -- 6b
+01:23:35 GMILSTER> SELECT rname, type, price
+01:23:35   2  FROM recipe
+01:23:35   3  WHERE rname IN (
+01:23:35   4  	 SELECT rname
+01:23:35   5  	 FROM contains
+01:23:35   6  	 WHERE iname = 'egg'
+01:23:35   7  )
+01:23:35   8  ORDER BY rname;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Apple Treat          dessert                5.5
+Fried Cheese         appetizer              6.5
+Meatloaf             entree                  12
+
+3 rows selected.
+
+01:23:36 GMILSTER> 
+01:23:36 GMILSTER> -- 6c
+01:23:36 GMILSTER> SELECT rname, type, price
+01:23:36   2  FROM recipe r
+01:23:36   3  WHERE 'egg' IN (
+01:23:36   4  	 SELECT iname
+01:23:36   5  	 FROM contains c
+01:23:36   6  	 WHERE r.rname = c.rname
+01:23:36   7  )
+01:23:36   8  ORDER BY rname;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Apple Treat          dessert                5.5
+Fried Cheese         appetizer              6.5
+Meatloaf             entree                  12
+
+3 rows selected.
+
+01:23:36 GMILSTER> 
+01:23:36 GMILSTER> -- 6d
+01:23:36 GMILSTER> SELECT rname, type, price
+01:23:36   2  FROM recipe r
+01:23:36   3  WHERE 'egg' = ANY (
+01:23:36   4  	 SELECT iname
+01:23:36   5  	 FROM contains c
+01:23:36   6  	 WHERE c.rname = r.rname
+01:23:36   7  )
+01:23:36   8  ORDER BY rname;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Apple Treat          dessert                5.5
+Fried Cheese         appetizer              6.5
+Meatloaf             entree                  12
+
+3 rows selected.
+
+01:23:36 GMILSTER> 
+01:23:36 GMILSTER> -- 6e
+01:23:36 GMILSTER> SELECT rname, type, price
+01:23:36   2  FROM recipe r
+01:23:36   3  WHERE EXISTS (
+01:23:36   4  	 SELECT *
+01:23:36   5  	 FROM contains c
+01:23:36   6  	 WHERE c.rname = r.rname AND c.iname = 'egg'
+01:23:36   7  )
+01:23:36   8  ORDER BY rname;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Apple Treat          dessert                5.5
+Fried Cheese         appetizer              6.5
+Meatloaf             entree                  12
+
+3 rows selected.
+
+01:23:36 GMILSTER> -- 7. List the rname type and price of each recipe that does not contain the ingredient "egg"; ouput in increasing order of rname.
+01:23:36 GMILSTER> 
+01:23:36 GMILSTER> -- 7a
+01:23:36 GMILSTER> SELECT rname, type, price
+01:23:36   2  FROM recipe
+01:23:36   3  MINUS
+01:23:36   4  SELECT rname, type, price
+01:23:36   5  FROM contains INNER JOIN recipe USING (rname)
+01:23:36   6  WHERE iname = 'egg'
+01:23:36   7  ORDER BY rname ASC;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Butter Cookies       dessert                  5
+Garlic Shrimp        entree                17.5
+Hummus               appetizer             4.55
+
+3 rows selected.
+
+01:23:37 GMILSTER> 
+01:23:37 GMILSTER> -- 7b
+01:23:37 GMILSTER> SELECT r.rname, type, price
+01:23:37   2  FROM recipe r
+01:23:37   3  WHERE rname NOT IN (
+01:23:37   4  	  SELECT c.rname
+01:23:37   5  	  FROM contains c
+01:23:37   6  	  WHERE iname = 'egg')
+01:23:37   7  ORDER BY r.rname;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Butter Cookies       dessert                  5
+Garlic Shrimp        entree                17.5
+Hummus               appetizer             4.55
+
+3 rows selected.
+
+01:23:37 GMILSTER> 
+01:23:37 GMILSTER> -- 7c
+01:23:37 GMILSTER> SELECT r.rname, type, price
+01:23:37   2  FROM recipe r
+01:23:37   3  WHERE 'egg' NOT IN (
+01:23:37   4  	  SELECT iname
+01:23:37   5  	  FROM contains c
+01:23:37   6  	  WHERE c.rname = r.rname)
+01:23:37   7  ORDER BY r.rname;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Butter Cookies       dessert                  5
+Garlic Shrimp        entree                17.5
+Hummus               appetizer             4.55
+
+3 rows selected.
+
+01:23:37 GMILSTER> 
+01:23:37 GMILSTER> -- 7d
+01:23:37 GMILSTER> SELECT r.rname, type, price
+01:23:37   2  FROM recipe r
+01:23:37   3  WHERE 'egg' <> ALL (
+01:23:37   4  	  SELECT iname
+01:23:37   5  	  FROM contains c
+01:23:37   6  	  where c.rname = r.rname)
+01:23:37   7  ORDER BY rname;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Butter Cookies       dessert                  5
+Garlic Shrimp        entree                17.5
+Hummus               appetizer             4.55
+
+3 rows selected.
+
+01:23:38 GMILSTER> 
+01:23:38 GMILSTER> -- 7e
+01:23:38 GMILSTER> SELECT r.rname, type, price
+01:23:38   2  FROM recipe r
+01:23:38   3  WHERE NOT EXISTS (
+01:23:38   4  	  SELECT *
+01:23:38   5  	  FROM contains c
+01:23:38   6  	  where c.rname = r.rname and iname = 'egg')
+01:23:38   7  ORDER BY rname;
+RNAME                TYPE                 PRICE
+-------------------- --------------- ----------
+Butter Cookies       dessert                  5
+Garlic Shrimp        entree                17.5
+Hummus               appetizer             4.55
+
+3 rows selected.
+
+01:23:38 GMILSTER> 
+01:23:38 GMILSTER> -- 8. List the rname and price of the recipes with the highest price by using a sub-select in the WHERE clause that generates the highest price of all recipes. Output in increasing order or rname
+01:23:38 GMILSTER> SELECT x.rname, x.price
+01:23:38   2  FROM recipe x
+01:23:38   3  WHERE x.price = (
+01:23:38   4  	  SELECT max(r.price)
+01:23:38   5  	  FROM recipe r
+01:23:38   6  	  )
+01:23:38   7  ORDER BY x.rname;
+RNAME                     PRICE
+-------------------- ----------
+Garlic Shrimp              17.5
+
+1 row selected.
+
+01:23:38 GMILSTER> 
+01:23:38 GMILSTER> -- 9. SAME AS 8 BUT WITH ANY/ALL
+01:23:38 GMILSTER> SELECT r.rname, r.price
+01:23:38   2  FROM recipe r
+01:23:38   3  WHERE r.price >= ALL (
+01:23:38   4  	  SELECT x.price
+01:23:38   5  	  FROM recipe x)
+01:23:38   6  ORDER BY r.rname;
+RNAME                     PRICE
+-------------------- ----------
+Garlic Shrimp              17.5
+
+1 row selected.
+
+01:23:38 GMILSTER> 
+01:23:38 GMILSTER> -- 10. List the rname of each recipe that has the highest ingredient cost
+01:23:38 GMILSTER> SELECT rname
+01:23:38   2  FROM contains INNER JOIN ingredient USING (iname)
+01:23:38   3  GROUP BY rname
+01:23:38   4  HAVING sum(cost*amount) =
+01:23:38   5  	 (SELECT MAX(sum(cost*amount))
+01:23:38   6  	  FROM contains INNER JOIN ingredient USING (iname)
+01:23:38   7  	  GROUP BY rname
+01:23:38   8  	 );
+RNAME
+--------------------
+Garlic Shrimp
+
+1 row selected.
+
+01:23:38 GMILSTER> 
+01:23:38 GMILSTER> -- 11. List the rname of each recipe that has the highest ingredient cost using ANY/ALL
+01:23:38 GMILSTER> SELECT rname
+01:23:38   2  FROM contains INNER JOIN ingredient USING (iname)
+01:23:38   3  GROUP BY rname
+01:23:38   4  HAVING sum(cost*amount) >= ALL
+01:23:38   5  	 (SELECT sum(cost*amount)
+01:23:38   6  	  FROM contains INNER JOIN ingredient USING (iname)
+01:23:38   7  	  GROUP BY rname
+01:23:38   8  	 );
+RNAME
+--------------------
+Garlic Shrimp
+
+1 row selected.
+
+01:23:39 GMILSTER> SET PAUSE OFF
+01:23:44 GMILSTER> spool part1.lst

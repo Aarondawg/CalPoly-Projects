@@ -1,0 +1,1085 @@
+
+Welcome aboard the Lunar Module Flight Simulator
+
+  To begin you must specify the LM's initial altitude
+  and fuel level.  To simulate the actual LM use
+  values of 1300 meters and 500 liters, respectively.
+
+Good luck and may the force be with you!
+
+Enter the initial altitude of the LM (in meters): Enter the initial amount of fuel on board the LM (in liters): LM state at retrorocket cutoff
+Elapsed Time:     0 s
+        Fuel:     500 l
+        Rate:     0 l/s
+    Altitude:     1300 m
+    Velocity:      0 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     1 s
+        Fuel:     491 l
+        Rate:     9 l/s
+    Altitude:     1300.65 m
+    Velocity:     1.296 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     2 s
+        Fuel:     482 l
+        Rate:     9 l/s
+    Altitude:     1302.59 m
+    Velocity:     2.592 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     3 s
+        Fuel:     473 l
+        Rate:     9 l/s
+    Altitude:     1305.83 m
+    Velocity:     3.888 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     4 s
+        Fuel:     464 l
+        Rate:     9 l/s
+    Altitude:     1310.37 m
+    Velocity:     5.184 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     5 s
+        Fuel:     455 l
+        Rate:     9 l/s
+    Altitude:     1316.2 m
+    Velocity:     6.48 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     6 s
+        Fuel:     446 l
+        Rate:     9 l/s
+    Altitude:     1323.33 m
+    Velocity:     7.776 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     7 s
+        Fuel:     437 l
+        Rate:     9 l/s
+    Altitude:     1331.75 m
+    Velocity:     9.072 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     8 s
+        Fuel:     428 l
+        Rate:     9 l/s
+    Altitude:     1341.47 m
+    Velocity:     10.368 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     9 s
+        Fuel:     419 l
+        Rate:     9 l/s
+    Altitude:     1352.49 m
+    Velocity:     11.664 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     10 s
+        Fuel:     410 l
+        Rate:     9 l/s
+    Altitude:     1364.8 m
+    Velocity:     12.96 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     11 s
+        Fuel:     401 l
+        Rate:     9 l/s
+    Altitude:     1378.41 m
+    Velocity:     14.256 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     12 s
+        Fuel:     392 l
+        Rate:     9 l/s
+    Altitude:     1393.31 m
+    Velocity:     15.552 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     13 s
+        Fuel:     383 l
+        Rate:     9 l/s
+    Altitude:     1409.51 m
+    Velocity:     16.848 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     14 s
+        Fuel:     374 l
+        Rate:     9 l/s
+    Altitude:     1427.01 m
+    Velocity:     18.144 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     15 s
+        Fuel:     365 l
+        Rate:     9 l/s
+    Altitude:     1445.8 m
+    Velocity:     19.44 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     16 s
+        Fuel:     356 l
+        Rate:     9 l/s
+    Altitude:     1465.89 m
+    Velocity:     20.736 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     17 s
+        Fuel:     347 l
+        Rate:     9 l/s
+    Altitude:     1487.27 m
+    Velocity:     22.032 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     18 s
+        Fuel:     338 l
+        Rate:     9 l/s
+    Altitude:     1509.95 m
+    Velocity:     23.328 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     19 s
+        Fuel:     329 l
+        Rate:     9 l/s
+    Altitude:     1533.93 m
+    Velocity:     24.624 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     20 s
+        Fuel:     320 l
+        Rate:     9 l/s
+    Altitude:     1559.2 m
+    Velocity:     25.92 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     21 s
+        Fuel:     311 l
+        Rate:     9 l/s
+    Altitude:     1585.77 m
+    Velocity:     27.216 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     22 s
+        Fuel:     302 l
+        Rate:     9 l/s
+    Altitude:     1613.63 m
+    Velocity:     28.512 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     23 s
+        Fuel:     293 l
+        Rate:     9 l/s
+    Altitude:     1642.79 m
+    Velocity:     29.808 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     24 s
+        Fuel:     284 l
+        Rate:     9 l/s
+    Altitude:     1673.25 m
+    Velocity:     31.104 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     25 s
+        Fuel:     275 l
+        Rate:     9 l/s
+    Altitude:     1705 m
+    Velocity:     32.4 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     26 s
+        Fuel:     266 l
+        Rate:     9 l/s
+    Altitude:     1738.05 m
+    Velocity:     33.696 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     27 s
+        Fuel:     257 l
+        Rate:     9 l/s
+    Altitude:     1772.39 m
+    Velocity:     34.992 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     28 s
+        Fuel:     248 l
+        Rate:     9 l/s
+    Altitude:     1808.03 m
+    Velocity:     36.288 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     29 s
+        Fuel:     239 l
+        Rate:     9 l/s
+    Altitude:     1844.97 m
+    Velocity:     37.584 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     30 s
+        Fuel:     230 l
+        Rate:     9 l/s
+    Altitude:     1883.2 m
+    Velocity:     38.88 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     31 s
+        Fuel:     221 l
+        Rate:     9 l/s
+    Altitude:     1922.73 m
+    Velocity:     40.176 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     32 s
+        Fuel:     212 l
+        Rate:     9 l/s
+    Altitude:     1963.55 m
+    Velocity:     41.472 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     33 s
+        Fuel:     203 l
+        Rate:     9 l/s
+    Altitude:     2005.67 m
+    Velocity:     42.768 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     34 s
+        Fuel:     194 l
+        Rate:     9 l/s
+    Altitude:     2049.09 m
+    Velocity:     44.064 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     35 s
+        Fuel:     185 l
+        Rate:     9 l/s
+    Altitude:     2093.8 m
+    Velocity:     45.36 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     36 s
+        Fuel:     176 l
+        Rate:     9 l/s
+    Altitude:     2139.81 m
+    Velocity:     46.656 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     37 s
+        Fuel:     167 l
+        Rate:     9 l/s
+    Altitude:     2187.11 m
+    Velocity:     47.952 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     38 s
+        Fuel:     158 l
+        Rate:     9 l/s
+    Altitude:     2235.71 m
+    Velocity:     49.248 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     39 s
+        Fuel:     149 l
+        Rate:     9 l/s
+    Altitude:     2285.61 m
+    Velocity:     50.544 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     40 s
+        Fuel:     140 l
+        Rate:     9 l/s
+    Altitude:     2336.8 m
+    Velocity:     51.84 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     41 s
+        Fuel:     131 l
+        Rate:     9 l/s
+    Altitude:     2389.29 m
+    Velocity:     53.136 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     42 s
+        Fuel:     122 l
+        Rate:     9 l/s
+    Altitude:     2443.07 m
+    Velocity:     54.432 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     43 s
+        Fuel:     113 l
+        Rate:     9 l/s
+    Altitude:     2498.15 m
+    Velocity:     55.728 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     44 s
+        Fuel:     104 l
+        Rate:     9 l/s
+    Altitude:     2554.53 m
+    Velocity:     57.024 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     45 s
+        Fuel:     95 l
+        Rate:     9 l/s
+    Altitude:     2612.2 m
+    Velocity:     58.32 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     46 s
+        Fuel:     86 l
+        Rate:     9 l/s
+    Altitude:     2671.17 m
+    Velocity:     59.616 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     47 s
+        Fuel:     77 l
+        Rate:     9 l/s
+    Altitude:     2731.43 m
+    Velocity:     60.912 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     48 s
+        Fuel:     68 l
+        Rate:     9 l/s
+    Altitude:     2792.99 m
+    Velocity:     62.208 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     49 s
+        Fuel:     59 l
+        Rate:     9 l/s
+    Altitude:     2855.85 m
+    Velocity:     63.504 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     50 s
+        Fuel:     50 l
+        Rate:     9 l/s
+    Altitude:     2920 m
+    Velocity:     64.8 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     51 s
+        Fuel:     41 l
+        Rate:     9 l/s
+    Altitude:     2985.45 m
+    Velocity:     66.096 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     52 s
+        Fuel:     32 l
+        Rate:     9 l/s
+    Altitude:     3052.19 m
+    Velocity:     67.392 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     53 s
+        Fuel:     23 l
+        Rate:     9 l/s
+    Altitude:     3120.23 m
+    Velocity:     68.688 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     54 s
+        Fuel:     14 l
+        Rate:     9 l/s
+    Altitude:     3189.57 m
+    Velocity:     69.984 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     55 s
+        Fuel:     5 l
+        Rate:     9 l/s
+    Altitude:     3260.2 m
+    Velocity:     71.28 m/s
+
+Enter fuel rate(0-9, 0=freefall, 5=constant velocity, 9=max thrust): Elapsed Time:     56 s
+        Fuel:     0 l
+        Rate:     5 l/s
+    Altitude:     3331.48 m
+    Velocity:     71.28 m/s
+
+Elapsed Time:     57 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3401.95 m
+    Velocity:     69.66 m/s
+
+Elapsed Time:     58 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3470.8 m
+    Velocity:     68.04 m/s
+
+Elapsed Time:     59 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3538.03 m
+    Velocity:     66.42 m/s
+
+Elapsed Time:     60 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3603.64 m
+    Velocity:     64.8 m/s
+
+Elapsed Time:     61 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3667.63 m
+    Velocity:     63.18 m/s
+
+Elapsed Time:     62 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3730 m
+    Velocity:     61.56 m/s
+
+Elapsed Time:     63 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3790.75 m
+    Velocity:     59.94 m/s
+
+Elapsed Time:     64 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3849.88 m
+    Velocity:     58.32 m/s
+
+Elapsed Time:     65 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3907.39 m
+    Velocity:     56.7 m/s
+
+Elapsed Time:     66 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3963.28 m
+    Velocity:     55.08 m/s
+
+Elapsed Time:     67 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4017.55 m
+    Velocity:     53.46 m/s
+
+Elapsed Time:     68 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4070.2 m
+    Velocity:     51.84 m/s
+
+Elapsed Time:     69 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4121.23 m
+    Velocity:     50.22 m/s
+
+Elapsed Time:     70 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4170.64 m
+    Velocity:     48.6 m/s
+
+Elapsed Time:     71 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4218.43 m
+    Velocity:     46.98 m/s
+
+Elapsed Time:     72 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4264.6 m
+    Velocity:     45.36 m/s
+
+Elapsed Time:     73 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4309.15 m
+    Velocity:     43.74 m/s
+
+Elapsed Time:     74 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4352.08 m
+    Velocity:     42.12 m/s
+
+Elapsed Time:     75 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4393.39 m
+    Velocity:     40.5 m/s
+
+Elapsed Time:     76 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4433.08 m
+    Velocity:     38.88 m/s
+
+Elapsed Time:     77 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4471.15 m
+    Velocity:     37.26 m/s
+
+Elapsed Time:     78 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4507.6 m
+    Velocity:     35.64 m/s
+
+Elapsed Time:     79 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4542.43 m
+    Velocity:     34.02 m/s
+
+Elapsed Time:     80 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4575.64 m
+    Velocity:     32.4 m/s
+
+Elapsed Time:     81 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4607.23 m
+    Velocity:     30.78 m/s
+
+Elapsed Time:     82 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4637.2 m
+    Velocity:     29.16 m/s
+
+Elapsed Time:     83 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4665.55 m
+    Velocity:     27.54 m/s
+
+Elapsed Time:     84 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4692.28 m
+    Velocity:     25.92 m/s
+
+Elapsed Time:     85 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4717.39 m
+    Velocity:     24.3 m/s
+
+Elapsed Time:     86 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4740.88 m
+    Velocity:     22.68 m/s
+
+Elapsed Time:     87 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4762.75 m
+    Velocity:     21.06 m/s
+
+Elapsed Time:     88 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4783 m
+    Velocity:     19.44 m/s
+
+Elapsed Time:     89 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4801.63 m
+    Velocity:     17.82 m/s
+
+Elapsed Time:     90 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4818.64 m
+    Velocity:     16.2 m/s
+
+Elapsed Time:     91 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4834.03 m
+    Velocity:     14.58 m/s
+
+Elapsed Time:     92 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4847.8 m
+    Velocity:     12.96 m/s
+
+Elapsed Time:     93 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4859.95 m
+    Velocity:     11.34 m/s
+
+Elapsed Time:     94 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4870.48 m
+    Velocity:     9.72 m/s
+
+Elapsed Time:     95 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4879.39 m
+    Velocity:     8.1 m/s
+
+Elapsed Time:     96 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4886.68 m
+    Velocity:     6.48 m/s
+
+Elapsed Time:     97 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4892.35 m
+    Velocity:     4.86 m/s
+
+Elapsed Time:     98 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4896.4 m
+    Velocity:     3.24 m/s
+
+Elapsed Time:     99 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4898.83 m
+    Velocity:     1.62 m/s
+
+Elapsed Time:     100 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4899.64 m
+    Velocity:     3.28626e-14 m/s
+
+Elapsed Time:     101 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4898.83 m
+    Velocity:     -1.62 m/s
+
+Elapsed Time:     102 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4896.4 m
+    Velocity:     -3.24 m/s
+
+Elapsed Time:     103 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4892.35 m
+    Velocity:     -4.86 m/s
+
+Elapsed Time:     104 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4886.68 m
+    Velocity:     -6.48 m/s
+
+Elapsed Time:     105 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4879.39 m
+    Velocity:     -8.1 m/s
+
+Elapsed Time:     106 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4870.48 m
+    Velocity:     -9.72 m/s
+
+Elapsed Time:     107 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4859.95 m
+    Velocity:     -11.34 m/s
+
+Elapsed Time:     108 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4847.8 m
+    Velocity:     -12.96 m/s
+
+Elapsed Time:     109 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4834.03 m
+    Velocity:     -14.58 m/s
+
+Elapsed Time:     110 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4818.64 m
+    Velocity:     -16.2 m/s
+
+Elapsed Time:     111 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4801.63 m
+    Velocity:     -17.82 m/s
+
+Elapsed Time:     112 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4783 m
+    Velocity:     -19.44 m/s
+
+Elapsed Time:     113 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4762.75 m
+    Velocity:     -21.06 m/s
+
+Elapsed Time:     114 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4740.88 m
+    Velocity:     -22.68 m/s
+
+Elapsed Time:     115 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4717.39 m
+    Velocity:     -24.3 m/s
+
+Elapsed Time:     116 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4692.28 m
+    Velocity:     -25.92 m/s
+
+Elapsed Time:     117 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4665.55 m
+    Velocity:     -27.54 m/s
+
+Elapsed Time:     118 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4637.2 m
+    Velocity:     -29.16 m/s
+
+Elapsed Time:     119 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4607.23 m
+    Velocity:     -30.78 m/s
+
+Elapsed Time:     120 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4575.64 m
+    Velocity:     -32.4 m/s
+
+Elapsed Time:     121 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4542.43 m
+    Velocity:     -34.02 m/s
+
+Elapsed Time:     122 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4507.6 m
+    Velocity:     -35.64 m/s
+
+Elapsed Time:     123 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4471.15 m
+    Velocity:     -37.26 m/s
+
+Elapsed Time:     124 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4433.08 m
+    Velocity:     -38.88 m/s
+
+Elapsed Time:     125 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4393.39 m
+    Velocity:     -40.5 m/s
+
+Elapsed Time:     126 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4352.08 m
+    Velocity:     -42.12 m/s
+
+Elapsed Time:     127 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4309.15 m
+    Velocity:     -43.74 m/s
+
+Elapsed Time:     128 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4264.6 m
+    Velocity:     -45.36 m/s
+
+Elapsed Time:     129 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4218.43 m
+    Velocity:     -46.98 m/s
+
+Elapsed Time:     130 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4170.64 m
+    Velocity:     -48.6 m/s
+
+Elapsed Time:     131 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4121.23 m
+    Velocity:     -50.22 m/s
+
+Elapsed Time:     132 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4070.2 m
+    Velocity:     -51.84 m/s
+
+Elapsed Time:     133 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     4017.55 m
+    Velocity:     -53.46 m/s
+
+Elapsed Time:     134 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3963.28 m
+    Velocity:     -55.08 m/s
+
+Elapsed Time:     135 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3907.39 m
+    Velocity:     -56.7 m/s
+
+Elapsed Time:     136 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3849.88 m
+    Velocity:     -58.32 m/s
+
+Elapsed Time:     137 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3790.75 m
+    Velocity:     -59.94 m/s
+
+Elapsed Time:     138 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3730 m
+    Velocity:     -61.56 m/s
+
+Elapsed Time:     139 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3667.63 m
+    Velocity:     -63.18 m/s
+
+Elapsed Time:     140 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3603.64 m
+    Velocity:     -64.8 m/s
+
+Elapsed Time:     141 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3538.03 m
+    Velocity:     -66.42 m/s
+
+Elapsed Time:     142 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3470.8 m
+    Velocity:     -68.04 m/s
+
+Elapsed Time:     143 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3401.95 m
+    Velocity:     -69.66 m/s
+
+Elapsed Time:     144 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3331.48 m
+    Velocity:     -71.28 m/s
+
+Elapsed Time:     145 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3259.39 m
+    Velocity:     -72.9 m/s
+
+Elapsed Time:     146 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3185.68 m
+    Velocity:     -74.52 m/s
+
+Elapsed Time:     147 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3110.35 m
+    Velocity:     -76.14 m/s
+
+Elapsed Time:     148 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     3033.4 m
+    Velocity:     -77.76 m/s
+
+Elapsed Time:     149 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2954.83 m
+    Velocity:     -79.38 m/s
+
+Elapsed Time:     150 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2874.64 m
+    Velocity:     -81 m/s
+
+Elapsed Time:     151 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2792.83 m
+    Velocity:     -82.62 m/s
+
+Elapsed Time:     152 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2709.4 m
+    Velocity:     -84.24 m/s
+
+Elapsed Time:     153 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2624.35 m
+    Velocity:     -85.86 m/s
+
+Elapsed Time:     154 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2537.68 m
+    Velocity:     -87.48 m/s
+
+Elapsed Time:     155 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2449.39 m
+    Velocity:     -89.1 m/s
+
+Elapsed Time:     156 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2359.48 m
+    Velocity:     -90.72 m/s
+
+Elapsed Time:     157 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2267.95 m
+    Velocity:     -92.34 m/s
+
+Elapsed Time:     158 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2174.8 m
+    Velocity:     -93.96 m/s
+
+Elapsed Time:     159 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     2080.03 m
+    Velocity:     -95.58 m/s
+
+Elapsed Time:     160 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1983.64 m
+    Velocity:     -97.2 m/s
+
+Elapsed Time:     161 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1885.63 m
+    Velocity:     -98.82 m/s
+
+Elapsed Time:     162 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1786 m
+    Velocity:     -100.44 m/s
+
+Elapsed Time:     163 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1684.75 m
+    Velocity:     -102.06 m/s
+
+Elapsed Time:     164 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1581.88 m
+    Velocity:     -103.68 m/s
+
+Elapsed Time:     165 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1477.39 m
+    Velocity:     -105.3 m/s
+
+Elapsed Time:     166 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1371.28 m
+    Velocity:     -106.92 m/s
+
+Elapsed Time:     167 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1263.55 m
+    Velocity:     -108.54 m/s
+
+Elapsed Time:     168 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1154.2 m
+    Velocity:     -110.16 m/s
+
+Elapsed Time:     169 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     1043.23 m
+    Velocity:     -111.78 m/s
+
+Elapsed Time:     170 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     930.64 m
+    Velocity:     -113.4 m/s
+
+Elapsed Time:     171 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     816.43 m
+    Velocity:     -115.02 m/s
+
+Elapsed Time:     172 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     700.6 m
+    Velocity:     -116.64 m/s
+
+Elapsed Time:     173 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     583.15 m
+    Velocity:     -118.26 m/s
+
+Elapsed Time:     174 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     464.08 m
+    Velocity:     -119.88 m/s
+
+Elapsed Time:     175 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     343.39 m
+    Velocity:     -121.5 m/s
+
+Elapsed Time:     176 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     221.08 m
+    Velocity:     -123.12 m/s
+
+Elapsed Time:     177 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:     97.15 m
+    Velocity:     -124.74 m/s
+
+Elapsed Time:     178 s
+        Fuel:     0 l
+        Rate:     0 l/s
+    Altitude:      0 m
+    Velocity:     -126.36 m/s
+
+Status at landing - Ouch - that hurt!

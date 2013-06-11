@@ -1,0 +1,155 @@
+/* Garrett Milster */
+/* October 21 2009 */
+/* A program that lists names and their popularities over several decades*/
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#define MAXS 256
+#define MAXP 11
+
+typedef struct {
+
+  char name[MAXS];
+  int pop[MAXP];
+} NameData;
+
+void PrintRec(NameData Namerecord) {
+
+int i;
+
+  printf("Name: %s\n", Namerecord.name);
+  printf("Popularity by year: \n");
+  printf("1910   1920   1930   1940   1950   1960   1970   1980   1990   2000\n");
+  printf("-------------------------------------------------------------------- \n");
+
+ for(i = 0; i < 10; i ++){
+   printf("%-6d ", (Namerecord.pop[i]));
+	}
+
+ /*  printf("%-6d ", (Namerecord.pop[1]));
+  printf("%-6d ", (Namerecord.pop[2]));
+  printf("%-6d ", (Namerecord.pop[3]));
+  printf("%-6d ", (Namerecord.pop[4]));
+  printf("%-6d ", (Namerecord.pop[5]));
+  printf("%-6d ", (Namerecord.pop[6]));
+  printf("%-6d ", (Namerecord.pop[7]));
+  printf("%-6d ", (Namerecord.pop[8]));
+  printf("%-6d ", (Namerecord.pop[9]));
+  printf("%-6d ", (Namerecord.pop[10]));
+  
+*/
+  printf("\n");
+  printf("-------------------------------------------------------------------- \n");
+
+ 
+}
+
+int Compare(NameData Namerecord[],int numS){
+  int  i;
+  int comparison;
+  char search[MAXS];
+   i = 0;
+
+
+        printf("Enter name to search for: ");
+            scanf("%s", search);
+            printf("Searching for %s\n", search);
+                /*( printf("search produced: %s\n", search);*/
+
+       for(i = 0; i < numS; i++){
+ 	comparison = (strcmp(search, Namerecord[i].name));
+
+	 /* printf("comparison: %d\n", comparison);*/
+
+	  if(comparison == 0){
+		return(i);
+	 }
+		
+      }
+return(-1);
+}
+
+void PrintOne(NameData Namerecord){
+  int j;
+ j = 0;
+	printf("Name: %s\n", Namerecord.name);
+  	printf("Popularity by year:\n");
+	printf("1910   1920   1930   1940   1950   1960   1970   1980   1990   2000\n");
+  	printf("-------------------------------------------------------------------- \n");
+ 		 
+	for(j = 1; j <11; j++){
+	  if(Namerecord.pop[j] <= 100 && Namerecord.pop[j] != 0){
+	    printf("%-6c ", '*');
+	  }else if(Namerecord.pop[j] > 100 && Namerecord.pop[j] <= 500){
+            printf("%-6c ", '^');
+  	  }else if(Namerecord.pop[j] > 500 && Namerecord.pop[j] <= 900){
+ 	    printf("%-6c ", '+');
+ 	  }else if(Namerecord.pop[j] > 900 || Namerecord.pop[j] == 0){
+ 	    printf("%-6c ", '-');
+          }
+	}
+ 	printf("\n");
+ 	printf("-------------------------------------------------------------------- \n");
+	printf("Key: * = very popular, ^ = common, + = less common, - = rare\n");
+}
+
+
+int main(void) {
+  int i, numS, choice, comparison;
+  NameData Namerecord[5000];
+
+  FILE *fp;
+
+  fp = fopen("names-data.txt", "r");
+  if (fp == NULL) {
+    printf("Invalid file exiting\n");
+     exit(0);
+  }
+
+  i =0;
+ 
+
+ while ( fscanf(fp, "%s %d %d %d %d %d %d %d %d %d %d %d\n", Namerecord[i].name, (&Namerecord[i].pop[0]),(&Namerecord[i].pop[1]),(&Namerecord[i].pop[2]),(&Namerecord[i].pop[3]),(&Namerecord[i].pop[4]),(&Namerecord[i].pop[5]),(&Namerecord[i].pop[6]),(&Namerecord[i].pop[7]),(&Namerecord[i].pop[8]),(&Namerecord[i].pop[9]),(&Namerecord[i].pop[10])) == 12) {
+    i++;
+  }
+  numS = i;
+choice = 0;
+
+
+  printf("Welcome to the name popularity program\n");
+  printf("Reading in name data file\n");
+  printf("Done!  Read in %d records\n", numS);
+
+
+
+    while(choice == 1 || choice == 2 || choice == -1 || choice == 0){
+
+	printf("If you would like to search for a name, enter 1.\n");
+ 	printf("To print the entire list of names, enter 2.\n");
+ 	printf("To exit the program, enter -1.\n");
+ 	printf("Enter choice: "); 
+  	scanf("%d", &choice);
+
+	if(choice == 2){
+	 for(i = 0; i< numS; i++) {
+    	  PrintRec(Namerecord[i]);
+          }
+	}else if(choice == 1){
+	
+	   comparison =  Compare(Namerecord, numS);
+	
+	  if(comparison >= 0){
+	    PrintOne(Namerecord[comparison]);
+	  }else{
+	   printf("Name not found\n");
+	  }
+	}else if(choice == -1){
+	    exit(0);
+	}else{
+	  choice = 0;
+	}
+    }
+  exit(0);
+}
+

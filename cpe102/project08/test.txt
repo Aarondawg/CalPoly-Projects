@@ -1,0 +1,8 @@
+cat
+computer
+disk
+dog
+game
+phone
+soda
+television

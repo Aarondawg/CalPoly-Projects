@@ -1,0 +1,1 @@
+operator '+' requires int * int or string * string, found string * int

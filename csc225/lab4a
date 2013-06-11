@@ -1,0 +1,13 @@
+          .ORIG x3030
+
+       PRINT  LDI R2, DSR
+	      BRzp PRINT
+	      STI R0, DDR
+       LOOP2  LDI R2, DSR
+	      BRzp LOOP2
+	      STI R1, DDR
+	  RET
+       DSR .FILL xFE04
+       DDR .FILL xFE06
+	   
+           

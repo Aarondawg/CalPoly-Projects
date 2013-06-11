@@ -1,0 +1,10 @@
+Garrett Milster
+gmilster
+
+DJ Mitchell
+djmitche
+
+In the test harness we are failing 4 test cases (same 2 with stdout, 2 writing to file) for minget that are all related to one bug. These are related to Holes. Basically we diffed the output. Our files are the exact same size
+but for some reason our minget is writing "After the hole" much earlier in the file than yours is. Everything else works, and it writes the appriate amount of hole null values. this is the only special case that 
+doesn't seem to be working.
+ 

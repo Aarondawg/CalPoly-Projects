@@ -1,0 +1,18 @@
+time ./matmult 1408.in 1408.in: (SINGLE)          time ./matmult 1408.in 1408.in: (DOUBLE)
+
+real	0m48.516s                                   real	0m47.883s
+user	0m44.695s                                   user	0m46.831s
+sys	0m0.236s                                    sys 	0m0.304s               
+                     
+real	0m47.803s                                   real	0m47.914s
+user	0m44.559s                                   user	0m46.923s
+sys	0m0.488s                                    sys	   0m0.272s
+               
+real	0m56.112s                                   real	0m47.914s
+user	0m45.163s                                   user	0m46.923s
+sys	0m0.380s                                    sys	0  m0.272s
+
+
+
+
+

@@ -1,0 +1,7 @@
+Welcome to the emergency response assistance tool.
+Please enter the location of the emergency as a 2D coordinate.
+Enter the X value of the 2D coordinate: Enter the Y value of the 2D coordinate: Please enter the location of the first firetruck as a 2D coordinate.
+Enter the X value of the 2D coordinate: Enter the Y value of the 2D coordinate: Please enter the location of the second firetruck as a 2D coordinate.
+Enter the X value of the 2D coordinate: Enter the Y value of the 2D coordinate: The first firetruck is 5 blocks (or 3.605551 units) away from the emergency.
+The second firetruck is 10 blocks (or 7.071068 units) away from the emergency.
+Please contact the first truck.

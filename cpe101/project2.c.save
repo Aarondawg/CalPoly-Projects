@@ -1,0 +1,15 @@
+/*Garrett Milster*/
+/*October 7, 2009*/
+/*A program for determining which Firetruck is closest to the emergency point*/
+
+
+/* compare two numbers – necessary to compare floating point numbers */
+void compareNumber(float a, float b){ float EPSILON;
+	EPSILON=1e-8; if (fabs(a-b)< EPSILON) {
+		printf("comparison succeeded\n");
+	} else {
+		printf("comparison failed!\n");
+	}	
+}
+
+

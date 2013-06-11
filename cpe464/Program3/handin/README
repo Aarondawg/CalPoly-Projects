@@ -1,0 +1,1 @@
+All files compile and have been tested thoroughly on my Macbook, they also compile on vogon, but for some reason when i try to make with the most recent version of the library, it won't link to the cpe464 library. I used the same makefile with an older version of the library and it worked, so maybe it's something with the most recent library?

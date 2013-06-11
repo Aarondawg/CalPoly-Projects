@@ -1,0 +1,349 @@
+#include "extract.h"
+
+
+
+
+int extract(char *names[], int arrSize, int flag, int fd)
+{
+   int i = 0, index = 0, count = 0, everything, newFD;
+   int  numBlocks, type, length, chksum = 0, fileSpecified = 0, created = 0;
+   char buff[BLOCK], tempName[MAX_PATH], block[BLOCK], linkname[MAX_PATH];
+   struct utimbuf *timebuff = malloc(sizeof(struct utimbuf));
+   char temp[12];
+   char *ustar = "ustar";
+ 
+   if(arrSize)
+      fileSpecified = 1;
+
+   while((count = read(fd, buff, BLOCK)) != -1)
+   {
+      if(count != BLOCK)
+      {
+         perror("read");
+         exit(EXIT_FAILURE);
+      }
+      /* checks for 2 null blocks */
+      while(buff[i++] == '\0' && i<BLOCK)
+      {
+         /*nothing*/
+      }
+
+      if(i == BLOCK)
+      {
+         
+         if((count = read(fd, buff, BLOCK)) != BLOCK)
+         {
+            printf("read");
+            exit(EXIT_FAILURE);
+         }
+         i = 0;
+         while(buff[i++] == '\0' && i<BLOCK)
+	      {}   /*nothing*/
+         
+         /*indicates 2 null blocks, which means end of archive*/
+         if(i == BLOCK)
+            break;
+      }
+
+      /* checksum */
+      for(i=0; i<BLOCK; i++)
+      {
+         chksum += (unsigned char)buff[i];
+      }
+      index = 148;
+      for(i=0; i<8; i++)
+      {
+         temp[i] = buff[index];
+         chksum -= temp[i];
+         index++;
+      }
+      chksum += ASCII_SPACE*8;
+      temp[i] = '\0';
+
+      everything = (int)strtol(temp, NULL, 8);
+
+      
+
+      if(chksum != everything)
+      {
+         printf("Invalid header.\nreal: %d\nmine: %d\n", everything, chksum);
+         exit(EXIT_FAILURE);
+      }
+   
+      /* file type */
+      index = 156;
+      type = (int)strtol((buff+index), NULL, 10);
+      
+      /* reads linkname */
+      index = 157;
+      i = 0;
+      if((length = strlen(buff+index)))
+         while(i < length)
+            linkname[i++] = buff[index++];
+      else
+         linkname[0] = '\0';
+      /* reads name && prefix */
+      index = 345;
+      i = 0;
+      if((length = strlen(buff+index)))
+      {
+         while(i < length)
+            tempName[i++] = buff[index++];
+         tempName[i++] = '/';
+      }
+      index = 0;
+      while(index < 100 && buff[index] != '\0')
+         tempName[i++] = buff[index++];
+      tempName[i] = '\0';
+      
+      if(flag > 0)
+         printf("%s\n", tempName);
+      if(!flag)
+      {
+         index = 257;
+         if(buff[index+5] != '\0')
+         {
+            printf("Invalid header in strict mode.");
+            exit(EXIT_FAILURE);
+         }
+         length = strlen(buff+index);
+         for(i=0; i<length; i++)
+         {
+            temp[i] = buff[index++];
+         }
+         if(strcmp(temp, ustar))
+         {
+            printf("Invalid header in strict mode.");
+            exit(EXIT_FAILURE);
+         }
+         if(buff[index] != 0 || buff[index+1] != 0)
+         {
+            printf("Invalid header in strict mode.");
+            exit(EXIT_FAILURE);
+         }
+
+      }
+
+      index = 100;   
+      /* mode */
+      everything = (int)strtol((buff+index), NULL, 8);
+
+      index = 136;
+      /* mtime */
+      timebuff->modtime = (int)strtol((buff+index), NULL, 8);
+      timebuff->actime = time(NULL); 
+
+      /*printf("%o\n", everything); TESTING*/
+
+      if((everything & S_IXUSR) || (everything & S_IXGRP)
+      || (everything & S_IXOTH))
+      {
+         if(fileSpecified)
+         {
+            i = 3;
+            while(i < arrSize)
+            {
+               if(names[i][strlen(names[i])-1] == '/')
+               {
+                  if(!strncmp(tempName, names[i], strlen(names[i])))
+                  {
+                     build_dir_tree(tempName, S_IRWXU | S_IRWXG | S_IRWXO,
+                     linkname);
+                     created = 1;
+                     break;
+                  }
+               }
+               else if(!strncmp(names[i], tempName, strlen(tempName)))/**/
+               {
+                  created = 1;
+                  build_dir_tree(tempName, S_IRWXU | S_IRWXG | S_IRWXO,
+                  linkname);
+                  break;
+               }
+               i++;
+            }
+         }
+         else
+         {
+            created = 1;
+            build_dir_tree(tempName, S_IRWXU | S_IRWXG | S_IRWXO, linkname);
+         /* make file with execute, read, and write */
+         }
+      }
+      else
+      {
+         if(fileSpecified)
+         {
+            i = 3;
+            while(i < arrSize)
+            {
+               if(names[i][strlen(names[i])-1] == '/')
+               {
+                  if(!strncmp(tempName, names[i], strlen(names[i])))
+                  {
+                     created = 1;
+                     build_dir_tree(tempName, S_IRUSR|S_IWUSR|S_IRGRP|
+                     S_IWGRP|S_IROTH|S_IWOTH, linkname);
+                     break;
+                  }
+               }
+               else if(!strcmp(names[i], tempName))
+               {
+                  build_dir_tree(tempName, S_IRUSR|S_IWUSR|S_IRGRP|
+                  S_IWGRP|S_IROTH|S_IWOTH, linkname);
+                  created = 1;
+                  break;
+               }
+               i++;
+            }
+         }
+         else
+         {
+            created = 1;
+            build_dir_tree(tempName, S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|
+            S_IWOTH, linkname);
+         /* make file with read and write only */
+         }
+      }
+      
+   
+      index = 108;
+   
+      /* file size + writing file contents */
+      index = 124;
+      if(!type)
+      {
+         everything = (int)strtol(buff+index, NULL, 8);
+         numBlocks = everything / BLOCK;
+      }
+      i = 0;
+      if(!type && created)
+      {         
+         newFD = open(tempName, O_RDWR);
+         while(i < numBlocks)
+         {
+            if((count = read(fd, block, BLOCK)) != BLOCK)
+            {
+               printf("reading/writing error\n");
+               exit(EXIT_FAILURE);
+            }
+            write(newFD, block, BLOCK);
+            i++;	    
+         }
+         if(everything % BLOCK)
+         {
+            if((count = read(fd, block, BLOCK)) != BLOCK)
+            {
+               printf("reading/writing error2\n");
+               exit(EXIT_FAILURE);
+            }
+            write(newFD, block, (everything%BLOCK));
+         }
+         /* set modify time */
+         utime(tempName, timebuff);
+	      close(newFD);
+      }
+      else if(!type && !created)
+      {
+         while(i < numBlocks)
+         {
+            if(read(fd, block, BLOCK) != BLOCK)
+            {
+               printf("reading/writing error3\n");
+               exit(EXIT_FAILURE);
+            }
+            i++;
+         }
+         if(everything % BLOCK)
+            if(read(fd, block, BLOCK) != BLOCK)
+            {
+               printf("reading/writing error4\n");
+               exit(EXIT_FAILURE);
+            }
+      }
+
+
+      chksum = created = i = index = numBlocks = 0;
+   }
+
+   return 0;  
+   
+}
+
+/* builds tree, returns 0 on success -1 on failure */
+
+int build_dir_tree(char *path, mode_t mode, char *linkname)
+{
+   /* process a name passed, check if each directory exists 
+      and if not create it
+      once it hits file, create it and return file descriptor*/
+   int i = 0, totalLen = 0, isDir = 0, j = 0, fd;
+   struct stat sb;
+   
+   if(path != NULL)
+      totalLen = strlen(path);
+
+   if(path[totalLen-1] == '/')
+      isDir = 1;
+
+   else
+      path[totalLen+1] = '\0';
+
+   for(i=0; i<totalLen; i++)
+      if(path[i] == '/')
+         path[i] = '\0';
+   
+   if(path[0] == '\0')
+      path[0] = '/';
+   i = j = 0;
+
+   while(j < totalLen)
+   {
+      j = (strlen(path)+1);
+      /* if directory doesnt exist, create it */
+      if(lstat(path, &sb) == -1 && isDir)
+      {
+         if(path[j] == '\0' && isDir)
+         {
+            mkdir(path, mode);
+            path[j-1] = '/';
+            return 0;
+            /* possibly return here? */
+         }
+         else
+         {
+            mkdir(path, mode);
+            path[j-1] = '/';
+            continue; /*?*/
+         }
+      }
+
+      else if(linkname[0] != '\0' && path[j] == '\0')
+      {
+         if(symlink(linkname, path))
+         {
+            perror("symlink");
+            exit(EXIT_FAILURE);
+         }
+         return 0;
+         
+      }
+      else if(!isDir && path[j] == '\0')
+      {
+         fd = open(path, O_RDWR | O_CREAT | O_TRUNC, mode);
+         close(fd);
+         return 0;
+      }
+      else
+      {
+         path[j-1] = '/';
+      }
+      
+   }
+   if(!isDir)
+      path[j-1] = '\0';
+   return 0;
+}
+
+
+

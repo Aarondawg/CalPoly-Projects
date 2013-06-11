@@ -1,0 +1,55 @@
+/* Garrett Milster */
+/* October 21 2009 */
+/* A program that lists names and their popularities over several decades*/
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#define MAXS 256
+#define MAXP 10
+
+typedef struct {
+
+  char name[MAXS];
+  int pop[MAXP];
+} NameData;
+
+
+
+void PrintRec(NameData r) {
+
+  int i;
+
+  printf("name: %s\n", r.name);
+  printf("popularity: ");
+  for (i=0; i < 11; i++) {
+    printf("%d ", r.pop[i]);
+  }
+  printf("\n");
+}
+
+
+
+int main(void) {
+  int i, numS;
+  NameData Namerecord[5000];
+  FILE *fp;
+  
+  fp = fopen("names-data.txt", "r");
+  if (fp == NULL) {
+    printf("Invalid file exiting\n");
+     exit(0);
+  }
+
+  i =0;
+ while ( fscanf(fp, "%s %d %d %d %d %d %d %d %d %d %d %d\n", Namerecord[i].name, (&Namerecord[i].pop[0]),(&Namerecord[i].pop[1]),(&Namerecord[i].pop[2]),(&Namerecord[i].pop[3]),(&Namerecord[i].pop[4]),(&Namerecord[i].pop[5]),(&Namerecord[i].pop[6]),(&Namerecord[i].pop[7]),(&Namerecord[i].pop[8]),(&Namerecord[i].pop[9]),(&Namerecord[i].pop[10])) == 12) {
+    i++;
+  }
+  numS = i;
+  for (i=0; i< numS; i++) {
+    PrintRec(Namerecord[i]);
+  }
+
+  exit(0);
+}
+

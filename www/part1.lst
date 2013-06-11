@@ -1,0 +1,352 @@
+10:17:09 GMILSTER> start part1.sql
+10:17:13 GMILSTER> /***
+10:17:13 GMILSTER>  Winter 2012 CPE365
+10:17:13 GMILSTER>  lab 7 part 1
+10:17:13 GMILSTER>  Name: Garrett Milster
+10:17:13 GMILSTER>  Partner: Ross McKelvie
+10:17:13 GMILSTER> ***/
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> SET AUTOCOMMIT OFF;
+10:17:13 GMILSTER> SET FEEDBACK OFF
+10:17:13 GMILSTER> SET ECHO OFF
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- 1. Add a customer to the database with these values: CNO=4444, CNAME = "Smith" , STREET = "666 Easy St".
+10:17:13 GMILSTER> --	 The zipcode is that of the city "Columbia"; phone number is not known.  Hint: Use a sub-select to retrieve
+10:17:13 GMILSTER> --	 the value of the zipcode.
+10:17:13 GMILSTER> INSERT INTO customers (cno, cname, street, zip) VALUES (4444, 'Smith', '666 Easy St', (
+10:17:13   2  	 SELECT zip FROM zipcodes WHERE city = 'Columbia'
+10:17:13   3  ));
+
+1 row created.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- List the table Customers to show the effect of the changes made.
+10:17:13 GMILSTER> SELECT * FROM customers ORDER BY cno;
+       CNO CNAME      STREET                                ZIP PHONE
+---------- ---------- ------------------------------ ---------- ------------
+      1111 Charles    123 Main St.                        67226 316-636-5555
+      2222 Bertram    237 Ash Avenue                      67226 316-689-5555
+      3333 Barbara    111 Inwood St.                      60606 316-111-1234
+      4444 Smith      666 Easy St                         54444
+
+4 rows selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- 2. Customer "Barbara" in zip 60606 has gotten married.  Add her husband, named "John",
+10:17:13 GMILSTER> --  as a  customer.	His CNO is 1 greater than that of Barbara and he has the same
+10:17:13 GMILSTER> -- street, zip, and phone as "Barbara".
+10:17:13 GMILSTER> INSERT into customers (
+10:17:13   2  	 SELECT (cno + 1), 'John', street, zip, phone
+10:17:13   3  	 FROM customers
+10:17:13   4  	 WHERE cno = (
+10:17:13   5  	    SELECT cno
+10:17:13   6  	    FROM customers
+10:17:13   7  	    WHERE zip = '60606' AND cname = 'Barbara'
+10:17:13   8  	 )
+10:17:13   9  );
+
+1 row created.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- List the table Customers to show the effect of the changes made.
+10:17:13 GMILSTER> SELECT * FROM customers ORDER BY cno;
+       CNO CNAME      STREET                                ZIP PHONE
+---------- ---------- ------------------------------ ---------- ------------
+      1111 Charles    123 Main St.                        67226 316-636-5555
+      2222 Bertram    237 Ash Avenue                      67226 316-689-5555
+      3333 Barbara    111 Inwood St.                      60606 316-111-1234
+      3334 John       111 Inwood St.                      60606 316-111-1234
+      4444 Smith      666 Easy St                         54444
+
+5 rows selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- 3. Write a single DELETE statement to remove the customers whose CNOs are greater than
+10:17:13 GMILSTER> -- that of of the customer named Barbara in zip 60606.  You may assume that these customers
+10:17:13 GMILSTER> -- have not made any orders.
+10:17:13 GMILSTER> DELETE FROM customers
+10:17:13   2  WHERE cno > (
+10:17:13   3  	 SELECT cno
+10:17:13   4  	 FROM customers
+10:17:13   5  	 WHERE zip = '60606' AND cname = 'Barbara'
+10:17:13   6  );
+
+2 rows deleted.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- List the table Customers to show the changes made.
+10:17:13 GMILSTER> SELECT * FROM customers ORDER BY cno;
+       CNO CNAME      STREET                                ZIP PHONE
+---------- ---------- ------------------------------ ---------- ------------
+      1111 Charles    123 Main St.                        67226 316-636-5555
+      2222 Bertram    237 Ash Avenue                      67226 316-689-5555
+      3333 Barbara    111 Inwood St.                      60606 316-111-1234
+
+3 rows selected.
+
+10:17:13 GMILSTER> -- The database should now be back to its original state.
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- 4. Write a single update statement to increase BY 10% the price of each part priced below 20 dollars.
+10:17:13 GMILSTER> UPDATE parts
+10:17:13   2  SET price = (price + price * 0.1)
+10:17:13   3  WHERE price < 20;
+
+6 rows updated.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- cancel the changes made to restore the database to its original state
+10:17:13 GMILSTER> ROLLBACK;
+
+Rollback complete.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- 5. Remove from the database each employee who has not made any order.
+10:17:13 GMILSTER> DELETE FROM employees
+10:17:13   2  WHERE eno NOT IN (
+10:17:13   3  	 SELECT eno
+10:17:13   4  	 FROM orders
+10:17:13   5  );
+
+1 row deleted.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- Show the outcome of the change.
+10:17:13 GMILSTER> SELECT * FROM employees ORDER BY eno;
+       ENO ENAME             ZIP HDATE
+---------- ---------- ---------- ---------
+      1000 Jones           67226 12-DEC-95
+      1001 Smith           60606 01-JAN-92
+
+2 rows selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> ROLLBACK;
+
+Rollback complete.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- 6a) Preliminary: Write a statement to show the count of how many orders in
+10:17:13 GMILSTER> --	  which each PNO has been ordered.  Output in increasing order of the count.
+10:17:13 GMILSTER> SELECT pno PART_NO, count(*) NUM_TIMES_ORDERED
+10:17:13   2  FROM odetails
+10:17:13   3  GROUP BY pno
+10:17:13   4  ORDER BY NUM_TIMES_ORDERED;
+   PART_NO NUM_TIMES_ORDERED
+---------- -----------------
+     10508                 1
+     10506                 1
+     10507                 1
+     10800                 1
+     10509                 1
+     10701                 1
+     10900                 2
+     10601                 3
+
+8 rows selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- 6b) For each part that has been ordered in less than two orders, reduce the price by 10%.
+10:17:13 GMILSTER> UPDATE parts SET price = (price - price * 0.1)
+10:17:13   2  WHERE pno IN (
+10:17:13   3  	 SELECT pno
+10:17:13   4  	 FROM odetails
+10:17:13   5  	 GROUP BY pno
+10:17:13   6  	 HAVING count(*) < 2
+10:17:13   7  );
+
+6 rows updated.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- List the parts table to show that the changes have taken effect.
+10:17:13 GMILSTER> SELECT * FROM parts ORDER BY pno;
+       PNO PNAME                                 QOH      PRICE     OLEVEL
+---------- ------------------------------ ---------- ---------- ----------
+     10506 Land Before Time I                    200      17.99         20
+     10507 Land Before Time II                   156      17.99         20
+     10508 Land Before Time III                  190      17.99         20
+     10509 Land Before Time IV                    60      17.99         20
+     10601 Sleeping Beauty                       300      24.99         20
+     10701 When Harry Met Sally                  120      17.99         30
+     10800 Dirty Harry                           140      13.49         30
+     10900 Dr. Zhivago                           100      24.99         30
+
+8 rows selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> ROLLBACK;
+
+Rollback complete.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- 7. Write as few statements as you can to change the pno of the part named "Sleeping Beauty" to 12345.
+10:17:13 GMILSTER> --	 You should not assume to know what the current pno of this part is.
+10:17:13 GMILSTER> INSERT INTO parts (
+10:17:13   2  	 SELECT 12345, 'Sleeping Beauty', qoh, price, olevel
+10:17:13   3  	 FROM parts
+10:17:13   4  	 WHERE pname = 'Sleeping Beauty'
+10:17:13   5  );
+
+1 row created.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> UPDATE odetails
+10:17:13   2  SET pno = 12345
+10:17:13   3  WHERE pno = (
+10:17:13   4  	 SELECT pno
+10:17:13   5  	 FROM parts
+10:17:13   6  	 WHERE pname = 'Sleeping Beauty' AND pno <> 12345
+10:17:13   7  );
+
+3 rows updated.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> DELETE FROM parts
+10:17:13   2  WHERE pname = 'Sleeping Beauty' AND pno <> 12345;
+
+1 row deleted.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- Show what's in the parts and odetails table afterward.
+10:17:13 GMILSTER> SELECT * FROM parts ORDER BY pno;
+       PNO PNAME                                 QOH      PRICE     OLEVEL
+---------- ------------------------------ ---------- ---------- ----------
+     10506 Land Before Time I                    200      19.99         20
+     10507 Land Before Time II                   156      19.99         20
+     10508 Land Before Time III                  190      19.99         20
+     10509 Land Before Time IV                    60      19.99         20
+     10701 When Harry Met Sally                  120      19.99         30
+     10800 Dirty Harry                           140      14.99         30
+     10900 Dr. Zhivago                           100      24.99         30
+     12345 Sleeping Beauty                       300      24.99         20
+
+8 rows selected.
+
+10:17:13 GMILSTER> SELECT * FROM odetails ORDER BY ono, pno;
+       ONO        PNO        QTY
+---------- ---------- ----------
+      1020      10506          1
+      1020      10507          1
+      1020      10508          2
+      1020      10509          3
+      1021      12345          4
+      1022      10701          1
+      1022      12345          1
+      1023      10800          1
+      1023      10900          1
+      1024      10900          1
+      1025      12345          4
+
+11 rows selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> ROLLBACK;
+
+Rollback complete.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- 8.   The company is giving up on the city with zipcode 67226.  Write as few statements as possible to remove
+10:17:13 GMILSTER> --	   that city from the zipcodes table and all tuples depended, directly or indirectly, on that zipcode.
+10:17:13 GMILSTER> DELETE FROM odetails
+10:17:13   2  WHERE ono IN (
+10:17:13   3  	 SELECT ono
+10:17:13   4  	 FROM orders
+10:17:13   5  	 WHERE cno IN (
+10:17:13   6  	    SELECT cno
+10:17:13   7  	    FROM customers
+10:17:13   8  	    WHERE zip = 67226
+10:17:13   9  	 ) OR eno IN (
+10:17:13  10  	    SELECT eno
+10:17:13  11  	    FROM employees
+10:17:13  12  	    WHERE zip = 67226
+10:17:13  13  	 )
+10:17:13  14  );
+
+10 rows deleted.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> DELETE FROM orders
+10:17:13   2  WHERE cno IN (
+10:17:13   3  	 SELECT cno
+10:17:13   4  	 FROM customers
+10:17:13   5  	 WHERE zip = 67226
+10:17:13   6  ) OR eno IN (
+10:17:13   7  	 SELECT eno
+10:17:13   8  	 FROM employees
+10:17:13   9  	 WHERE zip = 67226
+10:17:13  10  );
+
+5 rows deleted.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> DELETE FROM employees
+10:17:13   2  WHERE zip = 67226;
+
+1 row deleted.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> DELETE FROM customers
+10:17:13   2  WHERE zip = 67226;
+
+2 rows deleted.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> DELETE FROM zipcodes
+10:17:13   2  WHERE zip = 67226;
+
+1 row deleted.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- Show what's in the database afterward.
+10:17:13 GMILSTER> SELECT * FROM zipcodes ORDER BY zip;
+       ZIP CITY
+---------- ------------------------------
+     50302 Kansas City
+     54444 Columbia
+     60606 Fort Dodge
+     61111 Fort Hays
+     66002 Liberal
+
+5 rows selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> SELECT * FROM  customers ORDER BY cno;
+       CNO CNAME      STREET                                ZIP PHONE
+---------- ---------- ------------------------------ ---------- ------------
+      3333 Barbara    111 Inwood St.                      60606 316-111-1234
+
+1 row selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> SELECT * FROM  employees ORDER BY eno;
+       ENO ENAME             ZIP HDATE
+---------- ---------- ---------- ---------
+      1001 Smith           60606 01-JAN-92
+      1002 Brown           50302 01-SEP-94
+
+2 rows selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> SELECT * FROM  orders ORDER BY ono;
+       ONO        CNO        ENO RECEIVED  SHIPPED
+---------- ---------- ---------- --------- ---------
+      1025       3333       1001 20-JUN-97
+
+1 row selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> SELECT * FROM  odetails ORDER BY ono, pno;
+       ONO        PNO        QTY
+---------- ---------- ----------
+      1025      10601          4
+
+1 row selected.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> ROLLBACK;
+
+Rollback complete.
+
+10:17:13 GMILSTER> 
+10:17:13 GMILSTER> -- THE END --
+10:17:13 GMILSTER> spool off

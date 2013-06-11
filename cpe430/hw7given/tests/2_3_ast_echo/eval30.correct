@@ -1,0 +1,13 @@
+function F()
+{
+if (((this.constructor) != F))
+{
+print "invoked as function\n";
+}
+else
+{
+print "invoked as constructor\n";
+}
+}
+F();
+(new F());

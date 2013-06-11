@@ -1,0 +1,623 @@
+0000000   t   a   r   .   c  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+0000016  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0000096  \0  \0  \0  \0   0   0   0   0   6   4   4  \0 200  \0  \0  \0
+0000112  \0   $   r 337   0   0   0   0   5   3   6  \0   0   0   0   0
+0000128   0   0   2   2   7   0   1  \0   1   1   5   3   2   0   0   3
+0000144   4   7   0  \0   0   1   3   0   7   7  \0       0  \0  \0  \0
+0000160  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0000256  \0   u   s   t   a   r          \0   g   m   i   l   s   t   e
+0000272   r  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+0000288  \0  \0  \0  \0  \0  \0  \0  \0  \0   M   a   j   o   r   _   U
+0000304   s   e   r   s  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+0000320  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0000512   /   *       G   a   r   r   e   t   t       M   i   l   s   t
+0000528   e   r  \n       *       D   J       M   i   t   c   h   e   l
+0000544  \n       *  \n       *       t   a   r       d   o   e   s    
+0000560   l   o   t   s       o   f      \n       *   /  \n   #   i   n
+0000576   c   l   u   d   e       <   s   t   d   i   o   .   h   >  \n
+0000592   #   i   n   c   l   u   d   e       <   s   t   d   l   i   b
+0000608   .   h   >  \n   #   i   n   c   l   u   d   e       <   s   t
+0000624   r   i   n   g   .   h   >  \n   #   i   n   c   l   u   d   e
+0000640       <   s   y   s   /   t   y   p   e   s   .   h   >  \n   #
+0000656   i   n   c   l   u   d   e       <   s   y   s   /   s   t   a
+0000672   t   .   h   >  \n   #   i   n   c   l   u   d   e       <   f
+0000688   c   n   t   l   .   h   >  \n   #   i   n   c   l   u   d   e
+0000704       <   u   n   i   s   t   d   .   h   >  \n   #   i   n   c
+0000720   l   u   d   e       <   d   i   r   e   n   t   .   h   >  \n
+0000736   #   i   n   c   l   u   d   e       <   g   r   p   .   h   >
+0000752  \n   #   i   n   c   l   u   d   e       <   p   w   d   .   h
+0000768   >  \n  \n   #   d   e   f   i   n   e       M   A   X   _   P
+0000784   A   T   H       2   5   6  \n   #   d   e   f   i   n   e    
+0000800   B   L   O   C   K       5   1   2  \n   i   n   t       b   u
+0000816   i   l   d   _   f   i   l   e   (   i   n   t       f   d   ,
+0000832       c   h   a   r       *   d   n   a   m   e   ,       c   h
+0000848   a   r   *       t   a   r   f   i   l   e   )   ;  \n   i   n
+0000864   t       w   r   i   t   e   _   f   i   l   e   (   c   h   a
+0000880   r       *   n   a   m   e   ,       i   n   t       f   d   ,
+0000896       c   h   a   r   *       t   a   r   f   i   l   e   )   ;
+0000912  \n   c   h   a   r   *       o   c   t   a   l   (   c   h   a
+0000928   r   *       s   t   r   i   n   g   ,       i   n   t       s
+0000944   i   z   e   )   ;  \n  \n  \n   i   n   t       m   a   i   n
+0000960   (   i   n   t       a   r   g   c   ,       c   h   a   r   *
+0000976       a   r   g   v   [   ]   )  \n   {  \n               i   n
+0000992   t       c       =       0   ,       t       =       0   ,    
+0001008   x       =       0   ,       v   =   0   ,       f   =   0   ,
+0001024       S       =       0   ;  \n               i   n   t       l
+0001040   e   n   ,       i   ,   f   d   ;  \n               c   h   a
+0001056   r       b   l   o   c   k   [   B   L   O   C   K   ]   ;  \n
+0001072  \n               i   f   (   a   r   g   c       <       2   )
+0001088  \n               {  \n                           p   r   i   n
+0001104   t   f   (   "   U   s   a   g   e   :       m   y   t   a   r
+0001120       [   c   t   x   S   [   f       t   a   r   f   i   l   e
+0001136   ]   ]       [       p   a   t   h       [       .   .   .    
+0001152   ]       ]   \   n   "   )   ;  \n                           r
+0001168   e   t   u   r   n       -   1   ;  \n               }  \n    
+0001184           l   e   n       =       s   t   r   l   e   n   (   a
+0001200   r   g   v   [   1   ]   )   ;  \n               /   *       u
+0001216   s   e   d       f   o   r       k   e   e   p   i   n   g    
+0001232   t   r   a   c   k       o   f       w   h   a   t       s   w
+0001248   i   t   c   h   e   s       w   e   r   e       u   s   e   d
+0001264       *   /  \n               f   o   r   (   i       =       0
+0001280   ;       i       <       l   e   n   ;       i   +   +   )  \n
+0001296               {  \n                           i   f   (   a   r
+0001312   g   v   [   1   ]   [   i   ]       =   =       '   c   '   )
+0001328  \n                           {  \n                            
+0001344           c   +   +   ;  \n                           }  \n    
+0001360                       e   l   s   e       i   f   (   a   r   g
+0001376   v   [   1   ]   [   i   ]       =   =       '   t   '   )  \n
+0001392                           {  \n                                
+0001408       t   +   +   ;  \n                           }  \n        
+0001424                   e   l   s   e       i   f   (   a   r   g   v
+0001440   [   1   ]   [   i   ]       =   =       '   x   '   )  \n    
+0001456                       {  \n                                    
+0001472   x   +   +   ;  \n                           }  \n            
+0001488               e   l   s   e       i   f   (   a   r   g   v   [
+0001504   1   ]   [   i   ]       =   =       '   v   '   )  \n        
+0001520                   {  \n                                       v
+0001536   +   +   ;  \n                           }  \n                
+0001552           e   l   s   e       i   f   (   a   r   g   v   [   1
+0001568   ]   [   i   ]       =   =       '   f   '   )  \n            
+0001584               {  \n                                       f   +
+0001600   +   ;  \n                           }  \n                    
+0001616       e   l   s   e       i   f   (   a   r   g   v   [   1   ]
+0001632   [   i   ]       =   =       '   S   '   )  \n                
+0001648           {  \n                                       S   +   +
+0001664   ;  \n                           }  \n                        
+0001680   e   l   s   e  \n                           {  \n            
+0001696                           p   r   i   n   t   f   (   "   I   n
+0001712   c   o   r   r   e   c   t       t   a   r       f   l   a   g
+0001728       u   s   e   d   \   n   "   )   ;  \n                    
+0001744                   r   e   t   u   r   n       -   1   ;  \n    
+0001760                       }  \n               }  \n               i
+0001776   f   (   (   c       +       t       +       x   )       >    
+0001792   1   )  \n               {  \n                           p   r
+0001808   i   n   t   f   (   "   u   s   a   g   e   :       %   s   :
+0001824       y   o   u       m   a   y       o   n   l   y       c   h
+0001840   o   o   s   e       o   n   e       o   f       t   h   e    
+0001856   '   c   t   x   '       o   p   t   i   o   n   s   .   \   n
+0001872   "   ,       a   r   g   v   [   2   ]   )   ;  \n            
+0001888                           p   r   i   n   t   f   (   "   U   s
+0001904   a   g   e   :       m   y   t   a   r       [   c   t   x   S
+0001920   [   f       t   a   r   f   i   l   e   ]   ]       [       p
+0001936   a   t   h       [       .   .   .       ]       ]   \   n   "
+0001952   )   ;  \n                           r   e   t   u   r   n    
+0001968   -   1   ;          \n               }  \n              \n    
+0001984           i   f   (   c       >       1       |   |       t    
+0002000   >       1       |   |       x       >       1       |   |    
+0002016   S       >       1       |   |       f       >       1   )  \n
+0002032               {  \n                           p   r   i   n   t
+0002048   f   (   "   u   s   a   g   e   :       %   s   :       y   o
+0002064   u       m   a   y       o   n   l   y       c   h   o   o   s
+0002080   e       o   n   e       o   f       t   h   e       '   c   t
+0002096   x   '       o   p   t   i   o   n   s   .   \   n   "   ,    
+0002112   a   r   g   v   [   2   ]   )   ;  \n                        
+0002128               p   r   i   n   t   f   (   "   U   s   a   g   e
+0002144   :       m   y   t   a   r       [   c   t   x   S   [   f    
+0002160   t   a   r   f   i   l   e   ]   ]       [       p   a   t   h
+0002176       [       .   .   .       ]       ]   \   n   "   )   ;  \n
+0002192                           r   e   t   u   r   n       -   1   ;
+0002208      \n               }  \n               i   f   (   f       =
+0002224   =       0   )  \n               {  \n                        
+0002240   p   r   i   n   t   f   (   "   N   a   m   e       o   f    
+0002256   a   r   c   h   i   v   e       f   i   l   e       i   s    
+0002272   r   e   q   u   i   r   e   d   \   n   "   )   ;  \n        
+0002288                   r   e   t   u   r   n       -   1   ;  \n    
+0002304           }  \n              \n               i   f   (   c    
+0002320   =   =       1   )  \n               {  \n  \n                
+0002336           i   f   (   (   f   d       =       o   p   e   n   (
+0002352   a   r   g   v   [   2   ]   ,       O   _   R   D   W   R   |
+0002368   O   _   T   R   U   N   C   |   O   _   C   R   E   A   T   ,
+0002384       S   _   I   R   W   X   U   )   )       <       0   )  \n
+0002400                           {  \n                                
+0002416       p   e   r   r   o   r   (   "   o   p   e   n   "   )   ;
+0002432  \n                                       r   e   t   u   r   n
+0002448       -   1   ;  \n                           }  \n            
+0002464               i   f   (   a   r   g   c       >       3   )  \n
+0002480                           {  \n                                
+0002496       f   o   r   (   i       =       3   ;       i       <    
+0002512   a   r   g   c   ;       i   +   +   )  \n                    
+0002528                   {  \n                                        
+0002544           b   u   i   l   d   _   f   i   l   e   (   f   d   ,
+0002560   a   r   g   v   [   i   ]   ,   a   r   g   v   [   2   ]   )
+0002576   ;  \n                                       }  \n            
+0002592               }  \n                          \n               }
+0002608  \n               e   l   s   e  \n               {  \n        
+0002624                   i   f   (   (   f   d       =       o   p   e
+0002640   n   (   a   r   g   v   [   2   ]   ,       O   _   R   D   W
+0002656   R   |   O   _   T   R   U   N   C   )   )       <       0   )
+0002672  \n                           {  \n                            
+0002688           p   e   r   r   o   r   (   "   o   p   e   n   "   )
+0002704   ;  \n                                       r   e   t   u   r
+0002720   n       -   1   ;  \n                           }  \n        
+0002736       }  \n              \n               /   *       w   r   i
+0002752   t   e   s       f   i   n   a   l       t   w   o       n   u
+0002768   l   l       b   l   o   c   k   s       *   /  \n            
+0002784   m   e   m   s   e   t   (   b   l   o   c   k   ,       '   \
+0002800   0   '   ,       B   L   O   C   K   )   ;  \n               i
+0002816   f   (   w   r   i   t   e   (   f   d   ,       b   l   o   c
+0002832   k   ,       B   L   O   C   K   )       =   =       -   1   )
+0002848       {  \n                           p   e   r   r   o   r   (
+0002864   "   W   r   i   t   e       E   r   r   o   r   \   n   "   )
+0002880   ;  \n                           r   e   t   u   r   n       -
+0002896   1   ;  \n               }      \n               i   f   (   w
+0002912   r   i   t   e   (   f   d   ,       b   l   o   c   k   ,    
+0002928   B   L   O   C   K   )       =   =       -   1   )       {  \n
+0002944                           p   e   r   r   o   r   (   "   W   r
+0002960   i   t   e       E   r   r   o   r   \   n   "   )   ;  \n    
+0002976                       r   e   t   u   r   n       -   1   ;  \n
+0002992               }  \n               c   l   o   s   e   (   f   d
+0003008   )   ;  \n              \n               r   e   t   u   r   n
+0003024       0   ;  \n   }  \n  \n   i   n   t       b   u   i   l   d
+0003040   _   f   i   l   e   (   i   n   t       f   d   ,       c   h
+0003056   a   r       *   d   n   a   m   e   ,       c   h   a   r   *
+0003072       t   a   r   f   i   l   e   )  \n   {  \n               D
+0003088   I   R       *   c   u   r   r   e   n   t   _   l   o   c   a
+0003104   t   i   o   n       =       N   U   L   L   ;  \n            
+0003120   s   t   r   u   c   t       d   i   r   e   n   t       *   c
+0003136   u   r   r   e   n   t   ;  \n               c   h   a   r    
+0003152   *       d   o   t       =       "   .   "   ;  \n            
+0003168   c   h   a   r       *       d   o   t   2       =       "   .
+0003184   .   "   ;  \n               s   t   r   u   c   t       s   t
+0003200   a   t       b   u   f   f   ;  \n               c   h   a   r
+0003216       t   e   m   p   [   M   A   X   _   P   A   T   H   ]   ;
+0003232  \n               i   n   t       i   ,       l   e   n   ,   j
+0003248   ,       i   n   d   e   x       =   0   ;  \n  \n            
+0003264   i   f   (   l   s   t   a   t   (   d   n   a   m   e   ,    
+0003280   &   b   u   f   f   )       =   =       -   1   )  \n        
+0003296       {  \n                           p   r   i   n   t   f   (
+0003312   "   I   n   c   o   r   r   e   c   t       f   i   l   e    
+0003328   p   a   t   h   \   n   "   )   ;  \n                        
+0003344   r   e   t   u   r   n       -   1   ;  \n               }  \n
+0003360               /   *       w   h   a   t       d   o       w   e
+0003376       d   o       f   o   r       l   i   n   k   s   ?       *
+0003392   /  \n               i   f   (   S   _   I   S   D   I   R   (
+0003408   b   u   f   f   .   s   t   _   m   o   d   e   )   )  \n    
+0003424           {  \n                           c   u   r   r   e   n
+0003440   t   _   l   o   c   a   t   i   o   n       =       o   p   e
+0003456   n   d   i   r   (   d   n   a   m   e   )   ;  \n            
+0003472               w   r   i   t   e   _   f   i   l   e   (   d   n
+0003488   a   m   e   ,       f   d   ,       t   a   r   f   i   l   e
+0003504   )   ;  \n                           w   h   i   l   e   (   (
+0003520   c   u   r   r   e   n   t       =       r   e   a   d   d   i
+0003536   r   (   c   u   r   r   e   n   t   _   l   o   c   a   t   i
+0003552   o   n   )   )       !   =       N   U   L   L   )  \n        
+0003568                   {  \n                                       i
+0003584   n   d   e   x       =       0   ;  \n                        
+0003600               i   f   (   s   t   r   c   m   p   (   c   u   r
+0003616   r   e   n   t   -   >   d   _   n   a   m   e   ,       d   o
+0003632   t   )       !   =       0       &   &       s   t   r   c   m
+0003648   p   (   c   u   r   r   e   n   t   -   >   d   _   n   a   m
+0003664   e   ,       d   o   t   2   )       !   =       0   )  \n    
+0003680                                   {          \n                
+0003696                                   l   e   n       =       s   t
+0003712   r   l   e   n   (   d   n   a   m   e   )   ;  \n            
+0003728                                       f   o   r   (   i       =
+0003744       0   ;       i       <       l   e   n   ;       i   +   +
+0003760   )  \n                                                   {  \n
+0003776                                                               t
+0003792   e   m   p   [   i   ]       =       d   n   a   m   e   [   i
+0003808   ]   ;  \n                                                   }
+0003824  \n                                                            
+0003840          \n                                                   i
+0003856   f   (   t   e   m   p   [   l   e   n       -   1       ]    
+0003872   =   =       '   /   '   )  \n                                
+0003888                   {  \n                                        
+0003904                       j       =       0   ;  \n                
+0003920                                   }  \n                        
+0003936                           e   l   s   e  \n                    
+0003952                               {  \n                            
+0003968                                   t   e   m   p   [   l   e   n
+0003984   ]       =       '   /   '   ;  \n                            
+0004000                                   j       =       1   ;  \n    
+0004016                                               }          \n    
+0004032                                               f   o   r   (   i
+0004048       =       l   e   n       +   j   ;       i       <       l
+0004064   e   n       +       s   t   r   l   e   n   (   c   u   r   r
+0004080   e   n   t   -   >   d   _   n   a   m   e   )       +       1
+0004096   ;       i   +   +   )  \n                                    
+0004112               {  \n                                            
+0004128                   t   e   m   p   [   i   ]       =       c   u
+0004144   r   r   e   n   t   -   >   d   _   n   a   m   e   [   i   n
+0004160   d   e   x   ]   ;  \n                                        
+0004176                       i   n   d   e   x   +   +   ;  \n        
+0004192                                           }                    
+0004208          \n                                                   t
+0004224   e   m   p   [   i   ]       =       '   \   0   '   ;        
+0004240          \n                                                   i
+0004256   f   (   b   u   i   l   d   _   f   i   l   e   (   f   d   ,
+0004272       t   e   m   p   ,       t   a   r   f   i   l   e   )    
+0004288   =   =       -   1   )  \n                                    
+0004304               {  \n                                            
+0004320                   p   r   i   n   t   f   (   "   b   u   i   l
+0004336   d   _   f   i   l   e       e   r   r   o   r   \   n   "   )
+0004352   ;  \n                                                        
+0004368       r   e   t   u   r   n       -   1   ;  \n                
+0004384                                   }  \n                        
+0004400               }  \n                                       /   *
+0004416       c   a   l   l       f   u   n   c   t   i   o   n       f
+0004432   o   r       f   i   l   e       *   /  \n                    
+0004448       }  \n                           i   f   (   c   l   o   s
+0004464   e   d   i   r   (   c   u   r   r   e   n   t   _   l   o   c
+0004480   a   t   i   o   n   )       <       0   )  \n                
+0004496           {  \n                                       p   e   r
+0004512   r   o   r   (   "   c   l   o   s   e   d   i   r   "   )   ;
+0004528  \n                                       r   e   t   u   r   n
+0004544       -   1   ;  \n                           }  \n            
+0004560   }  \n               e   l   s   e  \n               {  \n    
+0004576                       i   f   (   w   r   i   t   e   _   f   i
+0004592   l   e   (   d   n   a   m   e   ,       f   d   ,       t   a
+0004608   r   f   i   l   e   )       <       0   )  \n                
+0004624           {  \n                                       p   r   i
+0004640   n   t   f   (   "   w   r   i   t   e   _   f   i   l   e    
+0004656   e   r   r   o   r   \   n   "   )   ;  \n                    
+0004672                   r   e   t   u   r   n       -   1   ;  \n    
+0004688                       }  \n               }  \n               r
+0004704   e   t   u   r   n       0   ;  \n   }  \n  \n  \n   i   n   t
+0004720       w   r   i   t   e   _   f   i   l   e   (   c   h   a   r
+0004736       *   n   a   m   e   ,       i   n   t       f   d   ,    
+0004752   c   h   a   r   *       t   a   r   f   i   l   e   )  \n   {
+0004768  \n               s   t   r   u   c   t       s   t   a   t    
+0004784   b   u   f   f   ;  \n               s   t   r   u   c   t    
+0004800   p   a   s   s   w   d       *       p   w   p   ;  \n        
+0004816       s   t   r   u   c   t       g   r   o   u   p       *    
+0004832   g   r   p   ;  \n               i   n   t       s   t   a   t
+0004848   u   s   ,       i   n   d   e   x       =       0   ;  \n    
+0004864           i   n   t       l   e   n   ,       i   ,       r   e
+0004880   a   d   F   D   ;  \n               i   n   t       c   o   u
+0004896   n   t       =       0   ;  \n               c   h   a   r    
+0004912   *   t   e   m   p       =       m   a   l   l   o   c   (   3
+0004928   2   )   ;  \n               c   h   a   r       c   h   e   c
+0004944   k   s   u   m   [   8   ]   ;  \n               u   n   s   i
+0004960   g   n   e   d       c   h   a   r       b   l   o   c   k   [
+0004976   B   L   O   C   K   ]   ;  \n               c   h   a   r    
+0004992   t   y   p   e   f   l   a   g   ;  \n               c   h   a
+0005008   r       l   i   n   k   n   a   m   e   [   1   0   0   ]   ;
+0005024  \n  \n               m   e   m   s   e   t   (   b   l   o   c
+0005040   k   ,       '   \   0   '   ,       B   L   O   C   K   )   ;
+0005056  \n  \n               i   f   (   l   s   t   a   t   (   n   a
+0005072   m   e   ,       &   b   u   f   f   )   )  \n               {
+0005088  \n                           r   e   t   u   r   n       -   1
+0005104   ;  \n               }  \n               i   f   (   S   _   I
+0005120   S   R   E   G   (   b   u   f   f   .   s   t   _   m   o   d
+0005136   e   )       =   =       1   )  \n               {  \n        
+0005152                   s   t   a   t   u   s       =       0   ;  \n
+0005168                           t   y   p   e   f   l   a   g       =
+0005184       '   0   '   ;  \n                           i   f   (   s
+0005200   t   r   c   m   p   (   t   a   r   f   i   l   e   ,   n   a
+0005216   m   e   )       =   =       0   )  \n                        
+0005232   {  \n                                       s   t   a   t   u
+0005248   s       =       -   1   ;  \n                           }  \n
+0005264               }  \n               e   l   s   e       i   f   (
+0005280   S   _   I   S   D   I   R   (   b   u   f   f   .   s   t   _
+0005296   m   o   d   e   )       =   =       1   )  \n               {
+0005312  \n                           s   t   a   t   u   s       =    
+0005328   1   ;  \n                           t   y   p   e   f   l   a
+0005344   g       =       '   5   '   ;  \n               }  \n        
+0005360       e   l   s   e       i   f   (   S   _   I   S   L   N   K
+0005376   (   b   u   f   f   .   s   t   _   m   o   d   e   )       =
+0005392   =       1   )  \n               {                          \n
+0005408                           s   t   a   t   u   s       =       2
+0005424   ;  \n                           t   y   p   e   f   l   a   g
+0005440       =       '   2   '   ;  \n               }  \n            
+0005456   e   l   s   e  \n               {                          \n
+0005472                           p   r   i   n   t   f   (   "   i   n
+0005488   c   o   r   r   e   c   t       f   i   l   e       t   y   p
+0005504   e   \   n   "   )   ;  \n                           s   t   a
+0005520   t   u   s       =       -   1   ;  \n               }  \n    
+0005536                      \n               i   f   (   s   t   a   t
+0005552   u   s       >   =       0   )  \n               {  \n        
+0005568                   /   *   p   u   t   s       n   a   m   e    
+0005584   i   n       h   e   a   d   e   r       b   l   o   c   k    
+0005600   *   /  \n                           l   e   n       =       s
+0005616   t   r   l   e   n   (   n   a   m   e   )   ;  \n            
+0005632               i   f   (   l   e   n       <   =       1   0   0
+0005648   )  \n                           {                            
+0005664                      \n                                       f
+0005680   o   r   (   i       =       0   ;       i       <       l   e
+0005696   n   ;       i   +   +   )  \n                                
+0005712       {  \n                                                   b
+0005728   l   o   c   k   [   i   ]       =       n   a   m   e   [   i
+0005744   ]   ;  \n                                       }            
+0005760              \n                           }  \n                
+0005776           e   l   s   e  \n                           {  \n    
+0005792                                   i   f   (   l   e   n       >
+0005808       2   5   5   )  \n                                       {
+0005824  \n                                                   p   r   i
+0005840   n   t   f   (   "   F   i   l   e   n   a   m   e       t   o
+0005856   o       l   a   r   g   e   \   n   "   )   ;  \n            
+0005872                                       r   e   t   u   r   n    
+0005888   -   1   ;  \n                                       }  \n    
+0005904                                   f   o   r   (   i       =    
+0005920   0   ;       i       <       1   0   0   ;       i   +   +   )
+0005936  \n                                       {  \n                
+0005952                                   b   l   o   c   k   [   i   ]
+0005968       =       n   a   m   e   [   i   ]   ;  \n                
+0005984                       }  \n                                    
+0006000   i   n   d   e   x       =       i   ;  \n                    
+0006016                   i       =       3   4   5   ;  \n            
+0006032                           w   h   i   l   e   (   n   a   m   e
+0006048   [   i   n   d   e   x   ]   )       {  \n                    
+0006064                               b   l   o   c   k   [   i   ]    
+0006080   =       n   a   m   e   [   i   n   d   e   x   ]   ;  \n    
+0006096                                               i   n   d   e   x
+0006112   +   +   ;  \n                                                
+0006128   i   +   +   ;  \n                                       }  \n
+0006144                           }  \n  \n                           /
+0006160   *       m   o   d   e       *   /  \n                        
+0006176   m   e   m   s   e   t   (   t   e   m   p   ,       '   \   0
+0006192   '   ,       3   2   )   ;  \n                           i   n
+0006208   d   e   x       =       1   0   0   ;  \n                    
+0006224       i       =       s   p   r   i   n   t   f   (   t   e   m
+0006240   p   ,   "   %   0   8   o   "   ,       b   u   f   f   .   s
+0006256   t   _   m   o   d   e   )   ;  \n                           f
+0006272   o   r   (   i       =       0   ;       i       <       8   ;
+0006288       i   +   +   )  \n                           {  \n        
+0006304                               b   l   o   c   k   [   i   n   d
+0006320   e   x   ]       =       t   e   m   p   [   i   ]   ;  \n    
+0006336                                   i   n   d   e   x   +   +   ;
+0006352  \n                           }  \n  \n                        
+0006368   /   *       u   i   d       *   /  \n                        
+0006384   m   e   m   s   e   t   (   t   e   m   p   ,       '   \   0
+0006400   '   ,       3   2   )   ;  \n                           i    
+0006416   =       s   p   r   i   n   t   f   (   t   e   m   p   ,   "
+0006432   %   0   8   o   "   ,       b   u   f   f   .   s   t   _   u
+0006448   i   d   )   ;  \n  \n                           f   o   r   (
+0006464   i       =       0   ;       i       <       8   ;       i   +
+0006480   +   )  \n                           {  \n                    
+0006496                   i   f   (   t   e   m   p   [   0   ]       =
+0006512   =       '   1   '   )  \n                                    
+0006528   {  \n                                                   b   l
+0006544   o   c   k   [   i   n   d   e   x   ]       =       '   7   '
+0006560   ;  \n                                       }  \n            
+0006576                           b   l   o   c   k   [   i   n   d   e
+0006592   x   ]       =       t   e   m   p   [   i   ]   ;  \n        
+0006608                               i   n   d   e   x   +   +   ;  \n
+0006624                           }  \n                           /   *
+0006640       g   i   d       *   /  \n                           m   e
+0006656   m   s   e   t   (   t   e   m   p   ,       '   \   0   '   ,
+0006672       3   2   )   ;                          \n                
+0006688           i       =       s   p   r   i   n   t   f   (   t   e
+0006704   m   p   ,   "   %   0   8   o   "   ,       b   u   f   f   .
+0006720   s   t   _   g   i   d   )   ;                          \n    
+0006736                       f   o   r   (   i       =       0   ;    
+0006752   i       <       8   ;       i   +   +   )  \n                
+0006768           {  \n                                       b   l   o
+0006784   c   k   [   i   n   d   e   x   ]       =       t   e   m   p
+0006800   [   i   ]   ;  \n                                       i   n
+0006816   d   e   x   +   +   ;  \n                           }  \n    
+0006832                       /   *       i   f       i   t   '   s    
+0006848   a       r   e   g   u   l   a   r       f   i   l   e   ,    
+0006864   p   u   t       s   i   z   e       i   n   ,       o   t   h
+0006880   e   r   w   i   s   e       0       *   /  \n                
+0006896           m   e   m   s   e   t   (   t   e   m   p   ,       '
+0006912   \   0   '   ,       3   2   )   ;  \n                        
+0006928   i   f   (   s   t   a   t   u   s       =   =       0   )  \n
+0006944                           {  \n                                
+0006960       i       =       s   p   r   i   n   t   f   (   t   e   m
+0006976   p   ,   "   %   0   1   2   o   "   ,       (   u   n   s   i
+0006992   g   n   e   d       i   n   t   )   b   u   f   f   .   s   t
+0007008   _   s   i   z   e   )   ;  \n                                
+0007024       f   o   r   (   i       =       0   ;       i       <    
+0007040   1   2   ;       i   +   +   )  \n                            
+0007056           {  \n                                                
+0007072   b   l   o   c   k   [   i   n   d   e   x   ]       =       t
+0007088   e   m   p   [   i   ]   ;  \n                                
+0007104                   i   n   d   e   x   +   +   ;  \n            
+0007120                           }  \n                           }  \n
+0007136                           e   l   s   e  \n                    
+0007152       {  \n                                       f   o   r   (
+0007168   i       =       0   ;       i       <       1   2   ;       i
+0007184   +   +   )  \n                                       {  \n    
+0007200                                               b   l   o   c   k
+0007216   [   i   n   d   e   x   ]       =       0   ;  \n            
+0007232                                       i   n   d   e   x   +   +
+0007248   ;  \n                                       }                
+0007264                              \n                           }  \n
+0007280                           /   *       m   t   i   m   e       *
+0007296   /  \n                           m   e   m   s   e   t   (   t
+0007312   e   m   p   ,       '   \   0   '   ,       3   2   )   ;  \n
+0007328                           i       =       s   p   r   i   n   t
+0007344   f   (   t   e   m   p   ,   "   %   0   1   2   o   "   ,    
+0007360   (   u   n   s   i   g   n   e   d       i   n   t   )   b   u
+0007376   f   f   .   s   t   _   m   t   i   m   e   )   ;  \n        
+0007392                   f   o   r   (   i       =       0   ;       i
+0007408       <       1   2   ;       i   +   +   )  \n                
+0007424           {  \n                                       b   l   o
+0007440   c   k   [   i   n   d   e   x   ]       =       t   e   m   p
+0007456   [   i   ]   ;  \n                                       i   n
+0007472   d   e   x   +   +   ;  \n                           }  \n    
+0007488                       /   *       s   p   a   c   e       f   o
+0007504   r       c   h   e   c   k   s   u   m       *   /  \n        
+0007520                   f   o   r   (   i       =       0   ;       i
+0007536       <       8   ;       i   +   +   )  \n                    
+0007552       {  \n                                       b   l   o   c
+0007568   k   [   i   n   d   e   x   ]       =       '       '   ;  \n
+0007584                                       i   n   d   e   x   +   +
+0007600   ;  \n                           }  \n                        
+0007616   b   l   o   c   k   [   i   n   d   e   x   ]       =       t
+0007632   y   p   e   f   l   a   g   ;  \n                           i
+0007648   n   d   e   x   +   +   ;  \n                           /   *
+0007664       i   f       s   y   m   l   i   n   k   ,       g   e   t
+0007680       n   a   m   e       a   n   d       i   n   s   e   r   t
+0007696       i   t   *   /  \n                           i   f   (   s
+0007712   t   a   t   u   s       =   =       2   )  \n                
+0007728           {  \n                                       i   f   (
+0007744   (   l   e   n       =       r   e   a   d   l   i   n   k   (
+0007760   n   a   m   e   ,       l   i   n   k   n   a   m   e   ,    
+0007776   1   0   0   )   )       =   =       -   1   )  \n            
+0007792                           {  \n                                
+0007808                   p   e   r   r   o   r   (   "   s   y   m   l
+0007824   i   n   k   "   )   ;  \n                                    
+0007840               r   e   t   u   r   n       -   1   ;  \n        
+0007856                               }  \n                            
+0007872           f   o   r   (   i       =       0   ;       i       <
+0007888       l   e   n   ;       i   +   +   )  \n                    
+0007904                   {  \n                                        
+0007920           b   l   o   c   k   [   i   n   d   e   x   ]       =
+0007936       l   i   n   k   n   a   m   e   [   i   ]   ;  \n        
+0007952                                           i   n   d   e   x   +
+0007968   +   ;  \n                                       }            
+0007984                          \n                           }  \n    
+0008000                       i   n   d   e   x       =       2   5   7
+0008016   ;  \n                           m   e   m   s   e   t   (   t
+0008032   e   m   p   ,       '   \   0   '   ,       3   2   )   ;  \n
+0008048                           t   e   m   p       =       "   u   s
+0008064   t   a   r   "   ;  \n                           /   *       u
+0008080   s   t   a   r       *   /  \n                           f   o
+0008096   r   (   i       =       0   ;       i       <       6   ;    
+0008112   i   +   +   )  \n                           {  \n            
+0008128                           b   l   o   c   k   [   i   n   d   e
+0008144   x   ]       =       t   e   m   p   [   i   ]   ;  \n        
+0008160                               i   n   d   e   x   +   +   ;  \n
+0008176                           }  \n                           b   l
+0008192   o   c   k   [   i   n   d   e   x   ]       =       '   \   0
+0008208   '   ;  \n                           i   n   d   e   x   +   +
+0008224   ;  \n                           /   *       i   n   s   e   r
+0008240   t   s       0   0       f   o   r       v   e   r   s   i   o
+0008256   n       *   /  \n                           b   l   o   c   k
+0008272   [   i   n   d   e   x   ]       =       '   0   '   ;  \n    
+0008288                       i   n   d   e   x   +   +   ;  \n        
+0008304                   b   l   o   c   k   [   i   n   d   e   x   ]
+0008320       =       '   0   '   ;  \n                           i   n
+0008336   d   e   x   +   +   ;  \n                           /   *    
+0008352   u   n   a   m   e       *   /  \n                           i
+0008368   f   (   (   p   w   p       =       g   e   t   p   w   u   i
+0008384   d   (   b   u   f   f   .   s   t   _   u   i   d   )   )    
+0008400   =   =       N   U   L   L   )  \n                           {
+0008416  \n                                       p   r   i   n   t   f
+0008432   (   "   g   e   t   p   w   u   i   d       e   r   r   o   r
+0008448   \   n   "   )   ;  \n                                       r
+0008464   e   t   u   r   n       -   1   ;  \n                        
+0008480   }  \n                           i   =   0   ;  \n            
+0008496               w   h   i   l   e   (   p   w   p   -   >   p   w
+0008512   _   n   a   m   e   [   i   ]       &   &       i       <    
+0008528   3   1   )  \n                           {  \n                
+0008544                       b   l   o   c   k   [   i   n   d   e   x
+0008560   ]       =       p   w   p   -   >   p   w   _   n   a   m   e
+0008576   [   i   ]   ;  \n                                       i   +
+0008592   +   ;  \n                                       i   n   d   e
+0008608   x   +   +   ;  \n                           }  \n            
+0008624               /   *       g   n   a   m   e       *   /  \n    
+0008640                       i   f   (   (   g   r   p       =       g
+0008656   e   t   g   r   g   i   d   (   b   u   f   f   .   s   t   _
+0008672   g   i   d   )   )       =   =       N   U   L   L   )  \n    
+0008688                       {  \n                                    
+0008704   p   r   i   n   t   f   (   "   g   e   t   g   r   g   i   d
+0008720       e   r   r   o   r   \   n   "   )   ;  \n                
+0008736                       r   e   t   u   r   n       -   1   ;  \n
+0008752                           }  \n                           i   n
+0008768   d   e   x       =       2   9   7   ;  \n                    
+0008784       i       =       0   ;  \n                           w   h
+0008800   i   l   e   (   g   r   p   -   >   g   r   _   n   a   m   e
+0008816   [   i   ]       &   &       i       <       3   1   )  \n    
+0008832                       {  \n                                    
+0008848   b   l   o   c   k   [   i   n   d   e   x   ]       =       g
+0008864   r   p   -   >   g   r   _   n   a   m   e   [   i   ]   ;  \n
+0008880                                       i   +   +   ;  \n        
+0008896                               i   n   d   e   x   +   +   ;  \n
+0008912                           }  \n                           i   n
+0008928   d   e   x       =       1   4   8   ;  \n                    
+0008944       f   o   r   (   i       =       0   ;       i       <    
+0008960   B   L   O   C   K   ;       i   +   +   )  \n                
+0008976           {  \n                                       c   o   u
+0008992   n   t       =       c   o   u   n   t       +       b   l   o
+0009008   c   k   [   i   ]   ;  \n                           }  \n  \n
+0009024                           i       =       s   p   r   i   n   t
+0009040   f   (   c   h   e   c   k   s   u   m   ,   "   %   0   8   o
+0009056   "   ,       c   o   u   n   t   )   ;  \n                    
+0009072       f   o   r   (   i       =       0   ;       i       <    
+0009088   8   ;       i   +   +   )  \n                           {  \n
+0009104                                       b   l   o   c   k   [   i
+0009120   n   d   e   x   ]       =       c   h   e   c   k   s   u   m
+0009136   [   i   ]   ;  \n                                       i   n
+0009152   d   e   x   +   +   ;  \n                           }  \n    
+0009168                       /   *       w   r   i   t   e       h   e
+0009184   a   d   e   r       *   /  \n                           i   f
+0009200   (   w   r   i   t   e   (   f   d   ,       b   l   o   c   k
+0009216   ,       B   L   O   C   K   )       =   =       -   1   )    
+0009232   {  \n                                       p   r   i   n   t
+0009248   f   (   "   W   r   i   t   e       E   r   r   o   r   \   n
+0009264   "   )   ;  \n                                       r   e   t
+0009280   u   r   n       -   1   ;  \n                           }  \n
+0009296                          \n                           i   f   (
+0009312   s   t   a   t   u   s       =   =       0   )  \n            
+0009328               {  \n                                       r   e
+0009344   a   d   F   D       =       o   p   e   n   (   n   a   m   e
+0009360   ,       O   _   R   D   O   N   L   Y   )   ;                
+0009376                      \n                                       /
+0009392   *       w   r   i   t   e       r   e   g   u   l   a   r    
+0009408   f   i   l   e       *   /  \n                                
+0009424       m   e   m   s   e   t   (   b   l   o   c   k   ,       '
+0009440   \   0   '   ,       B   L   O   C   K   )   ;  \n            
+0009456                           w   h   i   l   e   (   (   c   o   u
+0009472   n   t       =       r   e   a   d   (   r   e   a   d   F   D
+0009488   ,       b   l   o   c   k   ,       5   1   2   )   )       >
+0009504       0   )  \n                                       {  \n    
+0009520                                               i   f   (   w   r
+0009536   i   t   e   (   f   d   ,       b   l   o   c   k   ,       c
+0009552   o   u   n   t   )       =   =       -   1   )       {  \n    
+0009568                                                           p   e
+0009584   r   r   o   r   (   "   W   r   i   t   e       H   e   a   d
+0009600   e   r       E   r   r   o   r   \   n   "   )   ;  \n        
+0009616                                                       r   e   t
+0009632   u   r   n       -   1   ;  \n                                
+0009648                   }      \n                                    
+0009664               m   e   m   s   e   t   (   b   l   o   c   k   ,
+0009680       '   \   0   '   ,       B   L   O   C   K   )   ;  \n    
+0009696                                   }  \n                        
+0009712               i   f   (   c   l   o   s   e   (   r   e   a   d
+0009728   F   D   )   )  \n                                       {  \n
+0009744                                                   r   e   t   u
+0009760   r   n       -   1   ;  \n                                    
+0009776   }  \n                           }  \n               }  \n    
+0009792           f   r   e   e   (   t   e   m   p   )   ;  \n        
+0009808       r   e   t   u   r   n       0   ;                      \n
+0009824   }  \n  \n   c   h   a   r   *       o   c   t   a   l   (   c
+0009840   h   a   r   *       s   t   r   i   n   g   ,       i   n   t
+0009856       s   i   z   e   )  \n   {  \n               i   n   t    
+0009872   l   e   n       =       s   t   r   l   e   n   (   s   t   r
+0009888   i   n   g   )   ;  \n               i   n   t       d   i   f
+0009904   f       =       s   i   z   e       -       l   e   n   ;  \n
+0009920               i   n   t       i   ,   j   =   0   ;  \n        
+0009936       c   h   a   r       *   o   c   t   a   l   s   t   r   i
+0009952   n   g       =       m   a   l   l   o   c   (   s   i   z   e
+0009968   )   ;  \n               f   o   r   (   i       =       0   ;
+0009984       i       <       d   i   f   f   ;       i   +   +   )  \n
+0010000               {  \n                           o   c   t   a   l
+0010016   s   t   r   i   n   g   [   i   ]       =       '   0   '   ;
+0010032  \n               }  \n               f   o   r   (   i       =
+0010048       d   i   f   f   ;       i       <       s   i   z   e   ;
+0010064       i   +   +   )  \n               {  \n                    
+0010080       o   c   t   a   l   s   t   r   i   n   g   [   i   ]    
+0010096   =       s   t   r   i   n   g   [   j   ]   ;  \n            
+0010112               j   +   +   ;  \n               }  \n            
+0010128   s   t   r   c   p   y   (   s   t   r   i   n   g   ,       o
+0010144   c   t   a   l   s   t   r   i   n   g   )   ;  \n            
+0010160   r   e   t   u   r   n       s   t   r   i   n   g   ;  \n   }
+0010176  \n  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+0010192  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0020480

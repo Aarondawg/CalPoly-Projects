@@ -1,0 +1,11 @@
+COMMAND: ls
+a.out
+file1
+Makefile
+mush.c
+mush.c~
+out
+out.c
+parseline
+parseline.c
+README

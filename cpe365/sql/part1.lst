@@ -1,0 +1,326 @@
+10:40:50 GMILSTER> start part1.sql
+10:40:53 GMILSTER> -- Name: Ross McKelvie
+10:40:53 GMILSTER> -- Partner: Garrett Milster
+10:40:53 GMILSTER> -- CSC 365 - Lab 04 - AM Section
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 1 List the rname of each recipe that contains the ingredient named 'salt'
+10:40:53 GMILSTER> SELECT rname
+10:40:53   2  FROM contains
+10:40:53   3  WHERE iname = 'salt'
+10:40:53   4  ORDER BY rname ASC;
+RNAME
+--------------------
+Apple Treat
+Garlic Shrimp
+Hummus
+Meatloaf
+
+4 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 2 List the rname of each recipe that does not contain the ingredient 'salt'
+10:40:53 GMILSTER> SELECT rname
+10:40:53   2  FROM contains
+10:40:53   3  MINUS
+10:40:53   4  SELECT rname
+10:40:53   5  FROM contains
+10:40:53   6  WHERE iname = 'salt'
+10:40:53   7  ORDER BY rname ASC;
+RNAME
+--------------------
+Butter Cookies
+Fried Cheese
+
+2 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 3 List the rname of each recipe that contains either the ingredient 'salt' or the ingredient named 'pepper' or both
+10:40:53 GMILSTER> SELECT rname
+10:40:53   2  FROM contains
+10:40:53   3  WHERE iname = 'salt'
+10:40:53   4  UNION
+10:40:53   5  SELECT rname
+10:40:53   6  FROM contains
+10:40:53   7  WHERE iname = 'pepper'
+10:40:53   8  ORDER BY rname ASC;
+RNAME
+--------------------
+Apple Treat
+Garlic Shrimp
+Hummus
+Meatloaf
+
+4 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 4 List the rname of each recipe that contains the ingredient 'salt' and the ingredient 'pepper'
+10:40:53 GMILSTER> SELECT rname
+10:40:53   2  FROM contains
+10:40:53   3  WHERE iname = 'salt'
+10:40:53   4  INTERSECT
+10:40:53   5  SELECT rname
+10:40:53   6  FROM contains
+10:40:53   7  WHERE iname = 'pepper'
+10:40:53   8  ORDER BY rname ASC;
+RNAME
+--------------------
+Garlic Shrimp
+Hummus
+Meatloaf
+
+3 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 5 List the rname of each recipe that contains the ingredient 'salt' but not 'pepper'
+10:40:53 GMILSTER> SELECT rname
+10:40:53   2  FROM contains
+10:40:53   3  WHERE iname = 'salt'
+10:40:53   4  MINUS
+10:40:53   5  SELECT rname FROM contains
+10:40:53   6  WHERE iname = 'pepper'
+10:40:53   7  ORDER BY rname ASC;
+RNAME
+--------------------
+Apple Treat
+
+1 row selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 6 List the rname of each recipe that contains neither 'salt' nor 'pepper'
+10:40:53 GMILSTER> SELECT rname FROM contains
+10:40:53   2  MINUS
+10:40:53   3  SELECT rname FROM contains
+10:40:53   4  WHERE iname = 'salt'
+10:40:53   5  MINUS
+10:40:53   6  SELECT rname FROM contains
+10:40:53   7  WHERE iname = 'pepper'
+10:40:53   8  ORDER BY rname ASC;
+RNAME
+--------------------
+Butter Cookies
+Fried Cheese
+
+2 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 7 List the rname, iname, amount, and foodGroup of each ingredient in each recipe, order by rname then iname
+10:40:53 GMILSTER> SELECT rname, c.iname, amount, foodGroup
+10:40:53   2  FROM contains c, ingredient i
+10:40:53   3  WHERE c.iname = i.iname
+10:40:53   4  ORDER BY rname, iname ASC;
+RNAME                INAME                    AMOUNT FOODGROUP
+-------------------- -------------------- ---------- ---------------
+Apple Treat          apple sauce                   1 seasoning
+Apple Treat          bread                         4 starch
+Apple Treat          egg                           2 dairy
+Apple Treat          milk                          1 dairy
+Apple Treat          salt                         .5 seasoning
+Apple Treat          sugar                        .5 seasoning
+Butter Cookies       almonds                       3 seasoning
+Butter Cookies       butter                        4 dairy
+Butter Cookies       flour                         4 starch
+Butter Cookies       sugar                       .25 seasoning
+Fried Cheese         bread crumbs                 .5 starch
+Fried Cheese         cheese                       .5 dairy
+Fried Cheese         egg                           2 dairy
+Fried Cheese         flour                         3 starch
+Fried Cheese         olive oil                     2 oil
+Fried Cheese         oregano                       1 herb
+Fried Cheese         paprika                       1 seasoning
+Garlic Shrimp        garlic                        7 seasoning
+Garlic Shrimp        lemon juice                   1 seasoning
+Garlic Shrimp        olive oil                     1 oil
+Garlic Shrimp        parsley                       1 herb
+Garlic Shrimp        pepper                     .125 seasoning
+Garlic Shrimp        salt                         .5 seasoning
+Garlic Shrimp        shrimp                      .75 seafood
+Hummus               garbanzo beans                1 legume
+Hummus               garlic                        2 seasoning
+Hummus               lemon juice                 .25 seasoning
+Hummus               olive oil                     4 oil
+Hummus               paprika                      .5 seasoning
+Hummus               pepper                       .5 seasoning
+Hummus               salt                        .75 seasoning
+Hummus               seasame seeds               .25 seasoning
+Meatloaf             bread                         3 starch
+Meatloaf             egg                           2 dairy
+Meatloaf             ground beef                   2 protein
+Meatloaf             onion                         1 seasoning
+Meatloaf             pepper                      .25 seasoning
+Meatloaf             salt                         .5 seasoning
+
+38 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 8 See #7, use NATURAL JOIN
+10:40:53 GMILSTER> SELECT rname, iname, amount, foodGroup
+10:40:53   2  FROM contains NATURAL JOIN ingredient
+10:40:53   3  ORDER BY rname, iname ASC;
+RNAME                INAME                    AMOUNT FOODGROUP
+-------------------- -------------------- ---------- ---------------
+Apple Treat          apple sauce                   1 seasoning
+Apple Treat          bread                         4 starch
+Apple Treat          egg                           2 dairy
+Apple Treat          milk                          1 dairy
+Apple Treat          salt                         .5 seasoning
+Apple Treat          sugar                        .5 seasoning
+Butter Cookies       almonds                       3 seasoning
+Butter Cookies       butter                        4 dairy
+Butter Cookies       flour                         4 starch
+Butter Cookies       sugar                       .25 seasoning
+Fried Cheese         bread crumbs                 .5 starch
+Fried Cheese         cheese                       .5 dairy
+Fried Cheese         egg                           2 dairy
+Fried Cheese         flour                         3 starch
+Fried Cheese         olive oil                     2 oil
+Fried Cheese         oregano                       1 herb
+Fried Cheese         paprika                       1 seasoning
+Garlic Shrimp        garlic                        7 seasoning
+Garlic Shrimp        lemon juice                   1 seasoning
+Garlic Shrimp        olive oil                     1 oil
+Garlic Shrimp        parsley                       1 herb
+Garlic Shrimp        pepper                     .125 seasoning
+Garlic Shrimp        salt                         .5 seasoning
+Garlic Shrimp        shrimp                      .75 seafood
+Hummus               garbanzo beans                1 legume
+Hummus               garlic                        2 seasoning
+Hummus               lemon juice                 .25 seasoning
+Hummus               olive oil                     4 oil
+Hummus               paprika                      .5 seasoning
+Hummus               pepper                       .5 seasoning
+Hummus               salt                        .75 seasoning
+Hummus               seasame seeds               .25 seasoning
+Meatloaf             bread                         3 starch
+Meatloaf             egg                           2 dairy
+Meatloaf             ground beef                   2 protein
+Meatloaf             onion                         1 seasoning
+Meatloaf             pepper                      .25 seasoning
+Meatloaf             salt                         .5 seasoning
+
+38 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 9 See #7, use INNER JOIN
+10:40:53 GMILSTER> SELECT rname, iname, amount, foodGroup
+10:40:53   2  FROM contains INNER JOIN ingredient USING (iname)
+10:40:53   3  ORDER BY rname, iname ASC;
+RNAME                INAME                    AMOUNT FOODGROUP
+-------------------- -------------------- ---------- ---------------
+Apple Treat          apple sauce                   1 seasoning
+Apple Treat          bread                         4 starch
+Apple Treat          egg                           2 dairy
+Apple Treat          milk                          1 dairy
+Apple Treat          salt                         .5 seasoning
+Apple Treat          sugar                        .5 seasoning
+Butter Cookies       almonds                       3 seasoning
+Butter Cookies       butter                        4 dairy
+Butter Cookies       flour                         4 starch
+Butter Cookies       sugar                       .25 seasoning
+Fried Cheese         bread crumbs                 .5 starch
+Fried Cheese         cheese                       .5 dairy
+Fried Cheese         egg                           2 dairy
+Fried Cheese         flour                         3 starch
+Fried Cheese         olive oil                     2 oil
+Fried Cheese         oregano                       1 herb
+Fried Cheese         paprika                       1 seasoning
+Garlic Shrimp        garlic                        7 seasoning
+Garlic Shrimp        lemon juice                   1 seasoning
+Garlic Shrimp        olive oil                     1 oil
+Garlic Shrimp        parsley                       1 herb
+Garlic Shrimp        pepper                     .125 seasoning
+Garlic Shrimp        salt                         .5 seasoning
+Garlic Shrimp        shrimp                      .75 seafood
+Hummus               garbanzo beans                1 legume
+Hummus               garlic                        2 seasoning
+Hummus               lemon juice                 .25 seasoning
+Hummus               olive oil                     4 oil
+Hummus               paprika                      .5 seasoning
+Hummus               pepper                       .5 seasoning
+Hummus               salt                        .75 seasoning
+Hummus               seasame seeds               .25 seasoning
+Meatloaf             bread                         3 starch
+Meatloaf             egg                           2 dairy
+Meatloaf             ground beef                   2 protein
+Meatloaf             onion                         1 seasoning
+Meatloaf             pepper                      .25 seasoning
+Meatloaf             salt                         .5 seasoning
+
+38 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 10 List the rname and type of each recipe that contains the ingredient 'salt'
+10:40:53 GMILSTER> SELECT DISTINCT rname, type
+10:40:53   2  FROM contains INNER JOIN recipe USING (rname)
+10:40:53   3  WHERE iname = 'salt'
+10:40:53   4  ORDER BY rname ASC;
+RNAME                TYPE
+-------------------- ---------------
+Apple Treat          dessert
+Garlic Shrimp        entree
+Hummus               appetizer
+Meatloaf             entree
+
+4 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 11 List rname of each recipe that contains at least one ingredient in the food group 'dairy'
+10:40:53 GMILSTER> SELECT DISTINCT rname
+10:40:53   2  FROM contains INNER JOIN ingredient USING (iname)
+10:40:53   3  WHERE foodGroup = 'dairy'
+10:40:53   4  ORDER BY rname ASC;
+RNAME
+--------------------
+Apple Treat
+Butter Cookies
+Fried Cheese
+Meatloaf
+
+4 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 12 List the rname of each recipe that contains no ingredient in the food group "dairy"
+10:40:53 GMILSTER> SELECT DISTINCT rname FROM contains
+10:40:53   2  MINUS
+10:40:53   3  SELECT DISTINCT rname
+10:40:53   4  FROM contains INNER JOIN ingredient USING (iname)
+10:40:53   5  WHERE foodGroup = 'dairy'
+10:40:53   6  ORDER BY rname ASC;
+RNAME
+--------------------
+Garlic Shrimp
+Hummus
+
+2 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 13 List the rname and price of each recipe that contains one or more ingredient in the food group diary
+10:40:53 GMILSTER> SELECT DISTINCT r.rname, r.price
+10:40:53   2  FROM contains c, recipe r, ingredient i
+10:40:53   3  WHERE r.rname = c.rname AND i.iname = c.iname AND i.foodGroup = 'dairy'
+10:40:53   4  ORDER BY r.rname ASC;
+RNAME                     PRICE
+-------------------- ----------
+Apple Treat                 5.5
+Butter Cookies                5
+Fried Cheese                6.5
+Meatloaf                     12
+
+4 rows selected.
+
+10:40:53 GMILSTER> 
+10:40:53 GMILSTER> -- 14 List the names of the least costly ingredients.
+10:40:53 GMILSTER> SELECT iname
+10:40:53   2  FROM ingredient
+10:40:53   3  MINUS
+10:40:53   4  SELECT i.iname
+10:40:53   5  FROM ingredient i, ingredient x
+10:40:53   6  WHERE i.cost > x.cost
+10:40:53   7  ORDER BY iname ASC;
+INAME
+--------------------
+flour
+salt
+
+2 rows selected.
+
+10:40:53 GMILSTER> spool off

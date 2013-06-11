@@ -1,0 +1,104 @@
+
+------------------------
+Looking for source files
+------------------------
+
+Found: xlat.c
+
+--------------------------------
+Checking for long lines (no program should have any lines > 80 chars)
+(run ~pnico/bin/longlines.pl on your files to check.)
+--------------------------------
+
+Line length ok.
+
+
+------------------------------------
+Building the application: "gcc -ansi -pedantic -Wall -o xlat xlat.c"
+------------------------------------
+
+gcc -ansi -pedantic -Wall -o xlat xlat.c
+
+---------------
+checking for executable
+---------------
+
+
+------------------------
+Running the application 
+------------------------
+
+
+--------------------------------------------------------
+Test Results:
+   These are the results of trying your xlat against
+mine on a number of different test cases. 
+
+  The output of your version of xlat is compared to 
+the output of ~pn-cs357/demos/xlat using diff (1).
+If they differ the test case is a failure.
+
+  The test commands are located in /home/pn-cs357/lib/asgn1//Tests/Tests and the
+associated data are in /home/pn-cs357/lib/asgn1//Tests/Inputs
+
+  Note:  The early usage tests give bad arguments and expect
+a non-zero exit status and see a message of the form:
+"usage: xlat [ -c ] [ -d ] set1 [ set2 ]" The message
+doesn't have to be exactly the same, but it's looking for the
+word "usage".
+
+  Each command is run with a timeout of 10 seconds, so 
+if your program takes longer than that, it will be interrupted.
+
+
+Tests:
+     1) Usage, no arguments at all                             ... ok.
+     2) Usage, only one set                                    ... ok.
+     3) Usage, delete with two sets                            ... ok.
+     4) Usage, three sets                                      ... ok.
+     5) Usage, -c without -d                                   ... ok.
+     6) Usage, different length sets                           ... ok.
+     7) Usage, repeats in set1                                 ... FAILURE (expected usage message)
+     8) Duplicates in the second set (should be ok)            ... ok.
+     9) One char set, translate, short file                    ... ok.
+    10) One char set, translate, long file                     ... ok.
+    11) One char set, translate, short file                    ... ok.
+    12) One char set, delete, long file                        ... ok.
+    13) One char set, translate, empty file                    ... ok.
+    14) One char set, delete, empty file                       ... ok.
+    15) One char set, translate, very long line                ... ok.
+    16) One char set, delete, very long line                   ... ok.
+    17) One char set, translate, unprintable chars             ... ok.
+    18) One char set, delete, unprintable chars                ... ok.
+    19) One char set, delete complement, empty file            ... ok.
+    20) One char set, delete complement, very long line        ... ok.
+    21) One char set, delete complement, unprintable chars     ... ok.
+    22) Multi-char set, translate, short file                  ... ok.
+    23) Multi-char set, translate, long file                   ... ok.
+    24) Multi-char set, translate, empty file                  ... ok.
+    25) Multi-char set, delete, empty file                     ... ok.
+    26) Multi-char set, translate, very long line              ... ok.
+    27) Multi-char set, delete, very long line                 ... ok.
+    28) Multi-char set, translate, unprintable chars           ... ok.
+    29) Multi-char set, delete, unprintable chars              ... ok.
+    30) Multi-char set, delete complement, empty file          ... ok.
+    31) Multi-char set, delete complement, very long line      ... ok.
+    32) Multi-char set, delete complement, unprintable chars   ... ok.
+    33) Rot 13, translate, short file                          ... ok.
+
+
+Interrupted
+
+FAILED.
+
+
+
+#############################
+# Failure details are below #
+#############################
+
+
+==========================================
+7) Usage, repeats in set1  (FAILURE (expected usage message))
+  $ xlat abcdee abcdee 
+==========================================

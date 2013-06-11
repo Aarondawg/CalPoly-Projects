@@ -1,0 +1,61 @@
+01:48:17 GMILSTER> @p3
+01:48:21 GMILSTER> -- Lab 9 | Part 3
+01:48:21 GMILSTER> -- Name: Garrett Milster
+01:48:21 GMILSTER> -- Partner: Ross McKelvie
+01:48:21 GMILSTER> CREATE OR REPLACE
+01:48:21   2  FUNCTION orderValue(ono_ odetails.ono%type)
+01:48:21   3  	      RETURN odetails.qty%TYPE
+01:48:21   4  AS
+01:48:21   5  	 ret odetails.qty%TYPE;
+01:48:21   6  
+01:48:21   7  BEGIN
+01:48:21   8  	 SELECT SUM (p.price * d.qty) into ret
+01:48:21   9  	 FROM parts p inner join odetails d ON p.pno = d.pno
+01:48:21  10  	 WHERE p.pno in (
+01:48:21  11  	       SELECT pno
+01:48:21  12  	       FROM odetails
+01:48:21  13  	       WHERE ono = ono_
+01:48:21  14  	 )
+01:48:21  15  	 GROUP BY d.ono;
+01:48:21  16  	 RETURN (ret);
+01:48:21  17  
+01:48:21  18  EXCEPTION
+01:48:21  19  	 WHEN OTHERS THEN
+01:48:21  20  	    ret := NULL;
+01:48:21  21  	    RETURN ret;
+01:48:21  22  END;
+01:48:21  23  /
+
+Function created.
+
+01:48:21 GMILSTER> show errors;
+No errors.
+01:48:21 GMILSTER> select ono, orderValue(ono) from orders
+01:48:43   2  
+01:48:44 GMILSTER> select ono, orderValue(ono) from orders;
+       ONO ORDERVALUE(ONO)
+---------- ---------------
+      1020             140
+      1021
+      1022
+      1023
+      1024
+      1025
+
+6 rows selected.
+
+01:48:56 GMILSTER> select ono, orderValue(ono) from orders order by ono;
+       ONO ORDERVALUE(ONO)
+---------- ---------------
+      1020             140
+      1021
+      1022
+      1023
+      1024
+      1025
+
+6 rows selected.
+
+01:49:55 GMILSTER> !
+
+01:51:15 GMILSTER> spool off

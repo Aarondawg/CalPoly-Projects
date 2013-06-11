@@ -1,0 +1,96 @@
+00:27:51 GMILSTER> start p3.sql
+00:27:56 GMILSTER> /**
+00:27:56 GMILSTER> p3.sql in PL/SQL
+00:27:56 GMILSTER> Ross McKelvie
+00:27:56 GMILSTER> Partner: Garrett Milster
+00:27:56 GMILSTER> */
+00:27:56 GMILSTER> SET AUTOCOMMIT OFF;
+00:27:56 GMILSTER> COMMIT;
+
+Commit complete.
+
+00:27:56 GMILSTER> WHENEVER OSERROR CONTINUE ROLLBACK;
+00:27:56 GMILSTER> WHENEVER SQLERROR CONTINUE ROLLBACK;
+00:27:56 GMILSTER> 
+00:27:56 GMILSTER> DECLARE
+00:27:56   2  	      decreaseamt_ INTEGER := &decreaseamt;
+00:27:56   3  
+00:27:56   4  BEGIN
+00:27:56   5  	      UPDATE parts SET QOH = qoh - decreaseamt_;
+00:27:56   6  	      COMMIT;
+00:27:56   7  
+00:27:56   8  EXCEPTION
+00:27:56   9  	      WHEN OTHERS THEN
+00:27:56  10  		      dbms_output.put_line('Error occurred: '|| ': ' || SQLERRM );
+00:27:56  11  		      ROLLBACK;
+00:27:56  12  END;
+00:27:56  13  /
+Enter value for decreaseamt: 60
+old   2: 	decreaseamt_ INTEGER := &decreaseamt;
+new   2: 	decreaseamt_ INTEGER := 60;
+
+PL/SQL procedure successfully completed.
+
+00:28:00 GMILSTER> select * from parts;
+       PNO PNAME                                 QOH      PRICE     OLEVEL
+---------- ------------------------------ ---------- ---------- ----------
+     10506 Land Before Time I                    140      19.99         20
+     10507 Land Before Time II                    96      19.99         20
+     10508 Land Before Time III                  130      19.99         20
+     10509 Land Before Time IV                     0      19.99         20
+     10601 Sleeping Beauty                       240      24.99         20
+     10701 When Harry Met Sally                   60      19.99         30
+     10800 Dirty Harry                            80      14.99         30
+     10900 Dr. Zhivago                            40      24.99         30
+
+8 rows selected.
+
+00:28:16 GMILSTER> @p3.sql
+00:29:10 GMILSTER> /**
+00:29:10 GMILSTER> p3.sql in PL/SQL
+00:29:10 GMILSTER> Ross McKelvie
+00:29:10 GMILSTER> Partner: Garrett Milster
+00:29:10 GMILSTER> */
+00:29:10 GMILSTER> SET AUTOCOMMIT OFF;
+00:29:10 GMILSTER> COMMIT;
+
+Commit complete.
+
+00:29:10 GMILSTER> WHENEVER OSERROR CONTINUE ROLLBACK;
+00:29:10 GMILSTER> WHENEVER SQLERROR CONTINUE ROLLBACK;
+00:29:10 GMILSTER> 
+00:29:10 GMILSTER> DECLARE
+00:29:10   2  	      decreaseamt_ INTEGER := &decreaseamt;
+00:29:10   3  
+00:29:10   4  BEGIN
+00:29:10   5  	      UPDATE parts SET QOH = qoh - decreaseamt_;
+00:29:10   6  	      COMMIT;
+00:29:10   7  
+00:29:10   8  EXCEPTION
+00:29:10   9  	      WHEN OTHERS THEN
+00:29:10  10  		      dbms_output.put_line('Error occurred: '|| ': ' || SQLERRM );
+00:29:10  11  		      ROLLBACK;
+00:29:10  12  END;
+00:29:10  13  /
+Enter value for decreaseamt: 1
+old   2: 	decreaseamt_ INTEGER := &decreaseamt;
+new   2: 	decreaseamt_ INTEGER := 1;
+Error occurred: : ORA-02290: check constraint (GMILSTER.SYS_C00566945) violated
+
+PL/SQL procedure successfully completed.
+
+00:29:11 GMILSTER> select * from parts;
+       PNO PNAME                                 QOH      PRICE     OLEVEL
+---------- ------------------------------ ---------- ---------- ----------
+     10506 Land Before Time I                    140      19.99         20
+     10507 Land Before Time II                    96      19.99         20
+     10508 Land Before Time III                  130      19.99         20
+     10509 Land Before Time IV                     0      19.99         20
+     10601 Sleeping Beauty                       240      24.99         20
+     10701 When Harry Met Sally                   60      19.99         30
+     10800 Dirty Harry                            80      14.99         30
+     10900 Dr. Zhivago                            40      24.99         30
+
+8 rows selected.
+
+00:29:24 GMILSTER> spool off

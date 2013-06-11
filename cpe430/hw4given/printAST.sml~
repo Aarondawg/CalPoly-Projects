@@ -1,0 +1,22 @@
+use "parser.sml";
+
+fun printExpression (EXP_NUM(x)) = print((Int.toString x))
+   | printExpression (EXP_STRING(x)) = (print x)
+   | printExpression EXP_TRUE = (print "true")
+   | printExpression EXP_FALSE = (print "false")
+   | printExpression EXP_UNDEFINED = (print "undefined")
+   | printExpression x = (print "ELSE")
+   (*| printExpression EXP_BINARY of {opr: binaryOperator, lft: expression, rht: expression}
+   | printExpression EXP_UNARY of {opr: unaryOperator, opnd: expression}
+   | printExpression EXP_COND of {guard: expression, thenExp: expression, elseExp: expression}*)
+;
+
+
+fun printStatement (ST_EXP {exp = x}) = (printExpression x);
+
+fun printSourceElement (STMT {stmt = x}) = (printStatement x);
+
+fun printAST (PROGRAM {elems = []}) = ()
+   | printAST (PROGRAM {elems = (x::xs)}) =
+   ((printAST (PROGRAM {elems = xs}));(printSourceElement x))
+;

@@ -1,0 +1,41 @@
+10:40:17 GMILSTER> start p1.sql
+10:40:22 GMILSTER> /**
+10:40:22 GMILSTER> p1.sql in PL/SQL
+10:40:22 GMILSTER> Garrett Milster
+10:40:22 GMILSTER> Partner: Ross McKelvie
+10:40:22 GMILSTER> */
+10:40:22 GMILSTER> 
+10:40:22 GMILSTER> DEClARE
+10:40:22   2  	 pno_ parts.pno%TYPE;
+10:40:22   3  	 price_ parts.price%TYPE;
+10:40:22   4  	 QOH_ parts.qoh%TYPE;
+10:40:22   5  	 pname_ parts.pname%TYPE;
+10:40:22   6  
+10:40:22   7  BEGIN
+10:40:22   8  
+10:40:22   9  	 pno_:=&pno_;
+10:40:22  10  	 SELECT p.pname, p.price, p.qoh INTO pname_, price_, qoh_
+10:40:22  11  	 FROM parts p
+10:40:22  12  	 WHERE	pno = pno_;
+10:40:22  13  	 dbms_output.put_line(pname_ || ',' || price_ || ',' || qoh_);
+10:40:22  14  EXCEPTION
+10:40:22  15  	 WHEN OTHERS THEN
+10:40:22  16  	  dbms_output.put_line('Error occurred: ' || ':' || SQLERRM);
+10:40:22  17  END;
+10:40:22  18  /
+Enter value for pno_: 10601
+old   9:    pno_:=&pno_;
+new   9:    pno_:=10601;
+Sleeping Beauty,24.99,300
+
+PL/SQL procedure successfully completed.
+
+10:41:03 GMILSTER> /
+Enter value for pno_: 12345
+old   9:    pno_:=&pno_;
+new   9:    pno_:=12345;
+Error occurred: :ORA-01403: no data found
+
+PL/SQL procedure successfully completed.
+
+10:41:22 GMILSTER> spool off

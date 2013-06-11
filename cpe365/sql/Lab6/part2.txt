@@ -1,0 +1,66 @@
+Lab 6 Part 2
+Name: Garrett Milster
+Partner: Ross McKelvie
+
+=========
+Problem 1
+=========
+
+MANUFACTURER ( mName, city, country )
+               -----
+
+CAR ( mName.model, cost)
+      -----------
+
+DEALER (dName, city, partner )
+        -----
+
+BUYER ( SSN, bName, address )
+        ---
+        
+MAKES ( mName, model )
+        -----  -----
+
+SELLS ( mName.model, SSN, dName, price )
+        -----------  ---  -----
+        
+PHONE_NUMS ( dName, phone )
+             -----  -----
+             
+=========       
+Problem 2
+=========
+
+SHIP ( sName, leadship)
+       -----
+SHIP_MOVEMENT ( sName.timestamp, date, time, longitude, latitude )
+                ---------------  
+SHIP_TYPE ( type, tonnage, hull)
+            ----
+SHIP_CUR_LOC ( sName, realHome, curLoc )
+               ----- 
+OWNER ( sName, owner )
+        -----  -----
+PORT ( pName, state, country, continent, capacity )
+       -----  -----  -------  ---------
+VISITS ( sName, port, endDate, startDate )
+         -----  ----
+         
+         
+=========
+Problem 3
+=========
+VILLAGE ( name, address )
+          ----
+APARTMENT ( name.number, capacity )
+            -----------
+STUDENT ( sid, name, gender )
+          ---
+EMAIL ( sid, email )
+        ---  -----
+STUDENT_STATUS ( sid, residentType )
+                 ---  ------------
+RESIDENT (sid, startDate, ra )
+          ---
+NON_RESIDENT (sid, address )
+	      ---

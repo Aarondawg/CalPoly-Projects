@@ -1,0 +1,7 @@
+Garrett Milster (gmilster)
+DJ Mitchel (djmitche)
+
+things to know: our cd executes correctly, but the next command afterward doesn't, it's like the path isn't right,
+any command afterward works fine, so cd .., then ls, will error, but if you ls again, it works fine...which is weird
+
+also, ctrl C will kill the shell, a little conditional we forgot to add and I just realized without enough time to fix.

@@ -1,0 +1,127 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "MyGrep.h"
+
+
+int main ( int argc, char *argv[])
+{
+
+    if ( argc != 3) 
+    {
+       // Error statement if the incorrect number of parameters are entered.
+        printf("Incorrect number of parameters\n");
+        printf("Input should be in the form of \"%s filename.txt search-word\n", argv[0]); 
+    }
+    else 
+    {   
+        char* maxstring;
+        FILE *file = fopen(argv[1], "r");
+        FILE *file2 = fopen(argv[1], "r");
+        
+        int maxcharcount = 0; //various counters for information about the lines and words.
+        int linecounter = 0;
+        int wordcounter = 0;        
+        int matchcounter = 0;
+        
+        char string[100];  //strings used when reading in lines from the file.
+        char string2[100];
+        char *stringptr;
+        maxstring = malloc(sizeof(char)*100); 
+
+        Word head; //Linked list components.
+        Word *current;
+        head.next = NULL;
+        
+        
+        if(file == 0 )
+        {
+           //if there is an error opening the file.
+            printf( "Could not open file\n" );
+        }
+        else 
+        {
+            //opens the file, scans each line, keeping track of the max line and it's number of characters.
+            while((fgets(string, 100, file)) != NULL)
+            {
+                int index = 0;
+                while (string[index] != '\0')
+                   index++;
+
+                if(index > maxcharcount)
+                {
+                     maxcharcount = index;
+                     strcpy(maxstring, string);
+                }
+                linecounter++;
+                
+            }
+            
+            linecounter = 0;
+            
+            //reads the file again, but takes each line, reads each word and compares it to the search word,
+            //if the word matches, it allocates memory for it and adds it to the linked list.
+            while((fgets(string2, 100, file2)) != NULL)
+            {		
+                char *temp = malloc(sizeof(char)*100);		
+                strcpy(temp, string2); 
+                
+                
+                stringptr = strtok(temp, " .,\n");
+                wordcounter = 0;
+                while(stringptr != NULL)
+                {
+                   if(strcmp(stringptr,argv[2]) == 0) 
+                   {
+                      matchcounter++;
+                      //if the linked list is empy.
+                      if(head.next == NULL)
+                      {
+                         current = (Word *) malloc(sizeof(Word));
+                         head.next = current;
+                         strcpy(current->line, string2);
+                         current->linenumber = linecounter;
+                         current->wordnumber = wordcounter;
+                         current->next = NULL;
+                      }
+                      else{
+                      //if the linked list isn't empty.                      
+                         current->next = (Word *) malloc(sizeof(Word));
+                         current = current->next;
+                         strcpy(current->line, string2);
+                         current->linenumber = linecounter;
+                         current->wordnumber = wordcounter;
+                         current->next = NULL;
+                      }
+                   }
+                   
+                   stringptr = strtok(NULL, " .,\n");   
+                   wordcounter++;
+                }
+                linecounter++;
+                
+            }
+	      fclose(file);
+         fclose(file2);
+        }
+      //prints all info related to lines and words.
+      printf("%s %s %s\n", argv[0],argv[1],argv[2]);
+      printf("longest line: %s", maxstring);
+      printf("num chars: %d\n", maxcharcount - 1);
+      printf("num lines: %d\n", linecounter);
+      printf("total occurances of word: %d\n", matchcounter);
+      
+      Word *temp = head.next;
+      //iterates through linked list printing info for each occurance of the word.
+      while(temp != NULL)
+      {
+         printf("line %d: word %d; %s", temp->linenumber, temp->wordnumber, temp->line);
+            temp = temp->next;
+
+      }
+      
+
+       
+    }
+}
+

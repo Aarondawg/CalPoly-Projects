@@ -1,0 +1,6 @@
+typedef struct WordList Word;
+struct WordList{
+int linenumber;
+int wordnumber;
+string line[100];
+}

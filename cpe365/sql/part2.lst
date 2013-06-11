@@ -1,0 +1,196 @@
+10:41:21 GMILSTER> start part2.sql
+10:41:25 GMILSTER> -- Name: Ross McKelvie
+10:41:25 GMILSTER> -- Partner: Garrett Milster
+10:41:25 GMILSTER> -- CSC 365 - Lab 04 - AM Section
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 15 List how many employees there are in the database
+10:41:25 GMILSTER> SELECT count(*) NUM_EMPLOYEES
+10:41:25   2  FROM employee;
+NUM_EMPLOYEES
+-------------
+           31
+
+1 row selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 16 Show the value of the lowest, highest, the average, and the total salary of the employees.
+10:41:25 GMILSTER> SELECT min(salary) LOWEST, max(salary) MAX, avg(salary) AVERAGE, sum(salary) TOTAL
+10:41:25   2  FROM employee;
+    LOWEST        MAX    AVERAGE      TOTAL
+---------- ---------- ---------- ----------
+        20    1204330 168750.774    5231274
+
+1 row selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 17 How many pilots are there? (A pilot is an employee certified to fly at least one aircraft)
+10:41:25 GMILSTER> SELECT count(distinct eid) NUM_PILOTS
+10:41:25   2  FROM certified;
+NUM_PILOTS
+----------
+        20
+
+1 row selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 18 List the FNO of each flight that does not originate from LAX in increasing order of FNO.
+10:41:25 GMILSTER> SELECT fno FNO_NOT_FROM_LAX
+10:41:25   2  FROM flight
+10:41:25   3  WHERE origin <> 'LAX'
+10:41:25   4  ORDER BY fno ASC;
+FNO_NOT_FROM_LAX
+----------------
+              68
+              76
+             149
+             304
+             701
+             702
+            2223
+            4884
+            5694
+            7789
+
+10 rows selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 19 How many flights are there that do not originate from LAX?
+10:41:25 GMILSTER> SELECT count(*) NUM_FLIGHTS_NOT_FROM_LAX
+10:41:25   2  FROM flight
+10:41:25   3  WHERE origin <> 'LAX';
+NUM_FLIGHTS_NOT_FROM_LAX
+------------------------
+                      10
+
+1 row selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 20 List the AID of each aircraft that can cover the distance of flight number 2. Output in increasing order of AID
+10:41:25 GMILSTER> SELECT aid AIRCRAFT_CAN_COVER_FNO2
+10:41:25   2  FROM aircraft a, flight f
+10:41:25   3  WHERE f.fno = 2 AND a.range >= f.distance
+10:41:25   4  ORDER BY aid ASC;
+AIRCRAFT_CAN_COVER_FNO2
+-----------------------
+                      1
+                      3
+                      9
+                     11
+                     12
+
+5 rows selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 21 How many aircrafts can cover the distance of flight number 2?
+10:41:25 GMILSTER> SELECT count(*) NUM_AIRCRAFT_CAN_COVER_FNO2
+10:41:25   2  FROM aircraft a, flight f
+10:41:25   3  WHERE f.fno = 2 AND a.range >= f.distance;
+NUM_AIRCRAFT_CAN_COVER_FNO2
+---------------------------
+                          5
+
+1 row selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 22 List the EID of each employee directly supervised by an employee whose last name is Nguyen. Output in increasing order of eid
+10:41:25 GMILSTER> SELECT e.eid EMPLOYEES_SUP_BY_NGUYEN
+10:41:25   2  FROM employee e, employee s
+10:41:25   3  WHERE e.sid = s.eid AND s.ename LIKE '%Nguyen';
+EMPLOYEES_SUP_BY_NGUYEN
+-----------------------
+              142519864
+              548977562
+              489221823
+              489456522
+              310454877
+
+5 rows selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 23 How many employees are directly supervised by an employee whose last name is Nguyen?
+10:41:25 GMILSTER> SELECT count(*) NUM_EMPLOYEES_SUP_BY_NGUYEN
+10:41:25   2  FROM employee e, employee s
+10:41:25   3  WHERE e.sid = s.eid AND s.ename LIKE '%Nguyen';
+NUM_EMPLOYEES_SUP_BY_NGUYEN
+---------------------------
+                          5
+
+1 row selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 24 How many recipes are in each type? Ouput with column heading TYPE and COUNT, in creasing order of the TYPE name
+10:41:25 GMILSTER> SELECT type TYPE, count(*) COUNT
+10:41:25   2  FROM recipe
+10:41:25   3  GROUP BY type;
+TYPE                 COUNT
+--------------- ----------
+dessert                  2
+entree                   2
+appetizer                2
+
+3 rows selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 25 What is the largest count (a single value) of recipes in any of the (recipe) type?
+10:41:25 GMILSTER> --	 Output the value with a column heading MAX_RECIPE _COUNT_IN_TYPE
+10:41:25 GMILSTER> SELECT max(count(*)) MAX_RECIPE_COUNT_IN_TYPE
+10:41:25   2  FROM recipe
+10:41:25   3  GROUP BY type;
+MAX_RECIPE_COUNT_IN_TYPE
+------------------------
+                       2
+
+1 row selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 26 How many different ingredients are there in each recipe?
+10:41:25 GMILSTER> --	 Output should have a heading of RNAME and INGREDIENT_COUNT in increasing order of RNAME
+10:41:25 GMILSTER> SELECT rname RNAME, count(*) INGREDIENT_COUNT
+10:41:25   2  FROM contains
+10:41:25   3  GROUP BY rname
+10:41:25   4  ORDER BY rname ASC;
+RNAME                INGREDIENT_COUNT
+-------------------- ----------------
+Apple Treat                         6
+Butter Cookies                      4
+Fried Cheese                        7
+Garlic Shrimp                       7
+Hummus                              8
+Meatloaf                            6
+
+6 rows selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 27 What is the largest total count of ingredients in any of the recipes?
+10:41:25 GMILSTER> --	 Output the value with a column heading MAX_INGREDIENT_COUNT.
+10:41:25 GMILSTER> SELECT max(count(*)) MAX_INGREDIENT_COUNT
+10:41:25   2  FROM contains
+10:41:25   3  GROUP BY rname;
+MAX_INGREDIENT_COUNT
+--------------------
+                   8
+
+1 row selected.
+
+10:41:25 GMILSTER> 
+10:41:25 GMILSTER> -- 28 For each food group that appears in the INGREDIENT table, output how many recipes contain one or more ingredient in that food group.
+10:41:25 GMILSTER> --	 Do not count the same recipe twice for each food group. The output should be under column headings of FOODGROUP and COUNT, in increasing order of FOODGROUP
+10:41:25 GMILSTER> SELECT i.foodGroup FOODGROUP, count(c.rname) COUNT
+10:41:25   2  FROM ingredient i, contains c
+10:41:25   3  WHERE c.iname = i.iname
+10:41:25   4  GROUP BY i.foodGroup
+10:41:25   5  ORDER BY i.foodGroup ASC;
+FOODGROUP            COUNT
+--------------- ----------
+dairy                    6
+herb                     2
+legume                   1
+oil                      3
+protein                  1
+seafood                  1
+seasoning               19
+starch                   5
+
+8 rows selected.
+
+10:41:25 GMILSTER> spool off

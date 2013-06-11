@@ -1,0 +1,207 @@
+
+Packet number: 1  Packet Len: 118
+
+	Ethernet Header
+		Dest MAC: c0:c1:c0:dc:8e:d2
+		Source MAC: 0:23:6c:85:6b:a8
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 64
+		Protocol: UDP
+		Checksum: Correct (0x29f8)
+		Sender IP: 192.168.1.123
+		Dest IP: 192.168.1.1
+
+	UDP Header
+		Source Port:  57323
+		Dest Port:  8905
+
+Packet number: 2  Packet Len: 146
+
+	Ethernet Header
+		Dest MAC: 0:23:6c:85:6b:a8
+		Source MAC: c0:c1:c0:dc:8e:d2
+		Type: IP
+
+	IP Header
+		TOS: 0xc0
+		TTL: 64
+		Protocol: ICMP
+		Checksum: Correct (0x6f53)
+		Sender IP: 192.168.1.1
+		Dest IP: 192.168.1.123
+
+	ICMP Header
+		Type: Unknown
+
+Packet number: 3  Packet Len: 98
+
+	Ethernet Header
+		Dest MAC: c0:c1:c0:dc:8e:d2
+		Source MAC: 0:23:6c:85:6b:a8
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 64
+		Protocol: ICMP
+		Checksum: Correct (0xf715)
+		Sender IP: 192.168.1.123
+		Dest IP: 192.168.1.1
+
+	ICMP Header
+		Type: Request
+
+Packet number: 4  Packet Len: 98
+
+	Ethernet Header
+		Dest MAC: 0:23:6c:85:6b:a8
+		Source MAC: c0:c1:c0:dc:8e:d2
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 64
+		Protocol: ICMP
+		Checksum: Correct (0x7042)
+		Sender IP: 192.168.1.1
+		Dest IP: 192.168.1.123
+
+	ICMP Header
+		Type: Reply
+
+Packet number: 5  Packet Len: 42
+
+	Ethernet Header
+		Dest MAC: 1:0:5e:0:0:1
+		Source MAC: c0:c1:c0:dc:8e:d2
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 1
+		Protocol: Unknown
+		Checksum: Correct (0xd835)
+		Sender IP: 192.168.1.1
+		Dest IP: 224.0.0.1
+
+Packet number: 6  Packet Len: 119
+
+	Ethernet Header
+		Dest MAC: c0:c1:c0:dc:8e:d2
+		Source MAC: 0:23:6c:85:6b:a8
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 64
+		Protocol: UDP
+		Checksum: Correct (0xbcfb)
+		Sender IP: 192.168.1.123
+		Dest IP: 207.62.170.131
+
+	UDP Header
+		Source Port:  60794
+		Dest Port:  8906
+
+Packet number: 7  Packet Len: 70
+
+	Ethernet Header
+		Dest MAC: 0:23:6c:85:6b:a8
+		Source MAC: c0:c1:c0:dc:8e:d2
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 51
+		Protocol: ICMP
+		Checksum: Correct (0x17ce)
+		Sender IP: 207.62.170.131
+		Dest IP: 192.168.1.123
+
+	ICMP Header
+		Type: Unknown
+
+Packet number: 8  Packet Len: 46
+
+	Ethernet Header
+		Dest MAC: 1:0:5e:0:0:2
+		Source MAC: c0:c1:c0:dc:8e:d2
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 1
+		Protocol: Unknown
+		Checksum: Correct (0x432c)
+		Sender IP: 192.168.1.1
+		Dest IP: 224.0.0.2
+
+Packet number: 9  Packet Len: 46
+
+	Ethernet Header
+		Dest MAC: 1:0:5e:0:0:fb
+		Source MAC: c0:c1:c0:dc:8e:d2
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 1
+		Protocol: Unknown
+		Checksum: Correct (0x4233)
+		Sender IP: 192.168.1.1
+		Dest IP: 224.0.0.251
+
+Packet number: 10  Packet Len: 46
+
+	Ethernet Header
+		Dest MAC: 1:0:5e:0:0:fb
+		Source MAC: 90:27:e4:e9:28:53
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 1
+		Protocol: Unknown
+		Checksum: Correct (0x783e)
+		Sender IP: 192.168.1.122
+		Dest IP: 224.0.0.251
+
+Packet number: 11  Packet Len: 98
+
+	Ethernet Header
+		Dest MAC: c0:c1:c0:dc:8e:d2
+		Source MAC: 0:23:6c:85:6b:a8
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 64
+		Protocol: ICMP
+		Checksum: Correct (0x440b)
+		Sender IP: 192.168.1.123
+		Dest IP: 192.168.1.1
+
+	ICMP Header
+		Type: Request
+
+Packet number: 12  Packet Len: 98
+
+	Ethernet Header
+		Dest MAC: 0:23:6c:85:6b:a8
+		Source MAC: c0:c1:c0:dc:8e:d2
+		Type: IP
+
+	IP Header
+		TOS: 0x0
+		TTL: 64
+		Protocol: ICMP
+		Checksum: Correct (0x7041)
+		Sender IP: 192.168.1.1
+		Dest IP: 192.168.1.123
+
+	ICMP Header
+		Type: Reply
+

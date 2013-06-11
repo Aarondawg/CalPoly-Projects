@@ -1,0 +1,17 @@
+$ java Password
+Enter your Oracle userID: gmilster
+Enter Oracle password:
+Enter your login name for accessing your bank account
+tom
+Enter your password
+tom1234
+Welcome to your bank account!
+
+$ java Password
+Enter your Oracle userID: gmilster
+Enter Oracle password:
+Enter your login name for accessing your bank account
+' OR 'u' = 'u
+Enter your password
+' OR 'u' = 'u
+Welcome to your bank account!

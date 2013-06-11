@@ -1,0 +1,292 @@
+Standard ML of New Jersey, Version 110.0.7, September 28, 2000 [CM; autoload enabled]
+- [opening printAST.sml]
+[opening parser.sml]
+[opening tokenizer.sml]
+opening TextIO
+  type vector = string
+  type elem = char
+  type instream
+  type outstream
+  val input : instream -> vector
+  val input1 : instream -> elem option
+  val inputN : instream * int -> vector
+  val inputAll : instream -> vector
+  val canInput : instream * int -> int option
+  val lookahead : instream -> elem option
+  val closeIn : instream -> unit
+  val endOfStream : instream -> bool
+  val output : outstream * vector -> unit
+  val output1 : outstream * elem -> unit
+  val flushOut : outstream -> unit
+  val closeOut : outstream -> unit
+  structure StreamIO :
+    sig
+      type vector = string
+      type elem = char
+      type reader = reader
+      type writer = writer
+      type instream
+      type outstream
+      type pos = pos
+      type in_pos
+      type out_pos
+      val input : instream -> vector * instream
+      val input1 : instream -> (elem * instream) option
+      val inputN : instream * int -> vector * instream
+      val inputAll : instream -> vector * instream
+      val canInput : instream * int -> int option
+      val closeIn : instream -> unit
+      val endOfStream : instream -> bool
+      val mkInstream : reader * vector option -> instream
+      val getReader : instream -> reader * vector
+      val getPosIn : instream -> in_pos
+      val setPosIn : in_pos -> instream
+      val filePosIn : in_pos -> pos
+      val output : outstream * vector -> unit
+      val output1 : outstream * elem -> unit
+      val flushOut : outstream -> unit
+      val closeOut : outstream -> unit
+      val setBufferMode : outstream * IO.buffer_mode -> unit
+      val getBufferMode : outstream -> IO.buffer_mode
+      val mkOutstream : writer * IO.buffer_mode -> outstream
+      val getWriter : outstream -> writer * IO.buffer_mode
+      val getPosOut : outstream -> out_pos
+      val setPosOut : out_pos -> unit
+      val filePosOut : out_pos -> pos
+      val inputLine : instream -> string * instream
+      val outputSubstr : outstream * substring -> unit
+    end
+  val getPosIn : instream -> StreamIO.in_pos
+  val setPosIn : instream * StreamIO.in_pos -> unit
+  val mkInstream : StreamIO.instream -> instream
+  val getInstream : instream -> StreamIO.instream
+  val setInstream : instream * StreamIO.instream -> unit
+  val getPosOut : outstream -> StreamIO.out_pos
+  val setPosOut : outstream * StreamIO.out_pos -> unit
+  val mkOutstream : StreamIO.outstream -> outstream
+  val getOutstream : outstream -> StreamIO.outstream
+  val setOutstream : outstream * StreamIO.outstream -> unit
+  val inputLine : instream -> string
+  val outputSubstr : outstream * substring -> unit
+  val openIn : string -> instream
+  val openString : string -> instream
+  val openOut : string -> outstream
+  val openAppend : string -> outstream
+  val stdIn : instream
+  val stdOut : outstream
+  val stdErr : outstream
+  val print : string -> unit
+  val scanStream : ((elem,StreamIO.instream) StringCvt.reader
+                    -> ('a,StreamIO.instream) StringCvt.reader)
+                   -> instream -> 'a option
+GC #0.0.0.0.1.19:   (1 ms)
+val OPTIONAL = true : bool
+exception InvalidSymbol of string
+exception InvalidNumber of string
+exception InvalidString
+exception UnterminatedString
+exception InvalidEscapeSequence of string
+datatype token
+  = TK_AND
+  | TK_ASSIGN
+  | TK_COLON
+  | TK_COMMA
+  | TK_DIVIDE
+  | TK_DOT
+  | TK_ELSE
+  | TK_EOF
+  | TK_EQ
+  | TK_FALSE
+  | TK_FUNCTION
+  | TK_GE
+  | TK_GT
+  | TK_ID of string
+  | TK_IF
+  | TK_LBRACE
+  | TK_LBRACKET
+  | TK_LE
+  | TK_LPAREN
+  | TK_LT
+  | TK_MINUS
+  | TK_MOD
+  | TK_NE
+  | TK_NEW
+  | TK_NOT
+  | TK_NUM of int
+  | TK_OR
+  | TK_PLUS
+  | TK_PRINT
+  | TK_QUESTION
+  | TK_RBRACE
+  | TK_RBRACKET
+  | TK_RETURN
+  | TK_RPAREN
+  | TK_SEMI
+  | TK_STRING of string
+  | TK_THIS
+  | TK_TIMES
+  | TK_TRUE
+  | TK_TYPEOF
+  | TK_UNDEFINED
+  | TK_VAR
+  | TK_WHILE
+val keywordTokens =
+  [("else",TK_ELSE),("false",TK_FALSE),("function",TK_FUNCTION),("if",TK_IF),
+   ("new",TK_NEW),("print",TK_PRINT),("return",TK_RETURN),("this",TK_THIS),
+   ("true",TK_TRUE),("typeof",TK_TYPEOF),("undefined",TK_UNDEFINED),
+   ("var",TK_VAR),...] : (string * token) list
+GC #0.0.0.0.2.51:   (1 ms)
+val symbolTokens =
+  [("{",TK_LBRACE),("}",TK_RBRACE),("(",TK_LPAREN),(")",TK_RPAREN),
+   ("[",TK_LBRACKET),("]",TK_RBRACKET),(",",TK_COMMA),(";",TK_SEMI),
+   ("?",TK_QUESTION),(":",TK_COLON),(".",TK_DOT),("+",TK_PLUS),...]
+  : (string * token) list
+val error = fn : vector -> 'a
+val member = fn : ''a -> ''a list -> bool
+val pairLookup = fn : ''a -> (''a * 'b) list -> 'b option
+val streamReduce = fn
+  : (elem -> bool) -> (elem * 'a -> 'a) -> 'a -> instream -> 'a
+val clearWhitespace = fn : instream -> unit
+GC #0.0.0.1.3.91:   (2 ms)
+val buildToken = fn : (elem -> bool) -> instream -> string
+val outputIdentifier = fn : string -> token
+val outputNumber = fn : string -> token
+val outputString = fn : string -> token
+val outputSymbol = fn : string -> token
+val recognizeIdentifier = fn : instream -> string
+val recognizeNumber = fn : instream -> string
+val escapeSequenceList =
+  [(#"\"",#"\""),(#"\\",#"\\"),(#"b",#"\^H"),(#"f",#"\^L"),(#"n",#"\n"),
+   (#"r",#"\^M"),(#"t",#"\t"),(#"v",#"\^K")] : (char * char) list
+val buildEscapeCharacter = fn : instream -> char
+val buildString = fn : instream -> char list -> string
+val recognizeString = fn : instream -> string
+GC #0.0.0.1.4.148:   (0 ms)
+val buildSymbol = fn : elem list -> bool -> instream -> string -> string
+val symbolBuildList =
+  [(#"{",fn),(#"}",fn),(#"(",fn),(#")",fn),(#"[",fn),(#"]",fn),(#",",fn),
+   (#";",fn),(#"?",fn),(#":",fn),(#".",fn),(#"+",fn),...]
+  : (char * (instream -> string -> string)) list
+val recognizeSymbol = fn : instream -> string
+val recognizeFirstToken = fn : instream -> token
+GC #0.0.0.1.5.203:   (1 ms)
+val nextToken = fn : instream -> token
+val it = () : unit
+[opening ast.sml]
+datatype binaryOperator
+  = BOP_AND
+  | BOP_COMMA
+  | BOP_DIVIDE
+  | BOP_EQ
+  | BOP_GE
+  | BOP_GT
+  | BOP_LE
+  | BOP_LT
+  | BOP_MINUS
+  | BOP_MOD
+  | BOP_NE
+  | BOP_OR
+  | BOP_PLUS
+  | BOP_TIMES
+datatype unaryOperator = UOP_MINUS | UOP_NOT | UOP_TYPEOF
+datatype expression
+  = EXP_BINARY of {lft:expression, opr:binaryOperator, rht:expression}
+  | EXP_COND of {elseExp:expression, guard:expression, thenExp:expression}
+  | EXP_FALSE
+  | EXP_NUM of int
+  | EXP_STRING of string
+  | EXP_TRUE
+  | EXP_UNARY of {opnd:expression, opr:unaryOperator}
+  | EXP_UNDEFINED
+datatype statement = ST_EXP of {exp:expression}
+datatype sourceElement = STMT of {stmt:statement}
+datatype program = PROGRAM of {elems:sourceElement list}
+val it = () : unit
+GC #0.0.0.1.6.238:   (2 ms)
+GC #0.0.0.1.7.260:   (1 ms)
+val isUnaryOp = fn : token -> bool
+val isMultOp = fn : token -> bool
+val isAddOp = fn : token -> bool
+GC #0.0.0.1.8.321:   (1 ms)
+GC #0.0.0.1.9.343:   (0 ms)
+val isRelOp = fn : token -> bool
+val isEqOp = fn : token -> bool
+val matchSource = fn : token -> bool
+val parseEq = fn : token -> instream -> token * binaryOperator
+val parseRel = fn : token -> instream -> token * binaryOperator
+val parseAdd = fn : token -> instream -> token * binaryOperator
+val parseMult = fn : token -> instream -> token * binaryOperator
+val parseUnary = fn : token -> instream -> token * unaryOperator
+val parseAnd = fn : 'a -> instream -> token * binaryOperator
+val parseOr = fn : 'a -> instream -> token * binaryOperator
+val parseAny = fn : 'a -> instream -> token
+val parseComma = fn : 'a -> instream -> token * binaryOperator
+GC #0.0.0.1.10.452:   (0 ms)
+val tokenToString = fn : token -> string
+GC #0.0.0.1.11.518:   (3 ms)
+GC #0.0.0.1.12.535:   (2 ms)
+GC #0.0.0.2.13.546:   (5 ms)
+GC #0.0.0.2.14.584:   (1 ms)
+GC #0.0.0.2.15.637:   (1 ms)
+val primaryExpression = fn : token -> instream -> token * expression
+val memberExpression = fn : token -> instream -> token * expression
+val callExpression = fn : token -> instream -> token * expression
+val leftHandSideExpression = fn : token -> instream -> token * expression
+val unaryExpression = fn : token -> instream -> token * expression
+val repeatMultOp = fn : token -> instream -> expression -> token * expression
+val multiplicativeExpression = fn : token -> instream -> token * expression
+val repeatAddOp = fn : token -> instream -> expression -> token * expression
+val additiveExpression = fn : token -> instream -> token * expression
+val repeatRelOp = fn : token -> instream -> expression -> token * expression
+val relationalExpression = fn : token -> instream -> token * expression
+val repeatEqOp = fn : token -> instream -> expression -> token * expression
+val equalityExpression = fn : token -> instream -> token * expression
+val repeatAND = fn : token -> instream -> expression -> token * expression
+val logicalANDExpression = fn : token -> instream -> token * expression
+val repeatOR = fn : token -> instream -> expression -> token * expression
+val logicalORExpression = fn : token -> instream -> token * expression
+val conditionalExpression = fn : token -> instream -> token * expression
+val assignmentExpression = fn : token -> instream -> token * expression
+val repeatExpression = fn
+  : token -> instream -> expression -> token * expression
+val expression = fn : token -> instream -> token * expression
+val expressionStatement = fn : token -> instream -> token * expression
+val statement = fn : token -> instream -> token * statement
+GC #0.0.0.2.16.715:   (1 ms)
+val sourceElement = fn : token -> instream -> token * sourceElement
+val repeatProgram = fn : token -> instream -> sourceElement list
+val program = fn : token -> instream -> program
+val parse = fn : string -> program
+val it = () : unit
+val printBOP = fn : binaryOperator -> string
+val printUOP = fn : unaryOperator -> string
+val printExpression = fn : expression -> unit
+val printStatement = fn : statement -> unit
+val printSourceElement = fn : sourceElement -> unit
+val printAST = fn : program -> unit
+val it = () : unit
+val run_printer = fn : 'a * string list -> OS.Process.status
+GC #1.1.1.3.17.792:   (1 ms)
+write 1,0: 296 bytes [0x4f20000..0x4f20128) @ 0x1000
+write 1,1: 96 bytes [0x4fd0008..0x4fd0068) @ 0x2000
+write 1,2: 0 bytes [0x5070000..0x5070000) @ 0x3000
+write 1,3: 0 bytes [0x50d0000..0x50d0000) @ 0x3000
+write 2,0: 316 bytes [0x1a0000..0x1a013c) @ 0x3000
+write 2,1: 80 bytes [0x1e0008..0x1e0058) @ 0x4000
+write 2,2: 0 bytes [0x1f0000..0x1f0000) @ 0x5000
+write 2,3: 0 bytes [0x200000..0x200000) @ 0x5000
+write 2,0: 13 big objects (38 pages) @ 0x5000
+write 3,0: 3656 bytes [0xf00000..0xf00e48) @ 0xe8d0
+write 3,1: 2064 bytes [0xf80008..0xf80818) @ 0xf8d0
+write 3,2: 16940 bytes [0x1050000..0x105422c) @ 0x108d0
+write 3,3: 456 bytes [0x1090000..0x10901c8) @ 0x158d0
+write 3,0: 40 big objects (65 pages) @ 0x168d0
+write 4,0: 0 bytes [0x2b0000..0x2b0000) @ 0x26f50
+write 4,1: 0 bytes [0x2c0008..0x2c0008) @ 0x26f50
+write 4,2: 0 bytes [0x2d0000..0x2d0000) @ 0x26f50
+write 4,3: 0 bytes [0x2e0000..0x2e0000) @ 0x26f50
+write 5,0: 4516 bytes [0x1e10000..0x1e111a4) @ 0x26f50
+write 5,1: 824 bytes [0x2040008..0x2040340) @ 0x28f50
+write 5,2: 18540 bytes [0x23d0000..0x23d486c) @ 0x29f50
+write 5,3: 448 bytes [0x24c0000..0x24c01c0) @ 0x2ef50
+write 5,0: 31 big objects (311 pages) @ 0x2ff50

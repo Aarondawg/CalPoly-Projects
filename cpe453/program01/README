@@ -1,0 +1,6 @@
+gmilster
+
+note:
+1. I couldn't connect to sparc so i was not able to test on that server. all my tests on falcon/vogon/home computer were ok.
+
+2. I was not sure if you were doing library replacement on your own or not so just to be safe i only included my source file and Makefile

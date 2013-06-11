@@ -1,0 +1,185 @@
+10:12:46 GMILSTER> start part1.sql
+10:12:50 GMILSTER> /*
+10:12:50 GMILSTER>  Winter 2012 CPE365 Lab 6 PART 1
+10:12:50 GMILSTER>  Garrett Milster (gmilster)
+10:12:50 GMILSTER>  Partner: Ross McKelvie
+10:12:50 GMILSTER> */
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> SET ECHO OFF
+SP2-0310: unable to open file "clear_nba.sql"
+SP2-0310: unable to open file "insert_nba.sql"
+10:12:50 GMILSTER> SET FEEDBACK ON
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /* 1.
+10:12:50 GMILSTER> List the birthday of the player named Kobe Bryant on the Lakers team,
+10:12:50 GMILSTER> in this format: <three-letter month name><one blank><number of day within the month>
+10:12:50 GMILSTER> <one comma><one blank><four-digit year>, with column heading BIRTHDAY.
+10:12:50 GMILSTER> */
+10:12:50 GMILSTER> SELECT to_char(bdate, 'MON DD, YYYY') BIRTHDAY
+10:12:50   2  FROM player
+10:12:50   3  WHERE pname = 'Kobe Bryant' AND tname = 'Lakers';
+BIRTHDAY
+------------
+AUG 23, 1978
+
+1 row selected.
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /* 2.
+10:12:50 GMILSTER> List the current age of the player named Kobe Bryant on the Lakers team; the age should
+10:12:50 GMILSTER> take into consideration today's date (sysdate), with column heading AGE.
+10:12:50 GMILSTER> */
+10:12:50 GMILSTER> SELECT trunc(months_between(sysdate, bdate) / 12) AGE
+10:12:50   2  FROM player
+10:12:50   3  WHERE pname = 'Kobe Bryant' AND tname = 'Lakers';
+       AGE
+----------
+        33
+
+1 row selected.
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /* 3
+10:12:50 GMILSTER>    List the name and age of the youngest player on the Lakers team,
+10:12:50 GMILSTER>    with column headings PNAME and AGE.
+10:12:50 GMILSTER> */
+10:12:50 GMILSTER> SELECT pname PNAME, trunc(months_between(sysdate, bdate) / 12) AGE
+10:12:50   2  FROM player
+10:12:50   3  WHERE tname = 'Lakers' AND bdate = (
+10:12:50   4  	 SELECT max(bdate)
+10:12:50   5  	 FROM player
+10:12:50   6  	 WHERE tname = 'Lakers'
+10:12:50   7  );
+PNAME                       AGE
+-------------------- ----------
+Andrew Bynum                 24
+
+1 row selected.
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /* 4. List the date and time of each of the games played in the series. */
+10:12:50 GMILSTER> SELECT to_char(dateTime, 'MON DD, YYYY') THE_DATE, to_char(dateTime, 'HH12AM') TIME
+10:12:50   2  FROM game
+10:12:50   3  ORDER BY THE_DATE;
+THE_DATE     TIME
+------------ ----
+JUN 03, 2010 09PM
+JUN 06, 2010 08PM
+JUN 08, 2010 09PM
+JUN 10, 2010 09PM
+JUN 13, 2010 08PM
+JUN 15, 2010 09PM
+JUN 17, 2010 09PM
+
+7 rows selected.
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /* 5 List the game number and the number of whole days since the last game, starting
+10:12:50 GMILSTER> 	with game 2 and in increasing order of game number.
+10:12:50 GMILSTER> */
+10:12:50 GMILSTER> SELECT g1.gnum GNUM, trunc(g1.dateTime) - trunc(g2.dateTime) DAYS_BETWEEN
+1j0:12:50   2  FROM game g1, game g2
+10:12:50   3  WHERE g1.gnum >= 2 AND g2.gnum = g1.gnum - 1;
+      GNUM DAYS_BETWEEN
+---------- ------------
+         2            3
+         3            2
+         4            2
+         5            3
+         6            2
+         7            2
+
+6 rows selected.
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /* 6.   Create a view named GAME_SCORES */
+10:12:50 GMILSTER> CREATE VIEW GAME_SCORES AS
+10:12:50   2  SELECT p.gnum GNUM, p.tname TNAME, sum(p.points) SCORE
+10:12:50   3  FROM plays_in p
+10:12:50   4  GROUP BY gnum, tname;
+
+View created.
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /* 7. Query the data dictionary to show that the view has been created. */
+10:12:50 GMILSTER> DESCRIBE game_scores;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ GNUM                                      NOT NULL NUMBER(1)
+ TNAME                                     NOT NULL VARCHAR2(10)
+ SCORE                                              NUMBER
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /* 8.   Write a statement that makes use of the view GAME_SCORES to output the scores
+10:12:50 GMILSTER> 	   of each game, with column heading GNUM, TNAME, SCORE,
+10:12:50 GMILSTER> 	  in increasing order of GNUM and decreasing order of SCORE.
+10:12:50 GMILSTER> */
+10:12:50 GMILSTER> SELECT GNUM, TNAME, SCORE
+10:12:50   2  FROM GAME_SCORES
+10:12:50   3  ORDER BY GNUM ASC, SCORE DESC;
+      GNUM TNAME           SCORE
+---------- ---------- ----------
+         1 Lakers            102
+         1 Celtics            89
+         2 Celtics           103
+         2 Lakers             94
+         3 Lakers             87
+         3 Celtics            84
+         4 Celtics            96
+         4 Lakers             89
+         5 Celtics            92
+         5 Lakers             86
+         6 Lakers             89
+         6 Celtics            67
+         7 Lakers             83
+         7 Celtics            79
+
+14 rows selected.
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /* 9. Make a change to the PLAYS_IN table so that player 24 on the
+10:12:50 GMILSTER>     Lakers team scores 5 points less in game 7.
+10:12:50 GMILSTER> */
+10:12:50 GMILSTER> UPDATE plays_in
+10:12:50   2  SET    points = points - 5
+10:12:50   3  WHERE  gnum = 7 AND tname = 'Lakers' AND pid = 24;
+
+1 row updated.
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /*
+10:12:50 GMILSTER>   10 Repeat step 8.	Look at the output and add a comment to explain how the outcome
+10:12:50 GMILSTER> 	supports this assertion: "The contents of a view is assemble dynamically".
+10:12:50 GMILSTER> */
+10:12:50 GMILSTER> SELECT GNUM, TNAME, SCORE
+10:12:50   2  FROM GAME_SCORES
+10:12:50   3  ORDER BY GNUM ASC, SCORE DESC;
+      GNUM TNAME           SCORE
+---------- ---------- ----------
+         1 Lakers            102
+         1 Celtics            89
+         2 Celtics           103
+         2 Lakers             94
+         3 Lakers             87
+         3 Celtics            84
+         4 Celtics            96
+         4 Lakers             89
+         5 Celtics            92
+         5 Lakers             86
+         6 Lakers             89
+         6 Celtics            67
+         7 Celtics            79
+         7 Lakers             78
+
+14 rows selected.
+
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> -- because the outcome of the 7th game has changed, we can see that
+10:12:50 GMILSTER> -- views gather data at the time they are run, not when they are generated.
+10:12:50 GMILSTER> 
+10:12:50 GMILSTER> /*  11. remove the view */
+10:12:50 GMILSTER> DROP VIEW GAME_SCORES;
+
+View dropped.
+
+10:12:50 GMILSTER> spool off

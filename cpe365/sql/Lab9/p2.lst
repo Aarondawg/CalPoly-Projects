@@ -1,0 +1,81 @@
+01:47:14 GMILSTER> @p2
+01:47:16 GMILSTER> -- Lab 9 | Part 2
+01:47:16 GMILSTER> -- Name: Garrett Milster
+01:47:16 GMILSTER> -- Partner: Ross McKelvie
+01:47:16 GMILSTER> CREATE OR REPLACE
+01:47:16   2  PROCEDURE listSales(eno_ employees.eno%type, pno_ parts.pno%type) AS
+01:47:16   3  	      -- DELCARE
+01:47:16   4  	 ono_ orders.ono%TYPE;
+01:47:16   5  	 received_ orders.received%TYPE;
+01:47:16   6  	 price_ parts.price%TYPE;
+01:47:16   7  
+01:47:16   8  	 checkRows NUMBER;
+01:47:16   9  
+01:47:16  10  	 CURSOR order_cursor IS
+01:47:16  11  	    SELECT o.ono, o.received, d.qty * p.price PRICE INTO ono_, received_, price_
+01:47:16  12  	      FROM orders o
+01:47:16  13  	      INNER JOIN odetails d ON o.ono = d.ono
+01:47:16  14  	      INNER JOIN parts p ON d.pno = p.pno
+01:47:16  15  	      WHERE d.pno = pno_ AND o.eno = eno_
+01:47:16  16  	      ORDER BY o.ono;
+01:47:16  17  
+01:47:16  18  	 order_record order_cursor%ROWTYPE;
+01:47:16  19  
+01:47:16  20  BEGIN
+01:47:16  21  	      dbms_output.put_line('The orders for part ' || pno_ || ' by ' || eno_ || ' are:');
+01:47:16  22  
+01:47:16  23  	      FOR order_record in order_cursor LOOP
+01:47:16  24  		 checkRows := order_cursor%ROWCOUNT;
+01:47:16  25  		 IF checkRows IS NULL THEN
+01:47:16  26  		    dbms_output.put_line('No data found');
+01:47:16  27  		 END IF;
+01:47:16  28  		      --EXIT WHEN order_cursor%NOTFOUND;
+01:47:16  29  		  dbms_output.put_line(order_cursor%ROWCOUNT || '. ' || order_record.ono || ', ' || order_record.received || ', ' || order_record.PRICE);
+01:47:16  30  	      END LOOP;
+01:47:16  31  
+01:47:16  32  	      IF checkRows IS NULL THEN
+01:47:16  33  	    dbms_output.put_line('No Data Found');
+01:47:16  34  	 END IF;
+01:47:16  35  
+01:47:16  36  EXCEPTION
+01:47:16  37  	      WHEN OTHERS THEN
+01:47:16  38  		  dbms_output.put_line('Error occurred: ' || ':' || SQLERRM);
+01:47:16  39  END;
+01:47:16  40  /
+
+Procedure created.
+
+01:47:16 GMILSTER> show errors
+No errors.
+01:47:16 GMILSTER> exec listSales(1000, 10506)
+The orders for part 10506 by 1000 are:
+1. 1020, 10-DEC-94, 19.99
+
+PL/SQL procedure successfully completed.
+
+01:47:29 GMILSTER> exec listSales(1001, 10601)
+The orders for part 10601 by 1001 are:
+1. 1022, 13-FEB-95, 24.99
+2. 1025, 20-JUN-97, 99.96
+
+PL/SQL procedure successfully completed.
+
+01:47:35 GMILSTER> exec listSales(1001, 10800)
+The orders for part 10800 by 1001 are:
+No Data Found
+
+PL/SQL procedure successfully completed.
+
+01:47:41 GMILSTER> exec listSales(9999, 10601)
+The orders for part 10601 by 9999 are:
+No Data Found
+
+PL/SQL procedure successfully completed.
+
+01:47:48 GMILSTER> exec listSales(1000, 12345)
+The orders for part 12345 by 1000 are:
+No Data Found
+
+PL/SQL procedure successfully completed.
+
+01:47:56 GMILSTER> spool off

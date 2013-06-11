@@ -1,0 +1,322 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "fw.h"
+
+#define base_length 75
+#define HASHSIZE 500
+
+char *read_long_line(FILE *file);
+void add_string(Node *array[], char* string);
+unsigned hash(char *s);
+void lookup(char *s, Node *table[]);
+
+int main(int argc, char *argv[])
+{
+   int i = 0; 
+   int j = 0;
+   int boolean = 0;
+   int size = 0;
+   char *line;
+   char *stringptr;
+   typedef struct linkedlist Node;
+   int numWords = 10;
+   FILE *file;
+   char *temp,*string, **dp = &temp;
+   static Node *hashtab[HASHSIZE];
+   Node *current;
+   Node *previous;
+   Node *table;
+   Node *ptr;
+   Node *garbage;
+   
+   for(j = 0; j < HASHSIZE; j++)
+   {
+      hashtab[j] = NULL;
+   }
+   
+   if(argc == 1)
+   {
+      boolean = 1;
+      /*if boolean == 1 then they are using stdin */
+   }
+   else
+   {
+      /* only contains fw and file1 */
+      if(argv[1][0] != '-') 
+      {
+          i = 1;        
+      }
+      else if(argc >= 3 && argv[1][0] == '-' && argv[1][1] == 'n') 
+      {
+          /* will be true if argv[2] is not a number */
+          if(!strtol(argv[2], dp, 10) || dp != &temp) 
+          {
+              printf("usage: fw [-n num] [ file1 [ file 2 ...] ]\n");
+              exit(EXIT_FAILURE);
+          }
+          /* for when -n is invoked and number is valid */
+          else 
+          {
+              numWords = (int)strtol(argv[2], NULL, 10);
+              if(argc == 3)
+              {
+                 boolean = 1;
+              }
+              else
+              {
+                 i = 3;
+              }
+          }
+      }
+      /* for the case of invalid commands such as: fw -z */
+      else 
+      {
+          printf("usage: fw [-n num] [ file1 [ file 2 ...] ]\n");
+          exit(EXIT_FAILURE);
+      }
+   }
+   
+   if(boolean == 1)
+   {
+      while((line = read_long_line(stdin)) != NULL)
+      {
+         stringptr = strtok(line, " .,\n");
+         while(stringptr != NULL)
+         {
+            size = size + 1;
+            add_string(hashtab, stringptr);
+            stringptr = strtok(NULL, " .,\n");   
+         }
+      }
+      
+   }
+   else
+   {
+      for(; i<argc; i++) 
+      {
+          /* this loop can be used to read from multiple files */
+          file = fopen(argv[i], "r");
+          if(!file)
+          {
+             perror(argv[i]);
+          }
+          else if(!boolean)
+          {
+             while((line = read_long_line(file)) != NULL)
+             {
+                stringptr = strtok(line, " .,\n");
+                while(stringptr != NULL)
+                {
+                   size = size + 1;
+                   add_string(hashtab, stringptr);
+                   stringptr = strtok(NULL, " .,\n");   
+                }
+             }
+	          fclose(file);
+          }
+      }
+   }
+   
+   i = 0; j = 0;
+   table = malloc(sizeof(Node) * numWords);
+   for(i = 0; i < numWords; i++)
+   {
+      table[i].count = 0;
+      table[i].word ="a";
+   }
+   
+   for(j = 0; j < HASHSIZE; j++)
+   {
+      if(hashtab[j] != NULL)
+      {
+         ptr = hashtab[j];
+         while(ptr != NULL)
+         {
+            previous = table + numWords - 1;
+            
+            for(i = numWords - 1; i >= 0; --i)
+            {           
+                   
+               current = table + i;
+               
+               if(ptr->count > current->count)
+               {
+                  string = malloc(sizeof(char)* (strlen(current->word)));
+                  strcpy(string,current->word);
+                  previous->word = string;
+                  previous->count = current->count;
+
+                  if(i == 0)
+                  {
+                     string = malloc(sizeof(char)* (strlen(ptr->word)));
+                     strcpy(string,ptr->word);
+                     current->word = string;
+                     current->count = ptr->count;
+                  }
+                  /*printf("%d---%s\n", previous->count, previous->word); */
+                  
+                  previous = current;
+               }
+               else if(ptr->count <= current->count && i != numWords - 1)
+               {
+                  if(ptr->count == current->count)
+                  {
+                     if(strcmp(ptr->word,current->word) > 0)
+                     {
+                        string = malloc(sizeof(char)* (strlen(current->word)));
+                        strcpy(string,current->word);
+                        previous->word = string;
+                        previous->count = current->count;
+                        previous = current;
+                        if(i == 0)
+                        {
+                           string = malloc(sizeof(char)* (strlen(ptr->word)));
+                           strcpy(string,ptr->word);
+                           current->word = string;
+                           current->count = ptr->count;
+                        }
+                     }
+                     else
+                     {
+                        string = malloc(sizeof(char)* (strlen(ptr->word)));
+                        strcpy(string,ptr->word);
+                        previous->word = string;
+                        previous->count = ptr->count;
+                        break;
+                     }
+
+                  }
+                  else
+                  {
+                     string = malloc(sizeof(char)* (strlen(ptr->word)));
+                     strcpy(string,ptr->word);
+                     previous->word = string;
+                     previous->count = ptr->count;
+                  }
+               }
+            }
+            garbage = ptr;
+            ptr = ptr->next;
+
+         }
+      }
+   }
+   
+   printf("The top %d words (out of %d) are:\n", numWords, size);
+   if(size == 0)
+   {
+      
+   }
+   else
+   {
+      for(i = 0; i < numWords; i++)
+      {
+         if(table[i].count != 0)
+            printf("%d %s\n", table[i].count, table[i].word);
+
+      }
+   }
+   
+   /*char *blah = "test";
+   lookup(blah, hashtab); */
+   
+
+   free(table);
+   free(line);
+   return 0;
+}
+
+char *read_long_line(FILE *file)
+{
+   char string[base_length];
+   char *final_string = calloc(base_length,sizeof(char) * base_length);
+   int current = base_length;
+   /* reads in 50 characters, checks for null ending, if there is,
+    * concats it to final string and returns, otherwise it allocates
+    * more memory for final string and goes back into the loop */
+   while((fgets(string,base_length, file)) != NULL)
+   {
+      int i = 0;
+      for(i = 0; i < base_length - 1; i++)
+      {
+         if(string[i] == '\n' || string[i] == '\0')
+         {
+            final_string = strcat(final_string, string);
+            return final_string;
+         }
+      } 
+      final_string = strcat(final_string, string);
+      current = current + base_length;
+      final_string = realloc(final_string, base_length);
+   }
+   free(final_string);
+   return NULL;
+   
+}
+
+void add_string(Node *array[], char* string)
+{
+   int value = hash(string);
+   Node *new;
+   Node *current;
+   Node *previous;
+   
+   if(array[value] == NULL)
+   {
+      new = malloc(sizeof(Node));
+      array[value] = new;
+      new->count = 1;
+      new->word = string;
+      new->next = NULL;
+   }
+   else
+   {
+      current = array[value];
+      previous = array[value];
+      while(current != NULL)
+      {
+         if(strcmp(string, current->word) == 0)
+         {
+            current->count++;
+            break;
+         }
+         previous = current;
+         current = current->next;
+      }
+      
+      if(current == NULL)
+      {
+         new = malloc(sizeof(Node));
+         previous->next = new;
+         new->count = 1;
+         new->word = string;
+         new->next = NULL;
+      }
+   }
+}
+
+unsigned hash(char *s)
+{
+   unsigned hashval = 0;
+   for(hashval =0; *s != '\0'; s++)
+   {
+      hashval = *s + 31 * hashval;
+   }
+   
+   return hashval% HASHSIZE;
+}
+
+/* this is a function purely for testing, it will print the
+ * searched word and its count if found */
+void lookup(char *s, Node *table[])
+{
+   Node *np;
+   for(np = table[hash(s)]; np != NULL; np = np->next)
+   {
+      if(strcmp(s,np->word) == 0)
+      {
+         printf("%s---%d\n", np->word, np->count);
+      }
+   }
+}

@@ -1,0 +1,192 @@
+01:24:14 GMILSTER> start part2.sql
+01:24:19 GMILSTER> -- Name: Garrett Milster
+01:24:19 GMILSTER> -- Partner: Ross McKelvie
+01:24:19 GMILSTER> 
+01:24:19 GMILSTER> -- 12 What is the percentage of the players on the team whose name is "Lakers" that went to college over all players on that team?
+01:24:19 GMILSTER> SELECT
+01:24:19   2  (
+01:24:19   3  	 SELECT count(*)
+01:24:19   4  	 FROM player
+01:24:19   5  	 WHERE tname = 'Lakers' AND college IS NOT NULL
+01:24:19   6  ) /
+01:24:19   7  (
+01:24:19   8  	 SELECT count(*)
+01:24:19   9  	 FROM player
+01:24:19  10  	 WHERE tname = 'Lakers'
+01:24:19  11  ) * 100
+01:24:19  12  AS PERCENT
+01:24:19  13  FROM dual;
+   PERCENT
+----------
+66.6666667
+
+1 row selected.
+
+01:24:19 GMILSTER> 
+01:24:19 GMILSTER> -- 13 What is the average of points scored by the Lakers team, computed as <total points scored by its players>
+01:24:19 GMILSTER> -- divided by <the number of games played>
+01:24:19 GMILSTER> -- Output the number under a column heading of average
+01:24:19 GMILSTER> SELECT
+01:24:19   2  (
+01:24:19   3  	 SELECT sum(points)
+01:24:19   4  	 FROM plays_in
+01:24:19   5  	 WHERE pid IN (
+01:24:19   6  	    SELECT pid
+01:24:19   7  	    FROM player
+01:24:19   8  	    WHERE tname='Lakers'
+01:24:19   9  	 )
+01:24:19  10  ) /
+01:24:19  11  (
+01:24:19  12  	 SELECT count(count(*))
+01:24:19  13  	 FROM plays_in
+01:24:19  14  	 WHERE tname = 'Lakers'
+01:24:19  15  	 GROUP BY gnum
+01:24:19  16  )
+01:24:19  17  AS AVERAGE
+01:24:19  18  FROM dual;
+   AVERAGE
+----------
+110.142857
+
+1 row selected.
+
+01:24:19 GMILSTER> 
+01:24:19 GMILSTER> -- 14 How many playesr play more than 10 minutes in at least one game?
+01:24:19 GMILSTER> SELECT count(*) HOW_MANY
+01:24:19   2  FROM
+01:24:19   3  (
+01:24:19   4  	 SELECT pid
+01:24:19   5  	 FROM plays_in
+01:24:19   6  	 WHERE minutes > 10
+01:24:19   7  	 GROUP BY pid
+01:24:19   8  	 ORDER BY pid
+01:24:19   9  );
+  HOW_MANY
+----------
+        19
+
+1 row selected.
+
+01:24:19 GMILSTER> 
+01:24:19 GMILSTER> -- 15 List the pname and height of each tallest player(s), in increasing order of name.
+01:24:19 GMILSTER> -- You must not use any Cartesian product or table join
+01:24:19 GMILSTER> SELECT pname, height
+01:24:19   2  FROM player
+01:24:19   3  WHERE height = (
+01:24:19   4  	 SELECT max(height)
+01:24:19   5  	 FROM player
+01:24:19   6  )
+01:24:19   7  ORDER BY pname;
+PNAME                    HEIGHT
+-------------------- ----------
+Andrew Bynum                 84
+D.J. Mbenga                  84
+Pau Gasol                    84
+
+3 rows selected.
+
+01:24:19 GMILSTER> 
+01:24:19 GMILSTER> -- 16 List the tname and pname of the highest paid player(s),
+01:24:19 GMILSTER> -- in increasing order of tname then pname.
+01:24:19 GMILSTER> -- You may not use any Cartesian product or table join.
+01:24:19 GMILSTER> SELECT tname, pname
+01:24:19   2  FROM player
+01:24:19   3  WHERE salary =
+01:24:19   4  (
+01:24:19   5  	 SELECT max(salary)
+01:24:19   6  	 FROM player
+01:24:19   7  )
+01:24:19   8  ORDER BY tname, pname;
+TNAME      PNAME
+---------- --------------------
+Lakers     Kobe Bryant
+
+1 row selected.
+
+01:24:19 GMILSTER> 
+01:24:19 GMILSTER> -- 17 List the tname and pname of each player who played one or more minutes in every one of the game in the series.
+01:24:19 GMILSTER> SELECT tname TEAM_NAME, pname PLAYER_NAME
+01:24:19   2  FROM player p
+01:24:19   3  WHERE p.pid IN
+01:24:19   4  (
+01:24:19   5  	 SELECT pid
+01:24:19   6  	 FROM plays_in
+01:24:19   7  	 WHERE MINUTES > 0
+01:24:19   8  	 GROUP BY pid
+01:24:19   9  )
+01:24:19  10  ORDER BY tname, pname;
+TEAM_NAME  PLAYER_NAME
+---------- --------------------
+Celtics    Glen Davis
+Celtics    Kendrick Perkins
+Celtics    Kevin Garnett
+Celtics    Marquis Daniels
+Celtics    Michael Finley
+Celtics    Nate Robinson
+Celtics    Paul Pierce
+Celtics    Rajon Rondo
+Celtics    Rasheed Wallace
+Celtics    Ray Allen
+Celtics    Shelden Williams
+Celtics    Tony Allen
+Lakers     Andrew Bynum
+Lakers     D.J. Mbenga
+Lakers     Derek Fisher
+Lakers     Jordan Farmar
+Lakers     Josh Powell
+Lakers     Kobe Bryant
+Lakers     Lamar Odom
+Lakers     Luke Walton
+Lakers     Pau Gasol
+Lakers     Ron Artest
+Lakers     Sasha Vujacic
+Lakers     Shannon Brown
+Lakers     Thomas Kelati
+
+25 rows selected.
+
+01:24:19 GMILSTER> 
+01:24:19 GMILSTER> -- 18 Which City hosted the most number of games?
+01:24:19 GMILSTER> SELECT place
+01:24:19   2  FROM game
+01:24:19   3  GROUP BY place
+01:24:19   4  HAVING count(place) =
+01:24:19   5  (
+01:24:19   6  	  SELECT max(count(place))
+01:24:19   7  	  FROM game
+01:24:19   8  	  GROUP BY place
+01:24:19   9  );
+PLACE
+---------------
+Los Angeles
+
+1 row selected.
+
+01:24:19 GMILSTER> 
+01:24:19 GMILSTER> -- 19 List the name of the team that won the series
+01:24:19 GMILSTER> -- NOTE: the series winner is the team that won the last game played, which should not assumed to be game 7,
+01:24:19 GMILSTER> -- but should be the game with the higest game number
+01:24:19 GMILSTER> SELECT tname
+01:24:19   2  FROM plays_in p
+01:24:19   3  WHERE gnum =
+01:24:19   4  (
+01:24:19   5  	 SELECT max(gnum) GNUM
+01:24:19   6  	 FROM plays_in
+01:24:19   7  )
+01:24:19   8  GROUP BY tname
+01:24:19   9  HAVING count(points) = (
+01:24:19  10  	 SELECT max(count(points))
+01:24:19  11  	 FROM plays_in
+01:24:19  12  	 WHERE gnum = (
+01:24:19  13  	    SELECT max(gnum) GNUM
+01:24:19  14  	    FROM plays_in
+01:24:19  15  	 )
+01:24:19  16  	 GROUP BY tname
+01:24:19  17  );
+TNAME
+----------
+Lakers
+
+1 row selected.
+
+01:24:19 GMILSTER> spool off

@@ -1,0 +1,41 @@
+/*Garrett Milster*/
+/*October 7, 2009*/
+/*A program for	determining which Firetruck is closest to the emergency	point*/
+
+int EuclidDistance2D(int x1, int y1, int x2, int y2, double distance) 
+{ 
+   printf("Input x1: ");
+   scanf("%d", &x1):
+   printf("Input yx1: ");
+   scanf("%d", &yx1):
+   printf("Input x21: ");
+   scanf("%d", &x21):
+   printf("Input y2: ");
+   scanf("%d", &y2):
+   
+   distance = sqrt((x2-x1)(x2-x1) + (y2-y1)(y2-y1))
+
+/* compare two numbers – necessary to compare floating point numbers */
+void compareNumber(float a, float b){ float EPSILON;
+        EPSILON=1e-8; if (fabs(a-b)< EPSILON) {
+                printf("comparison succeeded\n");
+        } else {
+                printf("comparison failed!\n");
+ 	}
+}
+
+    int main(void) { /* the distance from the origin to the point 
+		(3, 4) 
+		should be 5 units away */
+	compareNumber( EuclidDistance2D(0, 0, 3, 4), 5.0 ); /* if we 
+	translate the above situation by (1, 2) it should be the 
+	same answer*/
+
+	compareNumber(EuclidDistance2D (1, 2, 4, 6), 5.0 ); 
+	/* A final test, should be sqrt(2)*/
+	
+	compareNumber(EuclidDistance2D (3,4,4, 5), sqrt(2.0) ); 
+
+
+
+

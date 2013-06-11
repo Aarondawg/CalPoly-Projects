@@ -1,0 +1,63 @@
+10:59:40 GMILSTER> start p2.sql
+10:59:43 GMILSTER> /**
+10:59:43 GMILSTER> p2.sql in PL/SQL
+10:59:43 GMILSTER> Garrett Milster
+10:59:43 GMILSTER> Partner: Ross McKelvie
+10:59:43 GMILSTER> */
+10:59:43 GMILSTER> 
+10:59:43 GMILSTER> DECLARE
+10:59:43   2  
+10:59:43   3  pno_ parts.pno%TYPE;
+10:59:43   4  
+10:59:43   5  CURSOR part_cur IS
+10:59:43   6  	 SELECT ono, pno, qty
+10:59:43   7  	 FROM odetails
+10:59:43   8  	 WHERE pno = pno_
+10:59:43   9  	 ORDER BY ono;
+10:59:43  10  
+10:59:43  11  part_rec part_cur%ROWTYPE;
+10:59:43  12  order_count INTEGER :=0;
+10:59:43  13  
+10:59:43  14  BEGIN
+10:59:43  15  	 pno_:=&pno_;
+10:59:43  16  	 dbms_output.put_line('***The orders for the part you chose are:');
+10:59:43  17  	 FOR part_rec in part_cur LOOP
+10:59:43  18  	   EXIT WHEN part_cur%NOTFOUND;
+10:59:43  19  	 dbms_output.put_line(
+10:59:43  20  	    part_cur%ROWCOUNT || '. ' || part_rec.ono || ', ' || part_rec.pno || ', ' || part_rec.qty);
+10:59:43  21  	 END LOOP;
+10:59:43  22  
+10:59:43  23  EXCEPTION
+10:59:43  24  	 WHEN OTHERS THEN
+10:59:43  25  	  dbms_output.put_line('Error occurred: ' || ':' || SQLERRM);
+10:59:43  26  END;
+10:59:43  27  /
+Enter value for pno_: 10509
+old  15:    pno_:=&pno_;
+new  15:    pno_:=10509;
+***The orders for the part you chose are:
+1. 1020, 10509, 3
+
+PL/SQL procedure successfully completed.
+
+10:59:55 GMILSTER> 
+10:59:55 GMILSTER> /
+Enter value for pno_: 10601
+old  15:    pno_:=&pno_;
+new  15:    pno_:=10601;
+***The orders for the part you chose are:
+1. 1021, 10601, 4
+2. 1022, 10601, 1
+3. 1025, 10601, 4
+
+PL/SQL procedure successfully completed.
+
+11:00:10 GMILSTER> /
+Enter value for pno_: 12345
+old  15:    pno_:=&pno_;
+new  15:    pno_:=12345;
+***The orders for the part you chose are:
+
+PL/SQL procedure successfully completed.
+
+11:00:15 GMILSTER> spool off

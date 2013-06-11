@@ -1,0 +1,27 @@
+/* Garrett Milster */
+/* November 10 2009 */
+/* A Program that calculates planet data */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+
+typedef struct{
+
+char pName[80];
+double diameter;
+double Edist;
+int numS;
+
+} planetData;
+
+void PrintData(planetData test){
+
+printf("Planet name: %s\n", test.pName);
+printf("Equatorial diameter(km): %f\n", test.diameter);
+printf("Distance to Eartch(km): %f\n", test.Edist);
+printf("Number of satellites(moons): %d\n", test.numS);
+
+}
+

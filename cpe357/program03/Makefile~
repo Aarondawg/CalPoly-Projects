@@ -1,0 +1,15 @@
+CC = gcc
+
+CFLAGS = -Wall 
+
+LD = gcc
+
+LDFLAGS =
+
+all: hencode hdecode
+
+hencode: hencode.c
+	$(CC) $(CFLAGS) functions.c -o hencode hencode.c
+hdecode: hdecode.c
+	$(CC) $(CFLAGS) functions.c -o hdecode hdecode.c
+

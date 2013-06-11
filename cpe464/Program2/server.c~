@@ -1,0 +1,100 @@
+/* Garrett Milster 
+ * 
+ * CPE 464 Program 2
+ * 
+ */
+
+ /* Simple socket program: server side    */
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/types.h>          
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#include "util.h"
+#include "cpe464.h"
+#include <fcntl.h>
+#include <string.h>
+
+int main ( int argc, char *argv[]  )
+{
+   int sk ; // socket descriptor
+   struct sockaddr_in remote ; // socket address for remote
+   struct sockaddr_in local ; // socket address for us
+   unsigned char data[108];   // buffer from remote
+   int buf;
+   socklen_t rlen = sizeof(remote) ; // length of remote address
+   socklen_t len   = sizeof(local); //// length of local address length of local address
+   int mesglen; // actual length of message
+	
+   sk = open_socket();
+   // set up the socket
+   local.sin_family = AF_INET ;         // internet family
+   local.sin_addr.s_addr = htonl(INADDR_ANY);// wild card machine address
+   local.sin_port = htons(0);                 // let system choose the port
+   // bind the name (address) to a port
+   if (bindMod(sk,(struct sockaddr *)&local,sizeof(local)) < 0) {
+      perror("bind call");
+      exit(-1);
+   }
+   // get the port name and print it out
+   if (getsockname(sk,(struct sockaddr*)&local,&len) < 0) {
+      perror("getsockname call");
+      exit(-1);
+   }
+   printf("socket has port %d \n", ntohs(local.sin_port));
+   
+   int  count;
+   int sequence_number = 0;
+   unsigned short checksum = 0;
+   while (1)
+   {
+	   if ((mesglen = recvfrom(sk,data,108,0,(struct sockaddr *)&remote,&rlen)) < 0)
+	   {
+	      perror("recvfrom call");
+	      exit(-1);
+	   }
+      memcpy(&buf, data, 2);
+	   printf("len: %d\n",  ntohs(buf));
+      unsigned char ack = 1;
+      len = sendto(sk,&ack,1,0,(struct sockaddr *)&remote, sizeof(remote));
+	   /* close the socket */
+      unsigned char *block = malloc(buf);
+	   int readFD = open("one.txt", O_RDONLY);    
+      char end = -1;     
+      /* write regular file */
+      memset(block, '\0', buf);
+      memcpy(block, &sequence_number, 4);
+      block[4] = 0;
+      block[5] = 0;
+      while((count = read(readFD, block+6, buf-6)) > 0)
+      {
+         checksum = in_cksum((u_short*)block, buf);
+        // printf("CHECKSUM: %d\n", checksum);
+         memcpy(block+4, &checksum,2);
+         memcpy(block, &sequence_number, 4);
+         sequence_number++;
+         len = sendto(sk,block,buf,0,(struct sockaddr *)&remote, sizeof(remote));
+         memset(block, '\0', buf);
+
+      }
+      if(count < 0) {
+         perror("Write Error\n");
+         return -1;
+      }
+      else
+      {
+      //printf("HERE\n");
+        // len = sendto(sk,&end,1,0,(struct sockaddr *)&remote, sizeof(remote));
+      }
+      if(close(readFD))
+      {
+         return -1;
+      }
+	}
+   close(sk);	
+   return 0;
+}
+

@@ -1,0 +1,288 @@
+10:27:52 MLIU> select * from team;
+
+TNAME      C CITY
+---------- - ---------------
+Celtics    E Boston
+Lakers     W Los Angeles
+
+2 rows selected.
+
+10:28:48 MLIU> select * from team_color;
+
+TNAME      COLOR
+---------- ------------
+Celtics    green
+Celtics    white
+Lakers     purple
+Lakers     yellow
+
+4 rows selected.
+
+10:28:55 MLIU> select * from player;
+
+TNAME             PID PNAME                POS BDATE         HEIGHT     WEIGHT
+---------- ---------- -------------------- --- --------- ---------- ----------
+COLLEGE                  SALARY
+-------------------- ----------
+Lakers             37 Ron Artest           SF  13-NOV-79         79        260
+St. John's              5854000
+
+Lakers             12 Shannon Brown        SG  29-NOV-85         76        210
+Michigan State          1990000
+
+Lakers             24 Kobe Bryant          SG  23-AUG-78         78        205
+                       23034375
+
+Lakers             17 Andrew Bynum         C   27-OCT-87         84        285
+                       12500000
+
+Lakers              1 Jordan Farmar        PG  30-NOV-86         74        180
+UCLA                    1947240
+
+Lakers              2 Derek Fisher         PG  09-AUG-74         73        210
+Arkansas                5048000
+
+Lakers             23 Tom Gaffney          G   14-NOV-84         80        205
+Massachusetts
+
+Lakers             16 Pau Gasol            FC  06-JUL-80         84        250
+                       16452000
+
+Lakers             20 Thomas Kelati        G   27-SEP-82         77        200
+Washington State
+
+Lakers             28 D.J. Mbenga          C   30-DEC-80         84        255
+                         959111
+
+Lakers              6 Adam Morrison        SF  19-JUL-84         80        207
+Gonzaga                 5257229
+
+Lakers              7 Lamar Odom           PF  06-NOV-79         82        230
+Rhode Island            7500000
+
+Lakers             21 Josh Powell          FC  25-JAN-83         81        240
+North Carolina State     959111
+
+Lakers             18 Sasha Vujacic        SG  08-MAR-84         79        205
+                        5000000
+
+Lakers              4 Luke Walton          SF  28-MAR-80         80        235
+Arizona                 4840000
+
+
+TNAME             PID PNAME                POS BDATE         HEIGHT     WEIGHT
+---------- ---------- -------------------- --- --------- ---------- ----------
+COLLEGE                  SALARY
+-------------------- ----------
+Celtics            20 Ray Allen            SG  20-JUL-75         77        205
+Connecticut            18776860
+
+Celtics            42 Tony Allen           SG  11-JAN-82         76        213
+Oklahoma State          2500000
+
+Celtics             7 Marquis Daniels      SG  07-JAN-81         78        200
+Auburn                  1990000
+
+Celtics            11 Glen Davis           PF  01-JAN-86         81        289
+LSU                     3000004
+
+Celtics             5 Kevin Garnett        PF  19-MAY-76         83        253
+                       16417044
+
+Celtics            43 Kendrick Perkins     C   10-NOV-84         82        280
+                        4750000
+
+Celtics            34 Paul Pierce          SF  13-OCT-77         79        235
+Kansas                 19795712
+
+Celtics             9 Rajon Rondo          PG  22-FEB-86         73        171
+Kentucky                2094923
+
+Celtics            30 Rasheed Wallace      FC  17-SEP-74         83        230
+North Carolina          5854000
+
+Celtics            13 Shelden Williams     PF  21-OCT-83         81        250
+Duke                     825497
+
+Celtics            40 Michael Finley       G-F 06-MAR-73         79        225
+Wisconsin
+
+Celtics             4 Nate Robinson        G   31-MAY-84         79        225
+Washington
+
+
+27 rows selected.
+
+10:29:02 MLIU> select * from captain;
+
+TNAME             PID
+---------- ----------
+Celtics            34
+Lakers             24
+
+2 rows selected.
+
+10:29:20 MLIU> select * from game;
+
+      GNUM DATETIME  PLACE
+---------- --------- ---------------
+         1 03-JUN-10 Los Angeles
+         2 06-JUN-10 Los Angeles
+         3 08-JUN-10 Boston
+         4 10-JUN-10 Boston
+         5 13-JUN-10 Boston
+         6 15-JUN-10 Los Angeles
+         7 17-JUN-10 Los Angeles
+
+7 rows selected.
+
+10:29:25 MLIU> select * from plays_in;
+
+      GNUM TNAME             PID    MINUTES     POINTS S
+---------- ---------- ---------- ---------- ---------- -
+         1 Celtics             5         35         16 Y
+         1 Celtics            34         46         24 Y
+         1 Celtics            43         24          8 Y
+         1 Celtics            20         27         12 Y
+         1 Celtics             9         40         13 Y
+         1 Celtics            30         18          9 N
+         1 Celtics            42         17          4 N
+         1 Celtics            40          2          0 N
+         1 Celtics             4         13          0 N
+         1 Celtics            11         19          3 N
+         1 Lakers             37         33         15 Y
+         1 Lakers             16         47         23 Y
+         1 Lakers             17         28         10 Y
+         1 Lakers             24         39         30 Y
+         1 Lakers              2         28          9 Y
+         1 Lakers              7         21          5 N
+         1 Lakers              4          5          0 N
+         1 Lakers             12         17          6 N
+         1 Lakers             18          8          0 N
+         1 Lakers              1         13          4 N
+         2 Celtics             5         24          6 Y
+         2 Celtics            34         40         10 Y
+         2 Celtics            43         32         12 Y
+         2 Celtics            20         44         32 Y
+         2 Celtics             9         42         19 Y
+         2 Celtics            30         18          7 N
+         2 Celtics            13          4          0 N
+         2 Celtics            42         12          2 N
+         2 Celtics             4          6          7 N
+         2 Celtics            11         18          8 N
+         2 Lakers             37         41          6 Y
+         2 Lakers             16         42         25 Y
+         2 Lakers             17         39         21 Y
+         2 Lakers             24         34         21 Y
+         2 Lakers              2         35          6 Y
+         2 Lakers              7         15          3 N
+         2 Lakers             12         15          2 N
+         2 Lakers             18          7          3 N
+         2 Lakers              1         13          7 N
+         3 Lakers             37         23          2 Y
+         3 Lakers             16         39         13 Y
+         3 Lakers             17         29          9 Y
+         3 Lakers             24         44         29 Y
+         3 Lakers              2         43         16 Y
+         3 Lakers              7         28         12 N
+         3 Lakers              4         13          2 N
+         3 Lakers             12         16          4 N
+
+      GNUM TNAME             PID    MINUTES     POINTS S
+---------- ---------- ---------- ---------- ---------- -
+         3 Celtics             5         32         25 Y
+         3 Celtics            34         34         15 Y
+         3 Celtics            43         22          5 Y
+         3 Celtics            20         42          2 Y
+         3 Celtics             9         42         11 Y
+         3 Celtics            30         19          2 N
+         3 Celtics            42         20          7 N
+         3 Celtics             4          6          5 N
+         3 Celtics            11         24         12 N
+         4 Lakers             37         42          9 Y
+         4 Lakers             16         44         21 Y
+         4 Lakers             17         12          2 Y
+         4 Lakers             24         43         33 Y
+         4 Lakers              2         31          6 Y
+         4 Lakers              7         39         10 N
+         4 Lakers             12         11          5 N
+         4 Lakers             18          7          0 N
+         4 Lakers              1         11          3 N
+         4 Celtics             5         27         13 Y
+         4 Celtics            34         36         19 Y
+         4 Celtics            43         25          6 Y
+         4 Celtics            20         41         12 Y
+         4 Celtics             9         31         10 Y
+         4 Celtics            30         22          3 N
+         4 Celtics             7          0          0 N
+         4 Celtics            42         18          3 N
+         4 Celtics             4         17         12 N
+         4 Celtics            11         22         18 N
+         5 Lakers             37         34          7 Y
+         5 Lakers             16         38         12 Y
+         5 Lakers             17         32          6 Y
+         5 Lakers             24         44         38 Y
+         5 Lakers              2         34          9 Y
+         5 Lakers              7         26          8 N
+         5 Lakers              4          7          0 N
+         5 Lakers             12          0          0 N
+         5 Lakers             18         10          5 N
+         5 Lakers              1         14          1 N
+         5 Celtics             5         36         18 Y
+         5 Celtics            34         43         27 Y
+         5 Celtics            43         32          4 Y
+         5 Celtics            20         40         12 Y
+         5 Celtics             9         38         18 Y
+         5 Celtics            30         15          5 N
+         5 Celtics            42         13          4 N
+         5 Celtics             4         10          4 N
+         5 Celtics            11         13          0 N
+
+      GNUM TNAME             PID    MINUTES     POINTS S
+---------- ---------- ---------- ---------- ---------- -
+         6 Celtics             5         31         12 Y
+         6 Celtics            34         34         13 Y
+         6 Celtics            43          7          0 Y
+         6 Celtics            20         36         19 Y
+         6 Celtics             9         33         10 Y
+         6 Celtics            30         17          0 N
+         6 Celtics             7          4          5 N
+         6 Celtics            13         14          0 N
+         6 Celtics            42         17          2 N
+         6 Celtics            40          3          0 N
+         6 Celtics             4         16          6 N
+         6 Celtics            11         27          0 N
+         6 Lakers             37         32         15 Y
+         6 Lakers             16         41         17 Y
+         6 Lakers             17         16          2 Y
+         6 Lakers             24         40         26 Y
+         6 Lakers              2         15          4 Y
+         6 Lakers              7         28          8 N
+         6 Lakers             21          8          0 N
+         6 Lakers              4          6          0 N
+         6 Lakers             12         19          4 N
+         6 Lakers             18         14          9 N
+         6 Lakers             28          3          0 N
+         6 Lakers              1         17          4 N
+         7 Celtics             5         38         17 Y
+         7 Celtics            34         46         18 Y
+         7 Celtics            30         36         11 Y
+         7 Celtics            20         45         13 Y
+         7 Celtics             9         45         14 Y
+         7 Celtics            42          5          0 N
+         7 Celtics             4          4          0 N
+         7 Celtics            11         21          6 N
+         7 Lakers             37         46         20 Y
+         7 Lakers             16         42         19 Y
+         7 Lakers             17         19          2 Y
+         7 Lakers             24         45         23 Y
+         7 Lakers              2         30         10 Y
+         7 Lakers              7         35          7 N
+         7 Lakers             21          1          0 N
+         7 Lakers             12          5          0 N
+         7 Lakers             18          5          2 N
+         7 Lakers              1         13          0 N
+
+136 rows selected.
+
+10:29:33 MLIU> spool off

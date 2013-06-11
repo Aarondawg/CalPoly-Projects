@@ -1,0 +1,90 @@
+10:16:06 MLIU> select * from recipe;
+
+RNAME                TYPE                 PRICE   SERVINGS
+-------------------- --------------- ---------- ----------
+Fried Cheese         appetizer              6.5         10
+Hummus               appetizer             4.55         20
+Garlic Shrimp        entree                17.5          4
+Meatloaf             entree                  12          2
+Butter Cookies       dessert                  5          6
+Apple Treat          dessert                5.5          2
+
+6 rows selected.
+
+10:16:14 MLIU> select * from ingredient;
+
+INAME                FOODGROUP             COST    CALORIE
+-------------------- --------------- ---------- ----------
+flour                starch                 .05        400
+paprika              seasoning               .5          0
+milk                 dairy                  .45        150
+cheese               dairy                  .65        500
+butter               dairy                  .75        100
+egg                  dairy                   .2         90
+bread crumbs         starch                 .35        390
+oregano              herb                    .5          0
+olive oil            oil                    1.2        191
+garbanzo beans       legume                1.25        300
+seasame seeds        seasoning                2         45
+garlic               seasoning               .6         10
+sugar                seasoning                1        770
+lemon juice          seasoning              .35          5
+shrimp               seafood                2.5        400
+salt                 seasoning              .05          0
+pepper               seasoning               .5          0
+parsley              herb                    .8          2
+almonds              seasoning               .5        795
+ground beef          protein                1.5        250
+onion                seasoning               .2         50
+bread                starch                 .25        100
+tomato sauce         seasoning              .85         75
+apple sauce          seasoning             1.25        150
+
+24 rows selected.
+
+10:16:32 MLIU> select * from contains;
+
+RNAME                INAME                    AMOUNT
+-------------------- -------------------- ----------
+Fried Cheese         flour                         3
+Fried Cheese         paprika                       1
+Fried Cheese         cheese                       .5
+Fried Cheese         egg                           2
+Fried Cheese         bread crumbs                 .5
+Fried Cheese         oregano                       1
+Fried Cheese         olive oil                     2
+Hummus               garbanzo beans                1
+Hummus               lemon juice                 .25
+Hummus               seasame seeds               .25
+Hummus               garlic                        2
+Hummus               salt                        .75
+Hummus               pepper                       .5
+Hummus               paprika                      .5
+Hummus               olive oil                     4
+Garlic Shrimp        shrimp                      .75
+Garlic Shrimp        olive oil                     1
+Garlic Shrimp        parsley                       1
+Garlic Shrimp        lemon juice                   1
+Garlic Shrimp        garlic                        7
+Garlic Shrimp        salt                         .5
+Garlic Shrimp        pepper                     .125
+Meatloaf             ground beef                   2
+Meatloaf             onion                         1
+Meatloaf             egg                           2
+Meatloaf             bread                         3
+Meatloaf             salt                         .5
+Meatloaf             pepper                      .25
+Butter Cookies       butter                        4
+Butter Cookies       sugar                       .25
+Butter Cookies       flour                         4
+Butter Cookies       almonds                       3
+Apple Treat          bread                         4
+Apple Treat          apple sauce                   1
+Apple Treat          egg                           2
+Apple Treat          milk                          1
+Apple Treat          sugar                        .5
+Apple Treat          salt                         .5
+
+38 rows selected.
+
+10:16:48 MLIU> exit
